@@ -1,7 +1,6 @@
-javac -Xstdout log "$1.java"
+javac -Xstdout result "$1.java"
 #check if successfully compiled
-file=log
-if [ ! -s $file ]
+if [ ! -s $result ]
 then
     #compile sucess, run the program
     gtimeout 10 java -Djava.security.manager -Djava.security.policy=test.policy $1 > result
