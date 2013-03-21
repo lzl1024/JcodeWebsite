@@ -1,0 +1,15 @@
+javac -Xstdout log "$1.java"
+#check if successfully compiled
+file=log
+if [ ! -s $file ]
+then
+    #compile sucess, run the program
+    gtimeout 10 java -Djava.security.manager -Djava.security.policy=test.policy $1 > result
+    #check if timeout
+    if test $? -ne 0
+    then
+        echo "time exceeds" > result
+    fi
+else
+    echo "compiling error" > result
+fi
