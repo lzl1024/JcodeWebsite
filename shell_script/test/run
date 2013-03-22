@@ -1,14 +1,27 @@
-javac -Xstdout result "$1.java"
+src=$1  #source file
+res=$2  #result file
+policy=$3   #security policy file
+timeout=$4  #timeout seconds
+
+javac -Xstdout $res "$src.java"
 #check if successfully compiled
-if [ ! -s $result ]
+echo $src
+echo $res
+echo $policy
+echo $timeout
+if [ ! -s $res ]
 then
     #compile sucess, run the program
-    gtimeout 10 java -Djava.security.manager -Djava.security.policy=test.policy $1 > result
+    gtimeout $timeout java -Djava.security.manager -Djava.security.policy=$policy $src > $res 2>&1
     #check if timeout
-    if test $? -ne 0
+    status=$?   #keep the return status: 124 - timeout, 1 - security problem
+    if test $status -ne 0   #not success
     then
-        echo "time exceeds" > result
+        if test $status -ne 1  #timeout
+        then
+            echo "time exceeds" > $res
+        fi
     fi
 else
-    echo "compiling error" > result
+    echo "compiling error" >> $res
 fi
