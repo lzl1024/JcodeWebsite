@@ -4,8 +4,8 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">Created by<a  href="mailto:zhuolinl@andrew.cmu.edu"> Zhuolin Liu</a> and Qian Mao</a> with Twitter Bootstrap.
-        Please use chrome web browser.</p>
+        <p class="muted credit">Created by<a href="mailto:zhuolinl@andrew.cmu.edu"> Zhuolin Liu</a> and<a href="mailto:qianmao89@gmail.com"> Qian Mao</a> with Twitter Bootstrap.
+        Please use Google Chrome Web Browser.</p>
       </div>
     </div>
 

@@ -17,11 +17,12 @@ import databeans.User;
 public class Controller extends HttpServlet {
 
     public void init() throws ServletException {
-        Model model = new Model(getServletConfig());       
+        Model model = new Model(getServletConfig());   
         Action.add(new LoginAction(model));
         Action.add(new RegisterAction(model));
         Action.add(new ManageAction(model));
         Action.add(new LogoutAction(model));
+        Action.add(new OnlineJudgeAction(model));
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,6 +56,11 @@ public class Controller extends HttpServlet {
         if (user == null && !action.equals("manage.do")) {
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do",request);
+        }
+        
+        if (user != null && action.equals("oj.do")) {
+        	// If user logged in and click online judge system
+        	return Action.perform("oj.do",request);
         }
         
 
