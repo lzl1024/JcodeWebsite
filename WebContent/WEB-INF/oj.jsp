@@ -14,7 +14,7 @@ function reg() {
         <textarea cols="80" rows="10" name="code">${form.code}</textarea>
         <input type="hidden" name="use" value="1"/>
         <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
-        <textarea cols="80" rows="5" name="result">${form.result}</textarea>
+        <textarea cols="80" rows="5" name="result">${result}</textarea>
 		<jsp:include page="error-list.jsp" />
 </form>
 
