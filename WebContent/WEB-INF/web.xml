@@ -25,6 +25,10 @@
           <param-name>    csvDir                  </param-name> 
 	      <param-value>                           </param-value>
         </init-param>
+        <init-param>
+          <param-name>    OJPath		          </param-name> 
+	      <param-value>   /usr/local/OJ		  </param-value>
+        </init-param>
     </servlet>
     
 

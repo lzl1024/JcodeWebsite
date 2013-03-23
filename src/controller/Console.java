@@ -34,6 +34,7 @@ public class Console {
         int id;
 
         synchronized(idSet) {
+        	//random pick an ID number
             Random r = new Random();
             id = r.nextInt(Integer.MAX_VALUE);
             while(idSet.contains(id)) {
@@ -42,10 +43,14 @@ public class Console {
             idSet.add(id);
         }
 
-        source = path + "/source/src" + Integer.toString(id);
-        result = path + "/result/res" + Integer.toString(id); 
+        source = path + "/" + Integer.toString(id) + "/Source";
+        result = path + "/" + Integer.toString(id) + "/Result"; 
         
         try{
+        	// Create new directory
+        	File dir = new File(path + "/" + Integer.toString(id));
+        	dir.mkdir();
+        	
         	// Create Source file 
         	PrintWriter writer = new PrintWriter(source + ".java", "UTF-8");
         	writer.println(code);
@@ -55,7 +60,7 @@ public class Console {
         }
 
         
-        ConThread t = new ConThread(source, result, policy, timeout, path);
+        ConThread t = new ConThread("Source", "Result", policy, timeout, path, path+"/"+id);
         t.run();
         /* read result file */
         String output = readFile(result);
@@ -95,20 +100,23 @@ public class Console {
         private String policy;      //the security policy file
         private String timeout;     //timeout seconds
         private String path;		//real directory path
+        private String dir;			//user's dir
 
-        public ConThread(String src, String res, String policy, String timeout, String path) {
+        public ConThread(String src, String res, String policy, String timeout, String path, String dir) {
             this.src = src;
             this.res = res;
             this.policy = policy;
             this.timeout = timeout;
             this.path = path;
+            this.dir = dir;
         }
 
         public void run() {
         	System.out.println(path);
             Runtime r = Runtime.getRuntime();
-            String[] cmd = {path + "/run", src, res, policy, timeout};
+            String[] cmd = {path + "/run", dir, src, res, policy, timeout};
             try {
+            	System.out.println(Arrays.toString(cmd));
                 Process proc = r.exec(cmd);
                 proc.waitFor();
 

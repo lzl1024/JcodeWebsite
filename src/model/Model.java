@@ -8,11 +8,13 @@ import org.genericdao.DAOException;
 
 public class Model {
 	private UserDAO  userDAO;
+	private String   OJPath;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
+			OJPath     = config.getInitParameter("OJPath");
 			
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			userDAO  = new UserDAO("user", pool);
@@ -22,4 +24,5 @@ public class Model {
 	}
 	
 	public UserDAO  getUserDAO()  { return userDAO;  }
+	public String   getOJPath()   { return OJPath;   }
 }

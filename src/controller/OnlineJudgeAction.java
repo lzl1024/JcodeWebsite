@@ -23,9 +23,11 @@ public class OnlineJudgeAction extends Action {
 	private FormBeanFactory<OnlineJudgeForm> formBeanFactory = FormBeanFactory.getInstance(OnlineJudgeForm.class);
 	
 	private UserDAO  userDAO;
+	private String   OJPath;
 
 	public OnlineJudgeAction(Model model) {
     	userDAO  = model.getUserDAO();
+    	OJPath = model.getOJPath();
 	}
 
 	public String getName() { return "oj.do"; }
@@ -46,15 +48,12 @@ public class OnlineJudgeAction extends Action {
 	        }
 	        
 	        //compile and run
-	        HttpSession session = request.getSession();
-	        
 	        String code = form.getCode();
 	        Console con = Console.getInstance();
-	        //get real file path
-	        ServletContext context = session.getServletContext();
-	        String realContextPath = context.getRealPath("/OJ"); 
-	        String result = con.compileRun(code, realContextPath);
+	  
 	        
+	        String result = con.compileRun(code, OJPath);
+	        HttpSession session = request.getSession();
 	        session.setAttribute("code", code);
 	        session.setAttribute("result", result);
 
