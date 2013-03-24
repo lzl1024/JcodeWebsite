@@ -9,12 +9,12 @@ function reg() {
 }
 </script>
 
-<form method="post" class="form-signin" action="" name ="frm">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <textarea cols="80" rows="10" name="code">${form.code}</textarea>
+<form method="post" class="form-horizontal" action="" name ="frm">
+        <h2>Code:</h2>
+        <textarea class="input-block-level" rows="20" name="code">${form.code}</textarea>
         <input type="hidden" name="use" value="1"/>
         <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
-        <textarea cols="80" rows="5" name="result">${result}</textarea>
+        <textarea class="input-block-level" rows="10" name="result">${result}</textarea>
 		<jsp:include page="error-list.jsp" />
 </form>
 
