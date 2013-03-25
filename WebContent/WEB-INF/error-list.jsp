@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 		<div>
 		<p>  </p>
 		<c:forEach var="error" items="${errors}">	

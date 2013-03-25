@@ -9,6 +9,7 @@ import org.genericdao.DAOException;
 public class Model {
 	private UserDAO  userDAO;
 	private String   OJPath;
+	private BlogDAO  blogDAO;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -18,6 +19,8 @@ public class Model {
 			
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			userDAO  = new UserDAO("user", pool);
+			blogDAO  = new BlogDAO("blog", pool);
+			
 		} catch (DAOException e) {
 			throw new ServletException(e);
 		}
@@ -25,4 +28,5 @@ public class Model {
 	
 	public UserDAO  getUserDAO()  { return userDAO;  }
 	public String   getOJPath()   { return OJPath;   }
+	public BlogDAO   getBlogDAO() { return blogDAO;  }
 }

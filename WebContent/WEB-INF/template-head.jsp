@@ -114,7 +114,7 @@
           	<div class="nav-collapse collapse">
             	<ul class="nav">
               		<li class="active"><a href="manage.do">Home</a></li>
-              		<li><a href="blog.do">Blog</a></li>
+              		<li><a href="allblog.do">Blog</a></li>
               		<li><a href="oj.do">OnlineJudge</a></li>
               	</ul>
               	<ul class = "nav pull-right">
@@ -122,6 +122,7 @@
 					<c:choose>
 						<c:when test="${ (empty user) }">
 							<li><a href="login.do">Login</a></li>
+							<li><a href="register.do">Register</a></li>
 						</c:when>
               			<c:otherwise>
               			<li class="dropdown">

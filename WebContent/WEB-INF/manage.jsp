@@ -18,7 +18,7 @@
         <div class="span4">
           <h2>Want to discuss the problem?</h2>
           <p>How to be a top coder? We are not born to be it! Some top coders are here to solve your problems. Also, don't forget to teach others.</p>
-          <p><a class="btn" href="blog.do">Blog &raquo;</a></p>
+          <p><a class="btn" href="allblog.do">Blog &raquo;</a></p>
        </div>
         <div class="span4">
           <h2>Want to see how well you have done?</h2>

@@ -21,11 +21,6 @@ import formbeans.RegisterForm;
  * If successful:
  *   (1) creates a new User bean
  *   (2) sets the "user" session attribute to the new User bean
- *   (3) redirects to view the originally requested photo.
- * If there was no photo originally requested to be viewed
- * (as specified by the "redirect" hidden form value),
- * just redirect to manage.do to allow the user to add some
- * photos.
  */
 public class RegisterAction extends Action {
 	private FormBeanFactory<RegisterForm> formBeanFactory = FormBeanFactory.getInstance(RegisterForm.class);

@@ -1,19 +1,11 @@
 <jsp:include page="template-head.jsp" />
 
-<script>
-function run(){
-	frm.action = "oj.do";
-}
-function reg() {	
-	frm.action = "register.do";
-}
-</script>
-
-<form method="post" class="form-horizontal" action="" name ="frm">
+<form method="post" class="form-horizontal" action="oj.do" name ="frm">
         <h2>Code:</h2>
         <textarea class="input-block-level" rows="20" name="code">${form.code}</textarea>
-        <input type="hidden" name="use" value="1"/>
+        <p> </p>
         <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
+        <p> </p>
         <textarea class="input-block-level" rows="10" name="result">${result}</textarea>
 		<jsp:include page="error-list.jsp" />
 </form>

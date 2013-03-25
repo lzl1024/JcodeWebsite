@@ -20,7 +20,6 @@ public class LogoutAction extends Action {
         HttpSession session = request.getSession(false);
         session.setAttribute("user",null);
 
-		//request.setAttribute("message","You are now logged out");
         return "manage.jsp";
     }
 }

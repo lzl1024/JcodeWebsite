@@ -23,6 +23,10 @@ public class Controller extends HttpServlet {
         Action.add(new ManageAction(model));
         Action.add(new LogoutAction(model));
         Action.add(new OnlineJudgeAction(model));
+        Action.add(new PostBlogAction(model));
+        Action.add(new ViewAction(model));
+        Action.add(new YourBlogAction(model));
+        Action.add(new AllBlogAction(model));
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,21 +51,23 @@ public class Controller extends HttpServlet {
         String      action = getActionName(servletPath);
 
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
-
         if (action.equals("register.do") || action.equals("login.do")) {
         	// Allow these actions without logging in
 			return Action.perform(action,request);
         }
          
+        
         if (user == null && !action.equals("manage.do")) {
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do",request);
         }
         
+        
+        /*
         if (user != null && action.equals("oj.do")) {
         	// If user logged in and click online judge system
         	return Action.perform("oj.do",request);
-        }
+        }*/
         
 
       	// Let the logged in user run his chosen action

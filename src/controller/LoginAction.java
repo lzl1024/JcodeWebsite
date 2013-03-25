@@ -23,8 +23,7 @@ import formbeans.LoginForm;
  * user's User bean and then redirects to view the originally
  * requested photo.  If there was no photo originally requested
  * to be viewed (as specified by the "redirect" hidden form
- * value), just redirect to manage.do to allow the user to manage
- * his photos.
+ * value), just redirect to manage.do
  */
 public class LoginAction extends Action {
 	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
