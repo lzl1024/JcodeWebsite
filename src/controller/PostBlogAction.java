@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,7 @@ public class PostBlogAction extends Action {
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 
 			blog.setDate(formatter.format(curDate));
-			blog.setContent(fixBadChars(form.getContent()));
+			blog.setContent((fixBadChars(form.getContent())).getBytes("Unicode"));
 			blog.setTitle(fixBadChars(form.getTitle()));
 			blog.setUser(user.getUserName());
 			blog.setEmail(user.getEmail());
@@ -68,6 +69,9 @@ public class PostBlogAction extends Action {
 			errors.add(e.getMessage());
 			return "blog.jsp";
 	 	} catch (FormBeanException e) {
+			errors.add(e.getMessage());
+			return "blog.jsp";
+		} catch (UnsupportedEncodingException e) {
 			errors.add(e.getMessage());
 			return "blog.jsp";
 		}		

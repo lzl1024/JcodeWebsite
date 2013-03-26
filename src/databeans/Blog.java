@@ -1,17 +1,18 @@
 package databeans;
 
+import java.io.UnsupportedEncodingException;
+
 import org.genericdao.PrimaryKey;
 
 @PrimaryKey("id")
 public class Blog implements Comparable<Blog> {
 
-	private int    id          = -1;
-	
-	private String title = null;
-	private String content = null;
-	private String user       = null;
-	private String email       = null;
-	private String date		   = null;
+	private int    id		= -1;
+	private String title 	= null;
+	private byte[] content 	= null;
+	private String user		= null;
+	private String email 	= null;
+	private String date		= null;
 	
 	public int compareTo(Blog other) {
 		// Order first by owner, then by position
@@ -31,14 +32,15 @@ public class Blog implements Comparable<Blog> {
 	}
 	
     public String getTitle() 	   { return title; }
-    public String getContent() 	   { return content; }
+    public byte[] getContent() 	   { return content; }
     public int    getId()          { return id;          }
     public String getUser()		   { return user;	}
     public String getEmail()  	   { return email;  }
     public String getDate()  	   { return date;  }
+    public String getReadableCon() throws UnsupportedEncodingException { return new String(content, "Unicode");}
     
     public void setTitle(String s)  	  { title = s;  }
-    public void setContent(String s)  	  { content = s;  }
+    public void setContent(byte[] s)  	  { content = s;  }
     public void setId(int x)              { id = x;           }
     public void setUser(String userName)  { user = userName; }
     public void setEmail(String e)	 	  { email = e;        } 

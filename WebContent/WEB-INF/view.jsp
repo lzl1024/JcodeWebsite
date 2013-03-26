@@ -9,7 +9,7 @@
         <hr>
 
         <div>
-        <p>${blog.content} </p>
+        <p>${blog.readableCon} </p>
         </div>
 </div>
 		<jsp:include page="error-list.jsp" />
