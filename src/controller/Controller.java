@@ -29,6 +29,9 @@ public class Controller extends HttpServlet {
         Action.add(new AllBlogAction(model));
         Action.add(new SearchAction(model));
         Action.add(new CommentAction(model));
+        Action.add(new EditBlogAction(model));
+        Action.add(new DeleteBlogAction(model));
+        Action.add(new ChangePwdAction(model));
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

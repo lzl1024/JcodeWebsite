@@ -129,7 +129,7 @@
                   		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                   		<ul class="dropdown-menu">
                    	 		<li><a href="#">Edit Profile</a></li>
-                    		<li><a href="#">Change Password</a></li>
+                    		<li><a href="change-pwd.do">Change Password</a></li>
                     		<li class="divider"></li>
                     		<li class="nav-header">Your Statistic</li>
                     		<li><a href="#">Top Coder</a></li>

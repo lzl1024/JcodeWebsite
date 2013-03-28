@@ -23,13 +23,13 @@ public class UserDAO extends GenericDAO<User> {
 		return users;
 	}
 	
-	public void setPassword(String userName, String password) throws RollbackException {
+	public void setPassword(String userEmail, String password) throws RollbackException {
         try {
         	Transaction.begin();
-			User dbUser = read(userName);
+			User dbUser = read(userEmail);
 			
 			if (dbUser == null) {
-				throw new RollbackException("User "+userName+" no longer exists");
+				throw new RollbackException("User "+userEmail+" no longer exists");
 			}
 			
 			dbUser.setPassword(password);

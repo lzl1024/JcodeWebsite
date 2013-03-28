@@ -7,10 +7,6 @@
 <div class="span10">
 <p>
 	<table class="table table-striped">
-	<tr><td><strong>Title</strong></td>
-		<td><strong>Author</strong></td>
-		<td><strong>Date</strong></td>	
-	</tr>
 <%int i = 0;%>
 	<c:forEach var="blog" items="${bloglist}">
 	<%if (i % 2 == 0) {%>
@@ -18,9 +14,12 @@
 	<%}else {%>
 		<tr class ="info">
 	<%} %>
-			<td><a href="view.do?id=${blog.id}">${blog.title}</a></td>
-			<td>${blog.user}</td>
-			<td>${blog.date}</td>
+			<td>
+			<strong>Title:  <a href="view.do?id=${blog.id}">${blog.title}</a></strong>
+			<strong class="pull-right">Posted by: ${blog.user}  @ ${blog.date}</strong>
+			<p>${blog.shortDes}... 
+			<strong class="pull-right"><a href="view.do?id=${blog.id}">See Details &raquo</a></strong>
+			</td>
 		</tr>
 	<% i++; %>
 	</c:forEach>

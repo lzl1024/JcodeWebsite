@@ -15,18 +15,25 @@
         </div>
 <hr>  <hr>    
 </div>
+
 <div class="span10 pull-right alert alert-success">   
 <h3 class="form-signin-heading">Comments</h3> 
-
-<c:if test = "${fn:length(commentlist) > 0}">
-<c:forEach var="i" begin="0" end="${fn:length(commentlist)-1}">
-	<h3 class="badge">${i+1}</h3>
-	<h3 class="label">Posted By: ${commentlist[i].user}</h3>
-    <h3 class="label pull-right">  ${commentlist[i].date}</h3>
-   <p>${commentlist[i].readableCon}</p>
-   <hr>
-</c:forEach>    
-</c:if>        
+<c:choose>
+	<c:when test="${fn:length(commentlist) == 0}">
+	There is no comments right now.
+	<hr>
+	</c:when>
+	<c:otherwise>
+	<c:forEach var="i" begin="0" end="${fn:length(commentlist)-1}">
+		<h3 class="badge">${i+1}</h3>
+		<h3 class="label">Posted By: ${commentlist[i].user}</h3>
+    	<h3 class="label pull-right">  ${commentlist[i].date}</h3>
+   		<p>${commentlist[i].readableCon}</p>
+   		<hr>
+	</c:forEach>
+	</c:otherwise>
+</c:choose>
+	       
 <hr>                
 <form method="post" class="form-horizontal" action="comment.do">
         <h3 class="form-signin-heading">Write your Comment</h3>

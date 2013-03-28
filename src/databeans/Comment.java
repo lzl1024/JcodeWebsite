@@ -47,7 +47,7 @@ public class Comment implements Comparable<Comment> {
     public byte[] getContent() 	   { return content; }
     public int    getId()          { return id;      }
     public String getUser()		   { return user;	 }
-    public int	  getBlogId()  	   { return blogid;   }
+    public int	  getBlogId()  	   { return blogid;  }
     public String getDate()  	   { return date;    }
     public String getReadableCon() throws UnsupportedEncodingException { 
     	String str = new String(content, "Unicode");

@@ -13,7 +13,7 @@
               <input id="inputIcon"  type="text" class="input-block-level span5" placeholder="Search" name="keyword">
               </div>             
               </form>
-              </li>            
+              </li>         
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

@@ -1,6 +1,10 @@
 package databeans;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.genericdao.PrimaryKey;
 
@@ -18,9 +22,19 @@ public class Blog implements Comparable<Blog> {
 		// Order first by owner, then by position
 		if (user == null && other.user != null) return -1;
 		if (user != null && other.user == null) return 1;
-		int c = user.compareTo(other.user);
-		if (c != 0) return c;
-		return id - other.id;
+		Date d1,d2;
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {    
+			d1 = format.parse(date);  
+			d2 = format.parse(other.date);
+			if (d1.after(d2))
+				return -1;
+			else return 1;
+		} catch (ParseException e) {    
+			e.printStackTrace();    
+		}  
+
+		return -1;
 	}
 	
 	public boolean equals(Object obj) {
@@ -41,9 +55,17 @@ public class Blog implements Comparable<Blog> {
     	String str = new String(content, "Unicode");
     	return str.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
     }
+    public String getShortDes()	throws UnsupportedEncodingException { 
+    	String ret = getReadableCon();
+    	if (ret.length() > 250) {
+    		return ret.substring(0,250);
+    	}
+    	
+    	return ret; 
+    }
     
-    public void setTitle(String s)  	  { title = s;  }
-    public void setContent(byte[] s)  	  { content = s;  }
+    public void setTitle(String s)  	  { title = s;  	}
+    public void setContent(byte[] s)  	  { content = s;  	}
     public void setId(int x)              { id = x;           }
     public void setUser(String userName)  { user = userName; }
     public void setEmail(String e)	 	  { email = e;        } 

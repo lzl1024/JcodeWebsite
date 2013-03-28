@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,9 +42,10 @@ public class YourBlogAction extends Action {
     		}
 	       	
 			Blog[] blogs = blogDAO.getBlogs(user.getEmail());
+			Arrays.sort(blogs);
 			request.setAttribute("bloglist",blogs);
 			
-	        return "list.jsp";
+	        return "list-yours.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
