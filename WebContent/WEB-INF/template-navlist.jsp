@@ -6,7 +6,14 @@
               <li><a href="yourblog.do">Your Blogs</a></li>
               <li><a href="blog.do">Write a Blog</a></li>
               <li class="nav-header">Search</li>
-              <li><input type="text" class="input-block-level" placeholder="Search" name="search"></li>            
+              <li>
+              <form method="post" action = "search.do">
+              <div class="input-prepend">
+              <span class="add-on"><i class="icon-search"></i></span>
+              <input id="inputIcon"  type="text" class="input-block-level span5" placeholder="Search" name="keyword">
+              </div>             
+              </form>
+              </li>            
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

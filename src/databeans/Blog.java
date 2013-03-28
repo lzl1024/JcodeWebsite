@@ -31,13 +31,16 @@ public class Blog implements Comparable<Blog> {
 		return false;
 	}
 	
-    public String getTitle() 	   { return title; }
+    public String getTitle() 	   { return title; 	 }
     public byte[] getContent() 	   { return content; }
-    public int    getId()          { return id;          }
-    public String getUser()		   { return user;	}
-    public String getEmail()  	   { return email;  }
-    public String getDate()  	   { return date;  }
-    public String getReadableCon() throws UnsupportedEncodingException { return new String(content, "Unicode");}
+    public int    getId()          { return id;      }
+    public String getUser()		   { return user;	 }
+    public String getEmail()  	   { return email;   }
+    public String getDate()  	   { return date;    }
+    public String getReadableCon() throws UnsupportedEncodingException { 
+    	String str = new String(content, "Unicode");
+    	return str.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
+    }
     
     public void setTitle(String s)  	  { title = s;  }
     public void setContent(byte[] s)  	  { content = s;  }
