@@ -28,7 +28,11 @@
 
     #bar {
         padding: 5px;
-        background-color: #585858;
+        font-size:25px;
+        text-align:center;
+        color: #ffffff;
+  		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  		background-color: #006dcc;
     }
 
     #panel {
@@ -197,11 +201,10 @@
     
         <div id="lower">
 
-            <div id="bar">toggle the panel</div>
+            <div id="bar">CLick Me to Show/Hide JCode Coding Pannel</div>
 
             <div id="panel">
                 <form method="post" class="form-horizontal" action="oj.do" name ="frm">
-                    <h2>Code:</h2>
                     <input type="hidden" name="switcher" id="switcher" value="${form.switcher}">
                     <textarea class="input-block-level" rows="10" name="code">${form.code}</textarea>
                     <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
