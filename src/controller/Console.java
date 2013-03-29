@@ -31,6 +31,7 @@ public class Console {
     public String compileRun(String code, String path) {
         String source;
         String result;
+        File dir = null;
         int id;
 
         synchronized(idSet) {
@@ -48,7 +49,7 @@ public class Console {
         
         try{
         	// Create new directory
-        	File dir = new File(path + "/" + Integer.toString(id));
+        	dir = new File(path + "/" + Integer.toString(id));
         	dir.mkdir();
         	
         	// Create Source file 
@@ -67,6 +68,7 @@ public class Console {
 
         synchronized(idSet) {
             idSet.remove(id);
+            deleteDirectory(dir);
         }
 
         return output;
@@ -92,6 +94,21 @@ public class Console {
         return stringBuilder.toString();
     
     }
+    
+    private boolean deleteDirectory(File dir) {
+        if(dir.exists()) {
+          File[] files = dir.listFiles();
+          for(int i=0; i<files.length; i++) {
+             if(files[i].isDirectory()) {
+               deleteDirectory(files[i]);
+             }
+             else {
+               files[i].delete();
+             }
+          }
+        }
+        return(dir.delete() );
+      }
 
 
     private static class ConThread implements Runnable {

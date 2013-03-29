@@ -33,7 +33,8 @@ public class OnlineJudgeAction extends Action {
 		try {
 			OnlineJudgeForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
-	        
+	        String switcher = form.getSwitcher();
+	        System.out.println("switcher: " + switcher);
 	        // Any validation errors?
 	        errors.addAll(form.getValidationErrors());
 	        
@@ -50,6 +51,7 @@ public class OnlineJudgeAction extends Action {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("code", code);
 	        session.setAttribute("result", result);
+	        session.setAttribute("switcher", switcher);
 
 	        return "oj.jsp";
         } catch (FormBeanException e) {

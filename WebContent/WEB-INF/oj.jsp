@@ -127,6 +127,13 @@
 
     $(document).ready(function(){
         $("#bar").click(function() {
+        	if($("#switcher").val() == "0") {
+        		$("#switcher").val("1");
+        		$("#code").val("WORI 1");
+        	} else {
+        		$("#switcher").val("0");
+        		$("#code").val("WORI 0");
+        	}
             $("#panel").slideToggle("slow");
    
 });
@@ -195,16 +202,20 @@
             <div id="panel">
                 <form method="post" class="form-horizontal" action="oj.do" name ="frm">
                     <h2>Code:</h2>
-                    <table>
-                        <tr>
-                            <td><textarea class="input-block-level" rows="20" name="code">${form.code}</textarea></td>
-                            <td><button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button></td>
-                            <td><textarea class="input-block-level" rows="10" name="result">${result}</textarea></td>
-                        </tr>
-                    </table>
+                    <input type="hidden" name="switcher" id="switcher" value="${form.switcher}">
+                    <textarea class="input-block-level" rows="10" name="code">${form.code}</textarea>
+                    <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
+                    <textarea class="input-block-level" rows="5" name="result">${result}</textarea>
                 </form>
             </div>
 
         </div>
+        
+        <script>
+        	if($("#switcher").val() == "1") {
+        		$("#panel").slideToggle(0);
+        	}
+        		
+        </script>
 
 <jsp:include page="template-bottom.jsp" />
