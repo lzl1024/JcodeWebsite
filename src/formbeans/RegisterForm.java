@@ -31,13 +31,25 @@ public class RegisterForm extends FormBean {
 		if (userName == null || userName.length() == 0) {
 			errors.add("User Name is required");
 		}
+		
+		if (userName.length() > 255) {
+			errors.add("Please edit userName less than 255 characters!");
+		}
 
 		if (email == null || !email.matches(".+@.+")) {
 			errors.add("Email is blank or not in correct format");
 		}
 		
+		if (email.length() > 255) {
+			errors.add("Please edit email less than 255 characters!");
+		}
+		
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
+		}
+		
+		if (password.length() >= 30) {
+			errors.add("Plase make your password less than 30 characters!");
 		}
 
 		if (confirm == null || confirm.length() == 0) {

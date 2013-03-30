@@ -41,17 +41,33 @@ public class EditProfileForm extends FormBean {
 		if (occupation == null || occupation.length() == 0) {
 			errors.add("Occupation should not be left blank");
 		}
+		
+		if (occupation.length() > 255) {
+			errors.add("Please edit occupation less than 255 characters!");
+		}
 
 		if (interest == null || interest.length() == 0) {
 			errors.add("Interest should not be left blank");
+		}
+		
+		if (interest.length() > 255) {
+			errors.add("Please edit interest less than 255 characters!");
 		}
 		
 		if (introduction == null || introduction.length() == 0) {
 			errors.add("Introduction should not be left blank");
 		}
 		
+		if (introduction.length() > 255) {
+			errors.add("Please edit introduction less than 255 characters!");
+		}
+		
 		if (status == null || status.length() == 0) {
 			errors.add("Status should not be left blank");
+		}
+		
+		if (status.length() > 255) {
+			errors.add("Please edit status less than 255 characters!");
 		}
 		
 		return errors;

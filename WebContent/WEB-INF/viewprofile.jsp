@@ -6,7 +6,7 @@
 <div class="span10 alert alert-block">
 
         <div class="span8">
-        <img src="image.do?email=${profile.email}"  width="254" height="39"/>
+        <div ><img src="image.do?email=${profile.email}" style="width:250px;height:250px;" /></div>  
          <p></p>
         <h4>User Name:      &nbsp &nbsp ${profile.realName}</h4>
         <p></p>      

@@ -22,6 +22,10 @@ public class PostBlogForm extends FormBean {
 			errors.add("Title should not be empty");
 		}
 		
+		if (title.length() > 255) {
+			errors.add("Plase make your title less than 255 characters!");
+		}
+		
 		if (content == null || content.length() == 0) {
 			errors.add("Content should not be empty");
 		}

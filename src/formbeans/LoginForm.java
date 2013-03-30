@@ -22,6 +22,10 @@ public class LoginForm extends FormBean {
 			errors.add("Email is required");
 		}
 		
+		if (email.length() > 255) {
+			errors.add("Please edit email less than 255 characters!");
+		}
+		
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
 		}
