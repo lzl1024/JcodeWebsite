@@ -16,7 +16,7 @@
 	<%} %>
 			<td>
 			<strong>Title:  <a href="view.do?id=${blog.id}">${blog.title}</a></strong>
-			<strong class="pull-right">Posted by: ${blog.user}  @ ${blog.date}</strong>
+			<strong class="pull-right">Posted by: <a href="viewprofile.do?email=${blog.email}">${blog.user}</a>  @ ${blog.date}</strong>
 			<p>${blog.shortDes}... 
 			<strong class="pull-right"><a href="view.do?id=${blog.id}">See Details &raquo</a></strong>
 			</td>

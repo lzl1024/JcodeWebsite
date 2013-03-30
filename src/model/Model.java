@@ -11,6 +11,7 @@ public class Model {
 	private String   	OJPath;
 	private BlogDAO 	blogDAO;
 	private CommentDAO 	commentDAO;
+	private ProfileDAO	profileDAO;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -22,6 +23,8 @@ public class Model {
 			userDAO  	= new UserDAO("user", pool);
 			blogDAO  	= new BlogDAO("blog", pool);
 			commentDAO 	= new CommentDAO("comment", pool);
+			profileDAO	= new ProfileDAO("profile", pool);
+			
 			
 		} catch (DAOException e) {
 			throw new ServletException(e);
@@ -32,4 +35,5 @@ public class Model {
 	public String   	getOJPath()   	{ return OJPath;   		}
 	public BlogDAO   	getBlogDAO() 	{ return blogDAO;  		}
 	public CommentDAO   getCommentDAO() { return commentDAO;  	}
+	public ProfileDAO	getProfileDAO() { return profileDAO;	}
 }

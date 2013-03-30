@@ -1,18 +1,24 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.Model;
+import model.ProfileDAO;
 import model.UserDAO;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.Profile;
 import databeans.User;
 import formbeans.RegisterForm;
 
@@ -26,9 +32,11 @@ public class RegisterAction extends Action {
 	private FormBeanFactory<RegisterForm> formBeanFactory = FormBeanFactory.getInstance(RegisterForm.class);
 
 	private UserDAO userDAO;
+	private ProfileDAO profileDAO;
 	
 	public RegisterAction(Model model) {
 		userDAO = model.getUserDAO();
+		profileDAO = model.getProfileDAO();
 	}
 
 	public String getName() { return "register.do"; }
@@ -62,6 +70,11 @@ public class RegisterAction extends Action {
 	        user.setPassword(form.getPassword());
 	        user.setEmail(form.getEmail());
         	userDAO.create(user);
+        	
+        	//Create the profile bean
+        	Profile profile = setProfileDefault(form.getEmail());
+        	profileDAO.create(profile);
+        	       	
         
 			// Attach (this copy of) the user bean to the session
 	        HttpSession session = request.getSession(false);
@@ -102,5 +115,30 @@ public class RegisterAction extends Action {
 		}
     	
     	return errors;
+    }
+    
+    private Profile setProfileDefault(String email) {
+    	Profile p = new Profile();
+    	BufferedImage image;
+    	ByteArrayOutputStream out = new ByteArrayOutputStream();
+    	
+		try { 
+			image = ImageIO.read(getClass().getResourceAsStream("/images/1.jpg"));    	
+	    	ImageIO.write(image, "jpg", out);	
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		p.setBytes(out.toByteArray());
+		p.setPictype("jpg");
+		p.setEmail(email);
+		p.setInterest("I just like code");
+		p.setOccupation("No code no job");
+		p.setRealName("Secret");
+		p.setStatus("Watching best demo!");
+		p.setIntroduction("I am too lazy to intro myself");
+		
+    	
+    	return p;
     }
 }
