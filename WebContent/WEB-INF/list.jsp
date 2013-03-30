@@ -19,6 +19,7 @@
 			<strong class="pull-right">Posted by: <a href="viewprofile.do?email=${blog.email}">${blog.user}</a>  @ ${blog.date}</strong>
 			<p>${blog.shortDes}... 
 			<strong class="pull-right"><a href="view.do?id=${blog.id}">See Details &raquo</a></strong>
+			<br><strong >Comments(${blog.commentNum})</strong>
 			</td>
 		</tr>
 	<% i++; %>

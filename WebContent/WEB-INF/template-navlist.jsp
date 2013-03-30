@@ -5,7 +5,7 @@
               <li class="active"><a href="allblog.do">All Blogs</a></li>
               <li><a href="yourblog.do">Your Blogs</a></li>
               <li><a href="blog.do">Write a Blog</a></li>
-              <li class="nav-header">Search</li>
+              <li class="nav-header">Search Blog</li>
               <li>
               <form method="post" action = "search.do">
               <div class="input-prepend">

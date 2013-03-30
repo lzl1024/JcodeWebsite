@@ -28,7 +28,7 @@ public class ImageServlet extends HttpServlet {
         }
         
         response.setContentType(profile.getPictype());
-        System.out.print(profile.getPictype());
+        
         ServletOutputStream out = response.getOutputStream();
         out.write(profile.getBytes());
     }

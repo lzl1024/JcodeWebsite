@@ -59,6 +59,7 @@ public class PostBlogAction extends Action {
 			blog.setTitle(fixBadChars(form.getTitle()));
 			blog.setUser(user.getUserName());
 			blog.setEmail(user.getEmail());
+			blog.setCommentNum(0);
 			blogDAO.create(blog);
 
 			request.setAttribute("errors",errors);

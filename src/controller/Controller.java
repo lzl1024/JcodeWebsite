@@ -34,6 +34,7 @@ public class Controller extends HttpServlet {
         Action.add(new ChangePwdAction(model));
         Action.add(new ViewProfileAction(model));
         Action.add(new ImageAction(model));
+        Action.add(new EditProfileAction(model));
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,7 +65,8 @@ public class Controller extends HttpServlet {
         }
          
         
-        if (user == null && !action.equals("manage.do")) {
+        if (user == null && !action.equals("manage.do") && !action.equals("view.do") 
+        	&& !action.equals("allblog.do") && !action.equals("viewprofile.do") && !action.equals("image.do")) {
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do",request);
         }

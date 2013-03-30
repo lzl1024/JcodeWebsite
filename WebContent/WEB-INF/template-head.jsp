@@ -110,10 +110,10 @@
             	<span class="icon-bar"></span>
             	<span class="icon-bar"></span>
           	</button>
-          	<a class="brand" href="#">JCode</a>
+          	<a class="brand active" href="#">JCode</a>
           	<div class="nav-collapse collapse">
             	<ul class="nav">
-              		<li class="active"><a href="manage.do">Home</a></li>
+              		<li><a href="manage.do">Home</a></li>
               		<li><a href="allblog.do">Blog</a></li>
               		<li><a href="oj.do">OnlineJudge</a></li>
               	</ul>
@@ -128,7 +128,8 @@
               			<li class="dropdown">
                   		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                   		<ul class="dropdown-menu">
-                   	 		<li><a href="#">Edit Profile</a></li>
+                  		    <li><a href="viewprofile.do?email=${user.email}">View Your Profile</a></li>
+                   	 		<li><a href="editprofile.do?edit=1">Edit Profile</a></li>
                     		<li><a href="change-pwd.do">Change Password</a></li>
                     		<li class="divider"></li>
                     		<li class="nav-header">Your Statistic</li>

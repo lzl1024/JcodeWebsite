@@ -72,7 +72,7 @@ public class RegisterAction extends Action {
         	userDAO.create(user);
         	
         	//Create the profile bean
-        	Profile profile = setProfileDefault(form.getEmail());
+        	Profile profile = setProfileDefault(form.getEmail(), form.getUserName());
         	profileDAO.create(profile);
         	       	
         
@@ -117,7 +117,7 @@ public class RegisterAction extends Action {
     	return errors;
     }
     
-    private Profile setProfileDefault(String email) {
+    private Profile setProfileDefault(String email, String userName) {
     	Profile p = new Profile();
     	BufferedImage image;
     	ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -134,7 +134,7 @@ public class RegisterAction extends Action {
 		p.setEmail(email);
 		p.setInterest("I just like code");
 		p.setOccupation("No code no job");
-		p.setRealName("Secret");
+		p.setRealName(userName);
 		p.setStatus("Watching best demo!");
 		p.setIntroduction("I am too lazy to intro myself");
 		

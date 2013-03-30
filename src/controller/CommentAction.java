@@ -53,6 +53,7 @@ public class CommentAction extends Action {
 	            return "view.jsp";
 	        }
 	       
+	        
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "view.jsp";
 
@@ -65,7 +66,10 @@ public class CommentAction extends Action {
 			comment.setBlogId(blog.getId());
 			comment.setUser(user.getUserName());
 			commentDAO.create(comment);
-
+			
+			blog.setCommentNum(blog.getCommentNum()+1);
+			
+			blogDAO.update(blog);
 			request.setAttribute("errors",errors);
 			
 			//request.setAttribute("comment", comment);

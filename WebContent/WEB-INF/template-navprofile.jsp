@@ -4,7 +4,7 @@
               <li class="nav-header">Operations</li>
               <li class="active"><a href="allblog.do">My Profile</a></li>
               <li><a href="yourblog.do">Edit Profile</a></li>
-              <li class="nav-header">Search</li>
+              <li class="nav-header">Search Profile</li>
               <li>
               <form method="post" action = "search.do">
               <div class="input-prepend">

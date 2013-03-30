@@ -17,6 +17,7 @@ public class Blog implements Comparable<Blog> {
 	private String user		= null;
 	private String email 	= null;
 	private String date		= null;
+	private int    commentNum = 0;
 	
 	public int compareTo(Blog other) {
 		// Order first by owner, then by position
@@ -51,6 +52,7 @@ public class Blog implements Comparable<Blog> {
     public String getUser()		   { return user;	 }
     public String getEmail()  	   { return email;   }
     public String getDate()  	   { return date;    }
+    public int    getCommentNum()  { return commentNum;}
     public String getReadableCon() throws UnsupportedEncodingException { 
     	String str = new String(content, "Unicode");
     	return str.replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
@@ -70,6 +72,7 @@ public class Blog implements Comparable<Blog> {
     public void setUser(String userName)  { user = userName; }
     public void setEmail(String e)	 	  { email = e;        } 
     public void setDate(String d)	 	  { date = d;        } 
+    public void setCommentNum(int s)	  { commentNum = s;	}
     
     public String toString() {
     	return "Blog("+id+")";
