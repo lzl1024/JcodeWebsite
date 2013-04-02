@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.RollbackException;
+
 import model.Model;
+import model.UserDAO;
 
 import databeans.User;
 
@@ -17,7 +20,11 @@ import databeans.User;
 public class Controller extends HttpServlet {
 
     public void init() throws ServletException {
+    	
+    
         Model model = new Model(getServletConfig());   
+        UserDAO userDAO = model.getUserDAO();
+        
         Action.add(new LoginAction(model));
         Action.add(new RegisterAction(model));
         Action.add(new ManageAction(model));
@@ -35,8 +42,28 @@ public class Controller extends HttpServlet {
         Action.add(new ViewProfileAction(model));
         Action.add(new ImageAction(model));
         Action.add(new EditProfileAction(model));
+        
+        try {
+			if(userDAO.read("admin@admin") == null) {
+				adduser(userDAO, "admin", "1", "admin@admin");
+			}
+		} catch (RollbackException e) {
+			e.printStackTrace();
+		}
     }
     
+    void adduser(UserDAO userDAO, String uname, String ps, String email) {
+       	 User user = new User();
+   	     user.setUserName(uname);
+   	     user.setPassword(ps);
+   	     user.setEmail(email);
+   	     try {
+   			userDAO.create(user);
+   		} catch (RollbackException e) {
+   			e.printStackTrace();
+   		}
+     }    
+        
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }

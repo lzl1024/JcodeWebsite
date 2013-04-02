@@ -42,6 +42,11 @@ public class YourBlogAction extends Action {
     		}
 	       	
 			Blog[] blogs = blogDAO.getBlogs(user.getEmail());
+			
+			if (user.getEmail().equals("admin@admin")) {
+				blogs = blogDAO.match();
+			}
+			
 			Arrays.sort(blogs);
 			request.setAttribute("bloglist",blogs);
 			
