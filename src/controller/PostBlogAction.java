@@ -17,6 +17,7 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.Blog;
+import databeans.Comment;
 import databeans.User;
 import formbeans.PostBlogForm;
 
@@ -62,8 +63,8 @@ public class PostBlogAction extends Action {
 			blog.setCommentNum(0);
 			blogDAO.create(blog);
 
-			request.setAttribute("errors",errors);
-			
+			request.setAttribute("errors", errors);
+			request.setAttribute("commentlist", new Comment[0]);
 			request.setAttribute("blog", blog);			
 	        return "view.jsp";
 	 	} catch (RollbackException e) {

@@ -21,7 +21,7 @@
 
 <% 	databeans.Comment[] comments = (databeans.Comment[])request.getAttribute("commentlist");
 	int begin = 1;
-	if (comments.length == 0){%>
+	if (comments == null || comments.length == 0){%>
 	There is no comments right now.
 	<hr>
 	<%}else{
