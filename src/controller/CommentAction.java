@@ -76,6 +76,8 @@ public class CommentAction extends Action {
 			Comment[] comments = commentDAO.getComments(blog.getId());
 			request.setAttribute("commentlist",comments);
 			request.setAttribute("blog", blog);
+			request.setAttribute("begin",1);
+			
 	        return "view.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());

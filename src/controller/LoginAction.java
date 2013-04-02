@@ -73,6 +73,13 @@ public class LoginAction extends Action {
 	        // Attach (this copy of) the user bean to the session
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user",user);
+	        
+	      /*  String lastpage;
+	        if ((lastpage = (String) session.getAttribute("last"))!= null) {
+	        	session.removeAttribute("last");
+	        	return lastpage;
+	        }*/
+	        	
 
 	        return "manage.do";
         } catch (RollbackException e) {

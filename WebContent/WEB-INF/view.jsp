@@ -18,21 +18,35 @@
 
 <div class="span10 pull-right alert alert-success">   
 <h3 class="form-signin-heading">Comments</h3> 
-<c:choose>
-	<c:when test="${fn:length(commentlist) == 0}">
+
+<% 	databeans.Comment[] comments = (databeans.Comment[])request.getAttribute("commentlist");
+	int begin = 1;
+	if (comments.length == 0){%>
 	There is no comments right now.
 	<hr>
-	</c:when>
-	<c:otherwise>
-	<c:forEach var="i" begin="0" end="${fn:length(commentlist)-1}">
-		<h3 class="badge">${i+1}</h3>
-		<h3 class="label">Posted By: ${commentlist[i].user}</h3>
-    	<h3 class="label pull-right">  ${commentlist[i].date}</h3>
-   		<p>${commentlist[i].readableCon}</p>
+	<%}else{
+		begin = (Integer)request.getAttribute("begin");
+        for (int i=(begin-1)*10; i<begin*10 && i < comments.length; i++) {%>
+
+		<h3 class="badge"><%=i+1%></h3>
+		<h3 class="label">Posted By: <%=comments[i].getUser()%></h3>
+    	<h3 class="label pull-right"> <%=comments[i].getDate()%></h3>
+   		<p><%=comments[i].getReadableCon()%></p>
    		<hr>
-	</c:forEach>
-	</c:otherwise>
-</c:choose>
+	<%}}%>
+	<div class="pagination pagination-centered">
+		<ul>
+		<li><a href="view.do?begin=<%= begin >1 ? begin-1:1%>&id=${blog.id}">Prev</a></li>
+		<%  int k = (comments.length-1)/10+1;
+        	for (Integer i= 1; i<=k; i++)
+        	if (i!=begin){%>
+        		<li><a href="view.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
+        	<%} else{%>
+        		<li class="disabled"><a href="view.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
+        	<%}%>
+        <li><a href="view.do?begin=<%= begin<k ? begin+1:k%>&id=${blog.id}">Next</a></li>
+        </ul>
+	</div>
 	       
 <hr>                
 <form method="post" class="form-horizontal" action="comment.do">

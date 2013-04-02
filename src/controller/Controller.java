@@ -1,7 +1,10 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import org.genericdao.RollbackException;
 
 import model.Model;
+import model.ProfileDAO;
 import model.UserDAO;
 
+import databeans.Profile;
 import databeans.User;
 
 @SuppressWarnings("serial")
@@ -24,6 +29,7 @@ public class Controller extends HttpServlet {
     
         Model model = new Model(getServletConfig());   
         UserDAO userDAO = model.getUserDAO();
+        ProfileDAO profileDAO = model.getProfileDAO();
         
         Action.add(new LoginAction(model));
         Action.add(new RegisterAction(model));
@@ -45,11 +51,16 @@ public class Controller extends HttpServlet {
         
         try {
 			if(userDAO.read("admin@admin") == null) {
-				adduser(userDAO, "admin", "1", "admin@admin");
+				adduser(userDAO, "admin", "1", "admin@admin");			
 			}
+			//Create the profile bean
+	    	Profile profile = setProfileDefault("admin@admin", "admin");
+	    	profileDAO.create(profile);
 		} catch (RollbackException e) {
 			e.printStackTrace();
 		}
+        
+      
     }
     
     void adduser(UserDAO userDAO, String uname, String ps, String email) {
@@ -85,6 +96,7 @@ public class Controller extends HttpServlet {
         User        user = (User) session.getAttribute("user");
         String      action = getActionName(servletPath);
 
+        
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
         if (action.equals("register.do") || action.equals("login.do")) {
         	// Allow these actions without logging in
@@ -95,6 +107,7 @@ public class Controller extends HttpServlet {
         if (user == null && !action.equals("manage.do") && !action.equals("view.do") 
         	&& !action.equals("allblog.do") && !action.equals("viewprofile.do") && !action.equals("image.do")) {
         	// If the user hasn't logged in, direct him to the login page
+	      //  session.setAttribute("last", action);
 			return Action.perform("login.do",request);
         }
         
@@ -150,5 +163,30 @@ public class Controller extends HttpServlet {
     	// We're guaranteed that the path will start with a slash
         int slash = path.lastIndexOf('/');
         return path.substring(slash+1);
+    }
+    
+    private Profile setProfileDefault(String email, String userName) {
+    	Profile p = new Profile();
+    	BufferedImage image;
+    	ByteArrayOutputStream out = new ByteArrayOutputStream();
+    	
+		try { 
+			image = ImageIO.read(getClass().getResourceAsStream("/images/1.jpg"));    	
+	    	ImageIO.write(image, "jpg", out);	
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		p.setBytes(out.toByteArray());
+		p.setPictype("jpg");
+		p.setEmail(email);
+		p.setInterest("I just like code");
+		p.setOccupation("No code no job");
+		p.setRealName(userName);
+		p.setStatus("Watching best demo!");
+		p.setIntroduction("I am too lazy to intro myself");
+		
+    	
+    	return p;
     }
 }

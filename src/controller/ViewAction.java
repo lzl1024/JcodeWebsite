@@ -54,6 +54,12 @@ public class ViewAction extends Action {
     		request.setAttribute("blog",p);  
 			Comment[] comments = commentDAO.getComments(p.getId());
 			request.setAttribute("commentlist",comments);
+			String begin;
+			if((begin = request.getParameter("begin")) == null) {
+				request.setAttribute("begin",1);
+			}else {
+				request.setAttribute("begin", Integer.parseInt(begin));
+			}
     		
             return "view.jsp";
     	} catch (RollbackException e) {
