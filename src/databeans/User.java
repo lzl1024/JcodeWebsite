@@ -13,6 +13,7 @@ public class User implements Comparable<User> {
 	private String  hashedPassword = "*";
 	private int     salt           = 0;
 	private String  email		   = null;
+	private String  userGroup	   = "user";
 
 	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
@@ -37,14 +38,16 @@ public class User implements Comparable<User> {
 	public String  getHashedPassword() { return hashedPassword; }
 	public String  getUserName()       { return userName;       }
 	public int     getSalt()           { return salt;           }
-	public String  getEmail()		   { return email; 			}		
+	public String  getEmail()		   { return email; 			}	
+	public String  getUserGroup()	   { return userGroup;		}
+	
 
 	public int     hashCode()          { return email.hashCode(); }
 
 	public void setHashedPassword(String x)  { hashedPassword = x; }
 	public void setPassword(String s)        { salt = newSalt(); hashedPassword = hash(s); }
 	public void setSalt(int x)               { salt = x;           }
-	
+	public void setUserGroup(String s)		 { userGroup = s;	   }
 	public void setUserName(String s)        { userName = s;       }
 	public void setEmail(String s)			 { email = s;		   }
 
@@ -85,4 +88,5 @@ public class User implements Comparable<User> {
 		Random random = new Random();
 		return random.nextInt(8192)+1;  // salt cannot be zero
 	}
+
 }

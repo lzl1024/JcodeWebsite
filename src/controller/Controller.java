@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
         Action.add(new LogoutAction(model));
         Action.add(new OnlineJudgeAction(model));
         Action.add(new PostBlogAction(model));
-        Action.add(new ViewAction(model));
+        Action.add(new ViewBlogAction(model));
         Action.add(new YourBlogAction(model));
         Action.add(new AllBlogAction(model));
         Action.add(new SearchAction(model));
@@ -48,14 +48,17 @@ public class Controller extends HttpServlet {
         Action.add(new ViewProfileAction(model));
         Action.add(new ImageAction(model));
         Action.add(new EditProfileAction(model));
+        Action.add(new PostProblemAction(model));
+        Action.add(new AllProblemAction(model));
         
         try {
 			if(userDAO.read("admin@admin") == null) {
-				adduser(userDAO, "admin", "1", "admin@admin");			
+				adduser(userDAO, "admin", "1", "admin@admin", "admin");			
+			
+				//Create the profile bean
+				Profile profile = setProfileDefault("admin@admin", "admin");
+				profileDAO.create(profile);
 			}
-			//Create the profile bean
-	    	Profile profile = setProfileDefault("admin@admin", "admin");
-	    	profileDAO.create(profile);
 		} catch (RollbackException e) {
 			e.printStackTrace();
 		}
@@ -63,11 +66,12 @@ public class Controller extends HttpServlet {
       
     }
     
-    void adduser(UserDAO userDAO, String uname, String ps, String email) {
+    void adduser(UserDAO userDAO, String uname, String ps, String email, String group) {
        	 User user = new User();
    	     user.setUserName(uname);
    	     user.setPassword(ps);
    	     user.setEmail(email);
+   	     user.setUserGroup(group);
    	     try {
    			userDAO.create(user);
    		} catch (RollbackException e) {

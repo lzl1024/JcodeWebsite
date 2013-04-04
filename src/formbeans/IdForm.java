@@ -6,7 +6,7 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class IdForm extends FormBean {
-	private String id;
+	private String id = "-1";
 
 	public String getId() { return id;    }
 	

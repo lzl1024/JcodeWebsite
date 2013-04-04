@@ -16,10 +16,10 @@
 		<tr class ="info">
 			<%} %>
 			<td>
-			<strong>Title:  <a href="view.do?id=<%=blogs[i].getId()%>"><%=blogs[i].getTitle()%></a></strong>
+			<strong>Title:  <a href="viewblog.do?id=<%=blogs[i].getId()%>"><%=blogs[i].getTitle()%></a></strong>
 			<strong class="pull-right">Posted by: <a href="viewprofile.do?email=<%=blogs[i].getEmail()%>"><%=blogs[i].getUser()%></a>  @ <%=blogs[i].getDate()%></strong>
 			<p><%=blogs[i].getShortDes()%>... 
-			<strong class="pull-right"><a href="view.do?id=<%=blogs[i].getId()%>">See Details &raquo</a></strong>
+			<strong class="pull-right"><a href="viewblog.do?id=<%=blogs[i].getId()%>">See Details &raquo</a></strong>
 			<br><strong >Comments(<%=blogs[i].getCommentNum()%>)</strong>
 			</td>
 		</tr>

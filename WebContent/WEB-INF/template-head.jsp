@@ -115,7 +115,7 @@
             	<ul class="nav">
               		<li><a href="manage.do">Home</a></li>
               		<li><a href="allblog.do">Blog</a></li>
-              		<li><a href="oj.do">OnlineJudge</a></li>
+              		<li><a href="allproblem.do">OnlineJudge</a></li>
               	</ul>
               	<ul class = "nav pull-right">
               	

@@ -69,6 +69,7 @@ public class RegisterAction extends Action {
 	        user.setUserName(form.getUserName());
 	        user.setPassword(form.getPassword());
 	        user.setEmail(form.getEmail());
+	        user.setUserGroup("user");
         	userDAO.create(user);
         	
         	//Create the profile bean

@@ -36,15 +36,15 @@
 	<%}}%>
 	<div class="pagination pagination-centered">
 		<ul>
-		<li><a href="view.do?begin=<%= begin >1 ? begin-1:1%>&id=${blog.id}">Prev</a></li>
+		<li><a href="viewblog.do?begin=<%= begin >1 ? begin-1:1%>&id=${blog.id}">Prev</a></li>
 		<%  int k = (comments.length-1)/10+1;
         	for (Integer i= 1; i<=k; i++)
         	if (i!=begin){%>
-        		<li><a href="view.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
+        		<li><a href="viewblog.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
         	<%} else{%>
-        		<li class="disabled"><a href="view.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
+        		<li class="disabled"><a href="viewblog.do?begin=<%=i%>&id=${blog.id}"><%=i%></a></li>
         	<%}%>
-        <li><a href="view.do?begin=<%= begin<k ? begin+1:k%>&id=${blog.id}">Next</a></li>
+        <li><a href="viewblog.do?begin=<%= begin<k ? begin+1:k%>&id=${blog.id}">Next</a></li>
         </ul>
 	</div>
 	       

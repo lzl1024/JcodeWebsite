@@ -8,20 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.BlogDAO;
 import model.Model;
+import model.ProblemDAO;
 
 import org.genericdao.RollbackException;
 
 import databeans.Blog;
+import databeans.Problem;
 
-public class AllBlogAction extends Action {
+public class AllProblemAction extends Action {
 
-	private BlogDAO  blogDAO;
+	private ProblemDAO  problemDAO;
 
-    public AllBlogAction(Model model) {
-    	blogDAO = model.getBlogDAO();
+    public AllProblemAction(Model model) {
+    	problemDAO = model.getProblemDAO();
 	}
 
-    public String getName() { return "allblog.do"; }
+    public String getName() { return "allproblem.do"; }
 
     public String perform(HttpServletRequest request) {
         // Set up the request attributes (the errors list and the form bean so
@@ -30,19 +32,17 @@ public class AllBlogAction extends Action {
         request.setAttribute("errors",errors);
         
 		try {
-
-	       	
-			Blog[] blogs = blogDAO.match();
-			Arrays.sort(blogs);
+			Problem[] problems = problemDAO.match();
+			Arrays.sort(problems);
 			String begin;
 			if((begin = request.getParameter("begin")) == null) {
 				request.setAttribute("begin",1);
 			}else {
 				request.setAttribute("begin", Integer.parseInt(begin));
 			}
-			request.setAttribute("bloglist",blogs);
+			request.setAttribute("problemlist",problems);
 			
-	        return "blogList.jsp";
+	        return "problemList.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";

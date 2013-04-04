@@ -13,7 +13,7 @@
         <div class="span4">
           <h2>Want to have an online challenge?</h2>
           <p>Come on! There are a lot of challenging technical problems are waiting for you to solve. Kick their butts and get your dream offer!</p>
-          <p><a class="btn" href="oj.do">Online Challenging &raquo;</a></p>
+          <p><a class="btn" href="allproblem.do">Online Challenging &raquo;</a></p>
         </div>
         <div class="span4">
           <h2>Want to discuss the problem?</h2>

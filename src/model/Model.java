@@ -12,6 +12,7 @@ public class Model {
 	private BlogDAO 	blogDAO;
 	private CommentDAO 	commentDAO;
 	private ProfileDAO	profileDAO;
+	private ProblemDAO  problemDAO;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -24,6 +25,7 @@ public class Model {
 			blogDAO  	= new BlogDAO("blog", pool);
 			commentDAO 	= new CommentDAO("comment", pool);
 			profileDAO	= new ProfileDAO("profile", pool);
+			problemDAO  = new ProblemDAO("problem", pool);
 			
 			
 		} catch (DAOException e) {
@@ -36,4 +38,6 @@ public class Model {
 	public BlogDAO   	getBlogDAO() 	{ return blogDAO;  		}
 	public CommentDAO   getCommentDAO() { return commentDAO;  	}
 	public ProfileDAO	getProfileDAO() { return profileDAO;	}
+	public ProblemDAO	getProblemDAO() { return problemDAO;	}
+
 }

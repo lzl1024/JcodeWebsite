@@ -10,27 +10,28 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.BlogDAO;
 import model.Model;
+import model.ProblemDAO;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Blog;
 import databeans.Comment;
+import databeans.Problem;
 import databeans.User;
-import formbeans.PostBlogForm;
+import formbeans.PostProblemForm;
 
-public class PostBlogAction extends Action {
-	private FormBeanFactory<PostBlogForm> formBeanFactory = FormBeanFactory.getInstance(PostBlogForm.class);
+public class PostProblemAction extends Action {
+	private FormBeanFactory<PostProblemForm> formBeanFactory = FormBeanFactory.getInstance(PostProblemForm.class);
 	
-	private BlogDAO	blogDAO;
+	private ProblemDAO	problemDAO;
 
-	public PostBlogAction(Model model) {
-		blogDAO = model.getBlogDAO();
+	public PostProblemAction(Model model) {
+		problemDAO = model.getProblemDAO();
 	}
 
-	public String getName() { return "blog.do"; }
+	public String getName() { return "postProblem.do"; }
     
     public String perform(HttpServletRequest request) {
     	// Set up the errors list
@@ -40,42 +41,49 @@ public class PostBlogAction extends Action {
 		try {
 
 			User user = (User) request.getSession(false).getAttribute("user");
-	                
-	        PostBlogForm form = formBeanFactory.create(request);
+	        if(!user.getUserGroup().equals("admin")) {
+	        	errors.add("Permission denied");
+	            request.setAttribute("errors",errors);
+	            return "error.jsp";
+	        }
+	        
+	        PostProblemForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        
 	        if (!form.isPresent()) {
-	            return "blog.jsp";
+	            return "postProblem.jsp";
 	        }
 	       
 	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() > 0) return "blog.jsp";
+	        if (errors.size() > 0) return "postProblem.jsp";
 
-			Blog blog = new Blog();  // id & position will be set when created
+			Problem problem = new Problem();  // id & position will be set when created
 			
-			SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 
-			blog.setDate(formatter.format(curDate));
-			blog.setContent((fixBadChars(form.getContent())).getBytes("Unicode"));
-			blog.setTitle(fixBadChars(form.getTitle()));
-			blog.setUser(user.getUserName());
-			blog.setEmail(user.getEmail());
-			blog.setCommentNum(0);
-			blogDAO.create(blog);
+			
+			problem.setDate(formatter.format(curDate));
+			problem.setContent((fixBadChars(form.getContent())).getBytes("Unicode"));
+			problem.setTitle(fixBadChars(form.getTitle()));
+			problem.setCommentNum(0);
+			problem.setStartCode(form.getStartCode().getBytes("Unicode"));
+			problem.setTestCode(form.getTestCode().getBytes("Unicode"));
+			problem.setReferRes(form.getReferRes().getBytes("Unicode"));
+			problemDAO.create(problem);
 
 			request.setAttribute("errors", errors);
 			request.setAttribute("commentlist", new Comment[0]);
-			request.setAttribute("blog", blog);
-	        return "view.jsp";
+			request.setAttribute("problem", problem);			
+	        return "postProblem.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "blog.jsp";
+			return "postProblem.jsp";
 	 	} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "blog.jsp";
+			return "postProblem.jsp";
 		} catch (UnsupportedEncodingException e) {
 			errors.add(e.getMessage());
-			return "blog.jsp";
+			return "postProblem.jsp";
 		}		
     }
     

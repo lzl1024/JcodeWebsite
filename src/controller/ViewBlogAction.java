@@ -18,18 +18,18 @@ import databeans.Comment;
 
 import formbeans.IdForm;
 
-public class ViewAction extends Action {
+public class ViewBlogAction extends Action {
 	private FormBeanFactory<IdForm> formBeanFactory = FormBeanFactory.getInstance(IdForm.class);
 
 	private BlogDAO  blogDAO;
 	private CommentDAO commentDAO;
 	
-    public ViewAction(Model model) {
+    public ViewBlogAction(Model model) {
     	blogDAO  = model.getBlogDAO();
     	commentDAO = model.getCommentDAO();
 	}
 
-    public String getName() { return "view.do"; }
+    public String getName() { return "viewblog.do"; }
 
     public String perform(HttpServletRequest request) {
         List<String> errors = new ArrayList<String>();
@@ -61,7 +61,7 @@ public class ViewAction extends Action {
 				request.setAttribute("begin", Integer.parseInt(begin));
 			}
     		
-            return "view.jsp";
+            return "viewblog.jsp";
     	} catch (RollbackException e) {
     		errors.add(e.getMessage());
     		return "error.jsp";

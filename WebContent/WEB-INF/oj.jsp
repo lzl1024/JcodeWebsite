@@ -195,8 +195,8 @@
     	<div class="container">
 
 <div id="upper">
-            <p>Problem Set 1</p>
-
+           <p>${problem.readableCon}</p>
+           
         </div>
     
         <div id="lower">
@@ -204,10 +204,12 @@
             <div id="bar">CLick Me to Show/Hide JCode Coding Pannel</div>
 
             <div id="panel">
-                <form method="post" class="form-horizontal" action="oj.do" name ="frm">
-                    <input type="hidden" name="switcher" id="switcher" value="${form.switcher}">
-                    <textarea class="input-block-level" rows="10" name="code">${form.code}</textarea>
-                    <button class="btn btn-large btn-primary" type="submit" onclick="run()">Run</button>
+                <form method="post" class="form-horizontal" action="oj.do?id=${problem.id}" name ="frm">
+                	<input type="hidden" name="problemId" value="${problem.id}">
+                    <input type="hidden" name="switcher" id="switcher" value="${ojForm.switcher}">
+                    <textarea class="input-block-level" rows="10" name="code">${ojForm.code}</textarea>
+                    <button class="btn btn-large btn-primary" type="submit" name="submit" value="run">Run</button>
+                    <button class="btn btn-large btn-primary" type="submit" name="submit" value="verify">Verify</button>
                     <textarea class="input-block-level" rows="5" name="result">${result}</textarea>
                 </form>
             </div>
