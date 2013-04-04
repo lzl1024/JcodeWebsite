@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import model.Model;
 import model.ProblemDAO;
@@ -14,8 +13,6 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Blog;
-import databeans.Comment;
 import databeans.Problem;
 
 import formbeans.IdForm;

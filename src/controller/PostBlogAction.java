@@ -66,7 +66,7 @@ public class PostBlogAction extends Action {
 			request.setAttribute("errors", errors);
 			request.setAttribute("commentlist", new Comment[0]);
 			request.setAttribute("blog", blog);
-	        return "view.jsp";
+	        return "viewblog.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "blog.jsp";

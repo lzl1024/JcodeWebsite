@@ -50,12 +50,12 @@ public class CommentAction extends Action {
 	        request.setAttribute("form",form);
 	        
 	        if (!form.isPresent()) {
-	            return "view.jsp";
+	            return "viewblog.jsp";
 	        }
 	       
 	        
 	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() > 0) return "view.jsp";
+	        if (errors.size() > 0) return "viewblog.jsp";
 
 			Comment comment = new Comment();  // id & position will be set when created
 			
@@ -78,7 +78,7 @@ public class CommentAction extends Action {
 			request.setAttribute("blog", blog);
 			request.setAttribute("begin",1);
 			
-	        return "view.jsp";
+	        return "viewblog.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

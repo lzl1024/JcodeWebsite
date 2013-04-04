@@ -32,7 +32,7 @@ function deleteblog(blogid) {
 	<%}else {%>
 		<tr class ="info">
 	<%} %>
-			<td><a href="view.do?id=<%=blogs[i].getId()%>"><%=blogs[i].getTitle()%></a></td>
+			<td><a href="viewblog.do?id=<%=blogs[i].getId()%>"><%=blogs[i].getTitle()%></a></td>
 			<td><%=blogs[i].getUser()%></td>
 			<td><%=blogs[i].getDate()%></td>
 			<td><a onclick="deleteblog(<%=blogs[i].getId()%>)" href="javascript::deleteblog(<%=blogs[i].getId()%>)">Delete</a>

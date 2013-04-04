@@ -6,13 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.BlogDAO;
 import model.Model;
 import model.ProblemDAO;
 
 import org.genericdao.RollbackException;
 
-import databeans.Blog;
 import databeans.Problem;
 
 public class AllProblemAction extends Action {
