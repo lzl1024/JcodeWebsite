@@ -107,15 +107,21 @@ public class OnlineJudgeAction extends Action {
 	        		//String testCode = "public class Test { public static void main(String[] args) {Source a = new Source(); System.out.println(a.len(\"test\"));}}";
 	        		String testCode = problem.getReadableTestCode();
 	        		String referRes = problem.getReadableReferRes();
+	        		
 	        		result = con.compileVerify(code, testCode, OJPath);
 	        		//compare the result with the reference
-	        		if(referRes.equals(result)) {
+        			System.out.println("result: " + result);
+        			System.out.println("referRes: " + referRes);
+        			//
+	        		if(referRes.trim().equals(result.trim())) {
 	        			result = "Accepted";
 	        		} else {
 	        			result = "Denied";
+
 	        		}
 	        	}
 	        }
+	        //seems the blewo attribute is not necessary
 	        request.setAttribute("problem", problem);
 	        request.setAttribute("code", code);
 	        request.setAttribute("result", result);
