@@ -14,6 +14,7 @@ import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
 import databeans.Comment;
+import databeans.User;
 
 public class DeleteBlogAction extends Action {
 	
@@ -35,6 +36,8 @@ public class DeleteBlogAction extends Action {
 		try {
 			Transaction.begin();
 			String strid = request.getParameter("blogid");
+			//User user = (User) request.getSession(false).getAttribute("user");
+
 			int blogid = Integer.parseInt(strid);
 	        blogDAO.delete(blogid);
 	        

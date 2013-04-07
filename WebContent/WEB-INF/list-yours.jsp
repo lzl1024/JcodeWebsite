@@ -14,9 +14,10 @@ function deleteblog(blogid) {
 </script>
 
 <div class="row-fluid">
-<jsp:include page="template-navlist.jsp" />
+<jsp:include page="template-blog-nav.jsp" />
 
-<div class="span10">
+        
+<div class="span9">
 <p>
 	<table class="table table-striped">
 	<tr><td><strong>Title</strong></td>

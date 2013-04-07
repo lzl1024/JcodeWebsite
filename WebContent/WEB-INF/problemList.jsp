@@ -2,9 +2,10 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-<jsp:include page="template-navlist.jsp" />
+<jsp:include page="template-problem-nav.jsp" />
 
-<div class="span10">
+        
+<div class="span9">
 <p>
 	<table class="table table-striped">
 <% 	databeans.Problem[] problems = (databeans.Problem[])request.getAttribute("problemlist");

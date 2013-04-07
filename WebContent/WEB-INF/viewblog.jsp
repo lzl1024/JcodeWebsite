@@ -3,9 +3,10 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-<jsp:include page="template-navlist.jsp" />
+<jsp:include page="template-blog-nav.jsp" />
 
-<div class="span10 alert alert-block">
+        
+<div class="span9 alert-block alert-info">
 
         <p><h2 class="text-center">${blog.title}</h2>
         <hr>
@@ -16,7 +17,7 @@
 <hr>  <hr>    
 </div>
 
-<div class="span10 pull-right alert alert-success">   
+<div class="span9 pull-right alert alert-success">   
 <h3 class="form-signin-heading">Comments</h3> 
 
 <% 	databeans.Comment[] comments = (databeans.Comment[])request.getAttribute("commentlist");
@@ -52,7 +53,7 @@
 <form method="post" class="form-horizontal" action="comment.do">
         <h3 class="form-signin-heading">Write your Comment</h3>
         <input type="hidden" name="blogid" value="${blog.id}"/>
-        <textarea class="input-block-level" rows="10" placeholder="Write your Comment" name="content"></textarea>
+        <textarea class="input-block-level" rows="5" placeholder="Write your Comment" name="content"></textarea>
         <p> </p>
         <button class="btn btn-large btn-primary" type="submit">Submit</button>
 </form>

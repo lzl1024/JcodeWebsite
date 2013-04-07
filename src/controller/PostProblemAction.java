@@ -48,7 +48,7 @@ public class PostProblemAction extends Action {
 	        }
 	        
 	        PostProblemForm form = formBeanFactory.create(request);
-	        request.setAttribute("form",form);
+	        request.setAttribute("postForm",form);
 	        
 	        if (!form.isPresent()) {
 	            return "postProblem.jsp";

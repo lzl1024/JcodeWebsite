@@ -2,9 +2,10 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-<jsp:include page="template-navlist.jsp" />
+<jsp:include page="template-blog-nav.jsp" />
 
-<div class="span10">
+        
+<div class="span9">
 <p>
 	<table class="table table-striped">
 <% 	databeans.Blog[] blogs = (databeans.Blog[])request.getAttribute("bloglist");

@@ -7,7 +7,7 @@ import org.mybeans.form.FormBean;
 
 public class OnlineJudgeForm extends FormBean {
 	private int	   problemId = -1;
-	private String code = "public class Source {\r\n    public static void main(String[] args) {\r\n        //Please don't modify the class name\r\n    }\r\n}";
+	private String code;
 	private String result;
 	private String switcher = "0";
 	

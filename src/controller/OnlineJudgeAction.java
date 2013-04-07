@@ -66,11 +66,23 @@ public class OnlineJudgeAction extends Action {
 	        	}
 	        }
     		
+	        if(ojForm.getCode() == null || ojForm.getCode().length() == 0)
+	        	ojForm.setCode(problem.getReadableStartCode());
+	        //else
+	        	//ojForm.setCode("public class Source {\r\n    public static void main(String[] args) {\r\n        //Please don't modify the class name\r\n    }\r\n}");
+
+	        System.out.println("---------------");
+	        System.out.println(ojForm.getCode());
+	        System.out.println("---------------");
+
+	        
+	        request.setAttribute("ojForm", ojForm);
+	        request.setAttribute("problem",problem);
+	        
 	        if (errors.size() != 0) {
 	            return "oj.jsp";
 	        }
 	        
-	        request.setAttribute("problem",problem);
 	        /*
 	        Comment[] comments = commentDAO.getComments(p.getId());
 			request.setAttribute("commentlist",comments);
@@ -136,6 +148,8 @@ public class OnlineJudgeAction extends Action {
 		}
 		
         request.setAttribute("errors",errors);
+        
+        System.out.println("Return OJ OK");
         return "oj.jsp";
 
     }

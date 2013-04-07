@@ -50,6 +50,9 @@ public class Controller extends HttpServlet {
         Action.add(new EditProfileAction(model));
         Action.add(new PostProblemAction(model));
         Action.add(new AllProblemAction(model));
+        Action.add(new EditProblemAction(model));
+        Action.add(new ManageProblemAction(model));
+        Action.add(new DeleteProblemAction(model));
         
         try {
 			if(userDAO.read("admin@admin") == null) {

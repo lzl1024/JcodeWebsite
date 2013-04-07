@@ -146,7 +146,7 @@ public class Console {
 
         synchronized(idSet) {
             idSet.remove(id);
-            //deleteDirectory(dir);
+            deleteDirectory(dir);
         }
 
         return output;

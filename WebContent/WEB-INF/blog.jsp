@@ -2,7 +2,7 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-<jsp:include page="template-navlist.jsp" />
+<jsp:include page="template-blog-nav.jsp" />
 
 <div class="span9">
 <c:choose>
