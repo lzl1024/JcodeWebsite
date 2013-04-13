@@ -14,7 +14,7 @@ function deleteproblem(problemid) {
 </script>
 
 <div class="row-fluid">
-<jsp:include page="template-blog-nav.jsp" />
+<jsp:include page="template-problem-nav.jsp" />
 
         
 <div class="span9">

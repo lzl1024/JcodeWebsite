@@ -10,7 +10,7 @@
               <form method="post" action = "search.do">
               <div class="input-prepend">
               <span class="add-on"><i class="icon-search"></i></span>
-              <input id="inputIcon"  type="text" class="input-block-level" placeholder="Search" name="keyword">
+              <input id="inputIcon"  type="text" class="input-block-level span10" placeholder="Search" name="keyword">
               </div>             
               </form>
               </li>         
