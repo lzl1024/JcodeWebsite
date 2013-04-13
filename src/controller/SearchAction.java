@@ -40,7 +40,6 @@ public class SearchAction extends Action{
 	            // Set up user list for nav bar
 				Blog[] bloglist;
 				String[] strar = search.getKeyword().split(" ");
-				System.out.println(Arrays.toString(strar));
 				if (strar == null || strar.length == 0)
 				{
 					bloglist = blogDAO.match();
@@ -50,18 +49,18 @@ public class SearchAction extends Action{
 						match = MatchArg.or(match, MatchArg.containsIgnoreCase("title", strar[i]));
 					}
 					bloglist = blogDAO.match(match);
-					System.out.println(bloglist.length);
-					//test below
-					for(int i = 0; i < bloglist.length; i++) {
-						System.out.println(bloglist[i].getTitle());
-					}
-					System.out.println("END OF BLOGLIST");
 					
 				}
 				
-				HttpSession session = request.getSession();
-		        session.setAttribute("bloglist",bloglist);
-		        return "list.jsp";
+				String begin;
+				if((begin = request.getParameter("begin")) == null) {
+					request.setAttribute("begin",1);
+				}else {
+					request.setAttribute("begin", Integer.parseInt(begin));
+				}
+				
+				request.setAttribute("bloglist",bloglist);
+		        return "blogList.jsp";
 	        } catch (RollbackException e) {
 	        	errors.add(e.getMessage());
 	        	return "error.jsp";

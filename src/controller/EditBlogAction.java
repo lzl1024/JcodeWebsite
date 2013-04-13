@@ -86,7 +86,7 @@ public class EditBlogAction extends Action {
 			Comment[] comments = commentDAO.getComments(p.getId());
 			request.setAttribute("commentlist",comments);
     		
-            return "view.jsp";
+            return "viewblog.jsp";
     	} catch (RollbackException e) {
     		errors.add(e.getMessage());
     		return "error.jsp";
