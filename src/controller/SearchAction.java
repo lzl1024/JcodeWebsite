@@ -59,9 +59,8 @@ public class SearchAction extends Action{
 					
 				}
 				
-				HttpSession session = request.getSession();
-		        session.setAttribute("bloglist",bloglist);
-		        return "list.jsp";
+		        request.setAttribute("bloglist",bloglist);
+		        return "blogList.jsp";
 	        } catch (RollbackException e) {
 	        	errors.add(e.getMessage());
 	        	return "error.jsp";
