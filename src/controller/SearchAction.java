@@ -52,6 +52,7 @@ public class SearchAction extends Action{
 					
 				}
 				
+<<<<<<< HEAD
 				String begin;
 				if((begin = request.getParameter("begin")) == null) {
 					request.setAttribute("begin",1);
@@ -60,6 +61,9 @@ public class SearchAction extends Action{
 				}
 				
 				request.setAttribute("bloglist",bloglist);
+=======
+		        request.setAttribute("bloglist",bloglist);
+>>>>>>> 41c4b996b19d5d76e09591486bda30d951f6583d
 		        return "blogList.jsp";
 	        } catch (RollbackException e) {
 	        	errors.add(e.getMessage());
