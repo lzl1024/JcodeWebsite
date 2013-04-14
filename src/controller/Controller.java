@@ -81,7 +81,11 @@ public class Controller extends HttpServlet {
         
         // add a demo problem
         try {
+<<<<<<< HEAD
 			if(problemDAO.match().length == 0) {
+=======
+			if(problemDAO.read(1) == null) {
+>>>>>>> Edit Problem
 				
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 				Date curDate = new Date(System.currentTimeMillis()); 

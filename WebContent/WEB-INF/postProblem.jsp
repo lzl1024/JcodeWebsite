@@ -5,19 +5,19 @@
 	<jsp:include page="template-problem-nav.jsp" />
 
 	<div class="span9">
+
 		<c:choose>
 			<c:when test="${edit == 1}">
-				<form method="post" class="form-horizontal" action="editblog.do">
-					<input type="hidden" name="id" value="${id}" />
-				</form>
+				<form method="post" class="form-horizontal" action="editproblem.do">
+				<input type="hidden" name="id" value="${id}"/>
+				<h2> Edit Problem</h2>
 			</c:when>
-			<c:otherwise>
-				
+    		<c:otherwise>
+				<form method="post" class="form-horizontal" action="postProblem.do">
+				<Post new Problem>
 			</c:otherwise>
 		</c:choose>
 		
-		<form method="post" class="form-horizontal" action="postProblem.do">
-		<h2>Post a new problem</h2>
 		<h3>Title</h3> 
 		<input type="text" class="input-block-level" placeholder="Title" name="title" value="${postForm.title}">
 		<p></p>
