@@ -9,43 +9,42 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
-import databeans.Blog;
+import databeans.PComment;
 
 
-public class BlogDAO extends GenericDAO<Blog> {
+public class PCommentDAO extends GenericDAO<PComment> {
 	
-	public BlogDAO(String tableName, ConnectionPool pool) throws DAOException {
-		super(Blog.class, tableName, pool);
+	public PCommentDAO(String tableName, ConnectionPool pool) throws DAOException {
+		super(PComment.class, tableName, pool);
 	}
 
-	public Blog[] getBlogs(String email) throws RollbackException {
-		Blog[] blogs = match(MatchArg.equals("email",email));
-		Arrays.sort(blogs); 
-		return blogs;
+	public PComment[] getComments(int problemid) throws RollbackException {
+		PComment[] comments = match(MatchArg.equals("problemid",problemid));
+		Arrays.sort(comments); 
+		return comments;
 	}
 	
-	public void create(Blog newBlog) throws RollbackException {
+	public void create(PComment newComment) throws RollbackException {
 		try {
 			Transaction.begin();
-			createAutoIncrement(newBlog);
+			createAutoIncrement(newComment);
 			Transaction.commit();
 		} finally {
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
-	
 
 	public void delete(int id, String owner) throws RollbackException {
 		try {
 			Transaction.begin();
-    		Blog p = read(id);
+    		PComment p = read(id);
 
     		if (p == null) {
-				throw new RollbackException("Blog does not exist: id="+id);
+				throw new RollbackException("Comment does not exist: id="+id);
     		}
 
     		if (!owner.equals(p.getUser())) {
-				throw new RollbackException("Blog not owned by "+owner);
+				throw new RollbackException("Comment not owned by "+owner);
     		}
 
 			delete(id);

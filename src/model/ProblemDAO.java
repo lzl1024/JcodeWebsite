@@ -32,6 +32,7 @@ public class ProblemDAO extends GenericDAO<Problem> {
 		}
 	}
 
+	
 	public void delete(int id, String owner) throws RollbackException {
 		try {
 			Transaction.begin();

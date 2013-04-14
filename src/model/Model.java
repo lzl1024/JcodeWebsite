@@ -13,6 +13,8 @@ public class Model {
 	private CommentDAO 	commentDAO;
 	private ProfileDAO	profileDAO;
 	private ProblemDAO  problemDAO;
+	private PCommentDAO pcommentDAO;
+	private StatisticDAO statisticDAO;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -26,6 +28,8 @@ public class Model {
 			commentDAO 	= new CommentDAO("comment", pool);
 			profileDAO	= new ProfileDAO("profile", pool);
 			problemDAO  = new ProblemDAO("problem", pool);
+			pcommentDAO = new PCommentDAO("pcomment", pool);
+			statisticDAO= new StatisticDAO("statistic", pool);
 			
 			
 		} catch (DAOException e) {
@@ -39,5 +43,7 @@ public class Model {
 	public CommentDAO   getCommentDAO() { return commentDAO;  	}
 	public ProfileDAO	getProfileDAO() { return profileDAO;	}
 	public ProblemDAO	getProblemDAO() { return problemDAO;	}
+	public PCommentDAO  getPCommentDAO(){ return pcommentDAO;  	}
+	public StatisticDAO getStatisticDAO(){return statisticDAO;	}
 
 }

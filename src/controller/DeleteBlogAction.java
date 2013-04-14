@@ -14,7 +14,6 @@ import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
 import databeans.Comment;
-import databeans.User;
 
 public class DeleteBlogAction extends Action {
 	

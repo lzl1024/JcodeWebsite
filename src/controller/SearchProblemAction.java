@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.BlogDAO;
+import model.ProblemDAO;
 import model.Model;
 
 import org.genericdao.MatchArg;
@@ -13,20 +13,20 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Blog;
+import databeans.Problem;
 
 import formbeans.SearchForm;
 
-public class SearchAction extends Action{
+public class SearchProblemAction extends Action{
 	private FormBeanFactory<SearchForm> formBeanFactory = FormBeanFactory.getInstance(SearchForm.class);
 	
-	private BlogDAO blogDAO;
+	private ProblemDAO problemDAO;
 
-	public SearchAction(Model model) {
-		blogDAO = model.getBlogDAO();
+	public SearchProblemAction(Model model) {
+		problemDAO = model.getProblemDAO();
 	}
 	
-	public String getName() { return "search.do"; }
+	public String getName() { return "searchproblem.do"; }
 	
 	 public String perform(HttpServletRequest request) {
 	        List<String> errors = new ArrayList<String>();
@@ -36,17 +36,17 @@ public class SearchAction extends Action{
 				SearchForm search = formBeanFactory.create(request);
 				
 	            // Set up user list for nav bar
-				Blog[] bloglist;
+				Problem[] problemlist;
 				String[] strar = search.getKeyword().split(" ");
 				if (strar == null || strar.length == 0)
 				{
-					bloglist = blogDAO.match();
+					problemlist = problemDAO.match();
 				}else {			
 					MatchArg match = MatchArg.containsIgnoreCase("title", strar[0]);
 					for(int i = 1; i < strar.length; i++) {
 						match = MatchArg.or(match, MatchArg.containsIgnoreCase("title", strar[i]));
 					}
-					bloglist = blogDAO.match(match);
+					problemlist = problemDAO.match(match);
 					
 				}
 				
@@ -57,8 +57,8 @@ public class SearchAction extends Action{
 					request.setAttribute("begin", Integer.parseInt(begin));
 				}
 				
-				request.setAttribute("bloglist",bloglist);
-		        return "blogList.jsp";
+				request.setAttribute("problemlist",problemlist);
+		        return "problemList.jsp";
 	        } catch (RollbackException e) {
 	        	errors.add(e.getMessage());
 	        	return "error.jsp";

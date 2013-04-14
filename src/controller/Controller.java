@@ -61,6 +61,10 @@ public class Controller extends HttpServlet {
         Action.add(new EditProblemAction(model));
         Action.add(new ManageProblemAction(model));
         Action.add(new DeleteProblemAction(model));
+        Action.add(new CommentProblemAction(model));
+        Action.add(new MyStatisticAction(model));
+        Action.add(new TopCoderAction(model));
+        Action.add(new SearchProblemAction(model));
         
         // add an admin
         try {
@@ -77,7 +81,7 @@ public class Controller extends HttpServlet {
         
         // add a demo problem
         try {
-			if(problemDAO.read(0) == null) {
+			if(problemDAO.match().length == 0) {
 				
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 				Date curDate = new Date(System.currentTimeMillis()); 

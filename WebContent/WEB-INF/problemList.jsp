@@ -22,6 +22,8 @@
 			<p><%=problems[i].getShortDes()%>... 
 			<strong class="pull-right"><a href="oj.do?id=<%=problems[i].getId()%>">See Details &raquo</a></strong>
 			<br><strong >Comments(<%=problems[i].getCommentNum()%>)</strong>
+			&nbsp &nbsp<strong>Accepted(<%=problems[i].getAccept()%>)</strong>
+			&nbsp &nbsp<strong>Denied(<%=problems[i].getDeny()%>)</strong>
 			</td>
 		</tr>
 		<%}%>

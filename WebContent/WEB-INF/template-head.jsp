@@ -225,7 +225,7 @@
                     		<li><a href="change-pwd.do">Change Password</a></li>
                     		<li class="divider"></li>
                     		<li class="nav-header">Your Statistic</li>
-                    		<li><a href="#">Top Coder</a></li>
+                    		<li><a href="topcoder.do">Top Coder</a></li>
                     		<li><a href="statistic.do">Sumbit Statistic</a></li>
                   		</ul>
                 		</li>

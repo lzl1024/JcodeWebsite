@@ -14,6 +14,15 @@ public class User implements Comparable<User> {
 	private int     salt           = 0;
 	private String  email		   = null;
 	private String  userGroup	   = "user";
+	private int 	accept		   = 0;
+	private int     deny		   = 0;
+	private int     score		   = 0;
+	
+	public User(){
+		accept 	= 0;
+		deny  	= 0;
+		score 	= 0;
+	}
 
 	public boolean checkPassword(String password) {
 		return hashedPassword.equals(hash(password));
@@ -21,10 +30,12 @@ public class User implements Comparable<User> {
 	
 	public int compareTo(User other) {
 		// Order first by lastName and then by firstName
-		int c = userName.compareTo(other.userName);
-		if (c != 0) return c;
+		if (score > other.score ) 
+			return -1;
+		else if (score < other.score)
+			return 1;
+		else return 0;
 	
-		return email.compareTo(other.email);
 	}
 
 	public boolean equals(Object obj) {
@@ -40,7 +51,9 @@ public class User implements Comparable<User> {
 	public int     getSalt()           { return salt;           }
 	public String  getEmail()		   { return email; 			}	
 	public String  getUserGroup()	   { return userGroup;		}
-	
+	public int 	   getAccept()		   { return accept;			}
+	public int     getDeny()		   { return deny;		    }
+	public int 	   getScore()		   { return score;			}
 
 	public int     hashCode()          { return email.hashCode(); }
 
@@ -50,6 +63,9 @@ public class User implements Comparable<User> {
 	public void setUserGroup(String s)		 { userGroup = s;	   }
 	public void setUserName(String s)        { userName = s;       }
 	public void setEmail(String s)			 { email = s;		   }
+	public void setAccept(int s)			 { accept = s;		   }
+	public void setDeny(int s)				 { deny = s;		   }
+	public void setScore(int s)				 { score = s;		   }
 
 	public String toString() {
 		return "User("+getUserName()+")";

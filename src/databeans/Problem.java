@@ -19,6 +19,13 @@ public class Problem implements Comparable<Problem> {
 	private byte[] startCode	= null;
 	private byte[] testCode		= null;
 	private byte[] referRes		= null;
+	private int	   accept		= 0;
+	private int    deny			= 0;
+	
+	public Problem(){
+		accept = 0;
+		deny = 0;
+	}
 	
 	public int compareTo(Problem other) {
 		// Order by date
@@ -56,6 +63,8 @@ public class Problem implements Comparable<Problem> {
     public byte[] getStartCode()   { return startCode; }
     public byte[] getTestCode()    { return testCode; }
     public byte[] getReferRes()    { return referRes; }
+    public int	  getAccept()	   { return accept;	  }
+    public int 	  getDeny()		   { return deny;	  }
 
     
     public String getReadableCon() throws UnsupportedEncodingException { 
@@ -92,6 +101,8 @@ public class Problem implements Comparable<Problem> {
     public void setReferRes(byte[] s)     { referRes = s;   }
     public void setDate(String d)	 	  { date = d;       } 
     public void setCommentNum(int s)	  { commentNum = s;	}
+    public void setAccept(int s)		  { accept = s;		}
+    public void setDeny(int s)			  { deny  = s;		}
     
     public String toString() {
     	return "Blog("+id+")";
