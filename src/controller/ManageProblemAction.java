@@ -14,8 +14,6 @@ import org.genericdao.RollbackException;
 import databeans.Problem;
 import databeans.User;
 
-
-
 public class ManageProblemAction extends Action {
 
 	private ProblemDAO  problemDAO;

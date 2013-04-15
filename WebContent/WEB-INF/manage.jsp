@@ -1,32 +1,70 @@
 <jsp:include page="template-head.jsp" />
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Hey, dude!</h1>
-        <p>I know you are attracted by this fantastic website. Do you want to see the source code of it? </p>
-        <p>Because this may be the only thing you can do if you have not signed in</p>
-        <p><a href="https://github.com/lzl1024/Leetcode.git" class="btn btn-primary btn-large">Click Me Hard !! &raquo;</a></p>
-      </div>
+      
+      <h1>JCode</h1>
+      
+      <div id="myCarousel" class="carousel slide">
+      <ol class="carousel-indicators">
+    	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    	<li data-target="#myCarousel" data-slide-to="1"></li>
+    	<li data-target="#myCarousel" data-slide-to="2"></li>
+    	<li data-target="#myCarousel" data-slide-to="3"></li>
 
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Want to have an online challenge?</h2>
-          <p>Come on! There are a lot of challenging technical problems are waiting for you to solve. Kick their butts and get your dream offer!</p>
-          <p><a class="btn" href="allproblem.do">Online Challenging &raquo;</a></p>
+	  </ol>
+    
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="pic/coding.jpg" alt="" width="1280" height="600">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Online Judge</h1>
+              <p class="lead">Welcome to Online Judge system. Code, run and enjoy!</p>
+			  <br>
+              <a class="btn btn-large btn-primary" href="allproblem.do">Online Judge</a>
+            </div>
+          </div>
         </div>
-        <div class="span4">
-          <h2>Want to discuss the problem?</h2>
-          <p>How to be a top coder? We are not born to be it! Some top coders are here to solve your problems. Also, don't forget to teach others.</p>
-          <p><a class="btn" href="allblog.do">Blog &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Want to see how well you have done?</h2>
-          <p>All of your statistic are here. How many times you fail on a problem. How many times you submit that problem. How many problems are conquered by you.</p>
-          <p><a class="btn" href="statistic.do">Statistic &raquo;</a></p>
+        
+        <div class="item">
+          <img src="pic/blog.jpg" alt="" width="1280" height="600">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Blog</h1>
+              <p class="lead">Hey, smart brain. Show your idea to the world!</p>
+              <br>
+              <a class="btn btn-large btn-primary" href="allblog.do">Blog</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <img src="pic/statistics.jpg" alt="" width="1280" height="600">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Ranking</h1>
+              <p class="lead">Code with the world's top coders. Or be one of them!</p>
+			  <br>
+              <a class="btn btn-large btn-primary" href="allstatistics.do">Statistics</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <img src="pic/github.jpg" alt="" width="1280" height="600">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>GitHub</h1>
+              <p class="lead">Wonder how this cool system works? This is an open source project!</p>
+			  <br>
+              <a class="btn btn-large btn-primary" href="https://github.com/lzl1024/Leetcode.git">View Source</a>
+            </div>
+          </div>
         </div>
       </div>
-
-      <hr>
+        
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
 
 <jsp:include page="template-bottom.jsp" />

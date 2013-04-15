@@ -15,6 +15,14 @@
     <link href="${pageContext.request.contextPath}/patterns/css/bootstrap.css" rel="stylesheet"/>
     
     <style type="text/css">
+    
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
     	
     #upper {
         position: relative;
@@ -158,8 +166,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="${pageContext.request.contextPath}/patterns/ico/favicon.png">
- 
+                                   <link rel="shortcut icon" href="pic/icon.jpeg">
  	<script>
 
     $(document).ready(function(){
@@ -173,6 +180,8 @@
         	}
             $("#panel").slideToggle("slow");  
 		});
+        
+        
     });
     
     function run(editor,form) {
@@ -188,6 +197,7 @@
 
     }
     
+    
     </script>
  
   </head>
@@ -196,6 +206,7 @@
 	<div id="wrap">
 	
     	<div class="navbar navbar-inverse navbar-fixed-top">
+    	
       	<div class="navbar-inner">
         	<div class="container">
           	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -203,10 +214,10 @@
             	<span class="icon-bar"></span>
             	<span class="icon-bar"></span>
           	</button>
-          	<a class="brand" href="#">JCode</a>
+          	<a class="brand" href="manage.do">JCode</a>
           	<div class="nav-collapse collapse">
             	<ul class="nav">
-              		<li class="active"><a href="manage.do">Home</a></li>
+              		<li><a href="manage.do">Home</a></li>
               		<li><a href="allblog.do">Blog</a></li>
               		<li><a href="allproblem.do">OnlineJudge</a></li>
               	</ul>
@@ -214,8 +225,11 @@
               	
 					<c:choose>
 						<c:when test="${ (empty user) }">
+							<!--  
 							<li><a href="login.do">Login</a></li>
 							<li><a href="register.do">Register</a></li>
+							-->
+							<a href="#myModal" role="button" class="btn" data-toggle="modal">Sign Up</a>
 						</c:when>
               			<c:otherwise>
               			<li class="dropdown">
@@ -238,4 +252,130 @@
       	</div>
     	</div>
 
-    	<div class="container">
+		<!-- Modal -->
+		<div id="myModal" class="modal hide fade" tabindex="-1"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">x</button>
+				<h3 id="myModalLabel">Sign Up</h3>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs" id="signUpTab">
+					<li class="active"><a href="#signin" data-toggle="tab">Sign
+							In</a></li>
+					<li><a href="#register" data-toggle="tab">Register</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="signin">
+						<form class="form-horizontal" name ="frm">
+							<div class="control-group">
+								<label class="control-label" for="signinEmail">Email:</label>
+								<div class="controls">
+									<input type="text" style="min-height: 30px;" placeholder="Email address" name="email" id="signinEmail" value="${loginForm.email}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="signinPassword">Password:</label>
+								<div class="controls">
+								    <input type="password" style="min-height: 30px;" placeholder="Password" name="password" id="signinPassword" value=""/>
+								
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="button" class="btn btn-primary" id="signinSubmit">Sign in</button>
+								</div>
+							</div>
+						</form>
+						<div id="signinMsg"></div>
+					</div>
+					<div class="tab-pane" id="register">
+						<form class="form-horizontal" action="register.do" name ="frm">
+							<div class="control-group">
+								<label class="control-label" for="registerEmail">Email</label>
+								<div class="controls" id="checkstatus">
+        							<input type="text" style="min-height: 30px;" placeholder="Email address" name="email" id="registerEmail" value="${regForm.email}">
+									<div id="status"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="registerUserName">User Name</label>
+								<div class="controls">
+									<input type="text" style="min-height: 30px;" placeholder="User Name" name="userName" id="registerUserName" value="${regForm.userName}">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="registerPassword">Password</label>
+								<div class="controls">
+									<input type="password" style="min-height: 30px;" placeholder="Password" name="password" id="registerPassword" value=""/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="registerConPassword">Conform Password</label>
+								<div class="controls">
+									<input type="password" style="min-height: 30px;" placeholder="Confirm Password" name="conPassword" id="registerConPassword" value=""/>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="button" class="btn btn-primary" id="registerSubmit">Register</button>
+								</div>
+							</div>
+						</form>
+						<div id="registerMsg"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		$(document).ready(
+				function() {
+					$('#signinSubmit').click(
+							function() {
+								$.ajax({
+									type : 'POST',
+									url :  'login.do',
+									data : 'email='
+											+ $('#signinEmail').val()
+											+ '&password='
+											+ $('#signinPassword').val(),
+									success : function(msg) {
+										msg = $.trim(msg);
+										if (msg == "success") {
+											window.location.href = 'manage.do';
+										} else {
+											$('#signinMsg').html(msg);
+										}
+									}
+								})
+							}), 
+					$('#registerSubmit').click(
+							function() {
+								$.ajax({
+									type : 'POST',
+									url :  'register.do',
+									data : 'email='
+											+ $('#registerEmail').val()
+											+ '&userName='
+											+ $('#registerUserName').val()
+											+ '&password='
+											+ $('#registerPassword').val()
+											+ '&confirm='
+											+ $('#registerConPassword').val(),
+									success : function(msg) {
+										msg = $.trim(msg);
+										if (msg == "success") {
+											window.location.href = 'manage.do';
+										} else {
+											$('#registerMsg').html(msg);
+										}
+									}
+								})
+							})
+				});
+		</script>
+
+		<div class="container">

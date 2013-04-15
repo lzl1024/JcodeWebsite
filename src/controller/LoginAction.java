@@ -38,21 +38,29 @@ public class LoginAction extends Action {
     
     public String perform(HttpServletRequest request) {
         List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors",errors);
+        String status = null;
+        
+
        
         try {
 	    	LoginForm form = formBeanFactory.create(request);
-	        request.setAttribute("form",form);
+	        request.setAttribute("loginForm",form);
 	        
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
+	        	status = "Information is incomplete.";
+	        	request.setAttribute("errors",errors);
+	            request.setAttribute("status",status);
 	            return "login.jsp";
 	        }
 	        
 	        // Any validation errors?
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
+	        	status = "notValidate";
+	        	request.setAttribute("errors",errors);
+	            request.setAttribute("status",status);
 	            return "login.jsp";
 	        }
 
@@ -60,17 +68,24 @@ public class LoginAction extends Action {
 	        User user = userDAO.read(form.getEmail());
 	        
 	        if (user == null) {
+	        	status = "noEmail";
 	            errors.add("Email not found");
+	            request.setAttribute("errors",errors);
+	            request.setAttribute("status",status);
 	            return "login.jsp";
 	        }
 
 	        // Check the password
 	        if (!user.checkPassword(form.getPassword())) {
+	        	status = "incorrectPwd";
 	            errors.add("Incorrect password");
+	            request.setAttribute("errors",errors);
+	            request.setAttribute("status",status);
 	            return "login.jsp";
 	        }
 	
 	        // Attach (this copy of) the user bean to the session
+	        status = "success";
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user",user);
 	        
@@ -80,8 +95,10 @@ public class LoginAction extends Action {
 	        	return lastpage;
 	        }*/
 	        	
-
-	        return "manage.do";
+	        System.out.println("login status: " + status);
+	        request.setAttribute("errors",errors);
+	        request.setAttribute("status",status);
+	        return "login.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";

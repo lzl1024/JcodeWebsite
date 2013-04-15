@@ -10,15 +10,13 @@ public class RegisterForm extends FormBean {
 	private String password;
 	private String confirm ;
 	private String email;
-	private String use;
+
 	
 	public String getUserName()  { return userName;  }
 	public String getEmail()	 { return email;	 }
 	public String getPassword()  { return password;  }
 	public String getConfirm()   { return confirm;   }
-	public String getUse()   	 { return use;   }
 	
-	public void setUse(String s)   	   { use = s;   }
 	public void setUserName(String s)  { userName  = trimAndConvert(s,"<>\"");  }
 	public void setEmail(String s)     { email     = s.trim();				    }
 	public void setPassword(String s)  { password  = s.trim();                  }
@@ -32,7 +30,7 @@ public class RegisterForm extends FormBean {
 			errors.add("User Name is required");
 		}
 		
-		if (userName.length() > 255) {
+		if (userName != null && userName.length() > 255) {
 			errors.add("Please edit userName less than 255 characters!");
 		}
 

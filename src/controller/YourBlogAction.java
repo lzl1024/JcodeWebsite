@@ -14,8 +14,6 @@ import org.genericdao.RollbackException;
 import databeans.Blog;
 import databeans.User;
 
-
-
 public class YourBlogAction extends Action {
 
 	private BlogDAO  blogDAO;

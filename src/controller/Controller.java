@@ -155,7 +155,7 @@ public class Controller extends HttpServlet {
         	&& !action.equals("allblog.do") && !action.equals("viewprofile.do") && !action.equals("image.do")) {
         	// If the user hasn't logged in, direct him to the login page
 	      //  session.setAttribute("last", action);
-			return Action.perform("login.do",request);
+			return Action.perform("manage.do",request);
         }
         
         
@@ -219,7 +219,7 @@ public class Controller extends HttpServlet {
     	
 		try { 
 			image = ImageIO.read(getClass().getResourceAsStream("/images/1.jpg"));    	
-	    	ImageIO.write(image, "jpg", out);	
+	    	ImageIO.write(image, "jpg", out);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
