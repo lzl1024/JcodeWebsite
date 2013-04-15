@@ -20,7 +20,6 @@
             <div class="carousel-caption">
               <h1>Online Judge</h1>
               <p class="lead">Welcome to Online Judge system. Code, run and enjoy!</p>
-			  <br>
               <a class="btn btn-large btn-primary" href="allproblem.do">Online Judge</a>
             </div>
           </div>

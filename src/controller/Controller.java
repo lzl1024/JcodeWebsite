@@ -139,7 +139,10 @@ public class Controller extends HttpServlet {
         User        user = (User) session.getAttribute("user");
         String      action = getActionName(servletPath);
 
-        
+        if(action.equals("registerPage.do")) {
+        	//direct to register jsp
+        	return "register.jsp";
+        }
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
         if (action.equals("register.do") || action.equals("login.do")) {
         	// Allow these actions without logging in
@@ -151,7 +154,7 @@ public class Controller extends HttpServlet {
         	&& !action.equals("allblog.do") && !action.equals("viewprofile.do") && !action.equals("image.do")) {
         	// If the user hasn't logged in, direct him to the login page
 	      //  session.setAttribute("last", action);
-			return Action.perform("manage.do",request);
+			return "login.jsp";
         }
         
         

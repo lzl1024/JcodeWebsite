@@ -42,10 +42,9 @@ public class RegisterAction extends Action {
 	public String getName() { return "register.do"; }
 
     public String perform(HttpServletRequest request) {
-    	System.out.println("Register: received!");
-    	
         List<String> errors = new ArrayList<String>();
         String status = null;
+        String msg = null;
 
         try {
 	        RegisterForm form = formBeanFactory.create(request);
@@ -55,10 +54,12 @@ public class RegisterAction extends Action {
 	        errors.addAll(form.getValidationErrors());
 	        errors.addAll(primarykeyError(userDAO, form.getEmail(), form.getUserName()));
 	        if (errors.size() != 0) {
-	        	status = "error";
+	        	status = "fail";
+	        	msg = "noValidate";
 	            request.setAttribute("status",status);
+	            request.setAttribute("msg",msg);
 	            request.setAttribute("errors",errors);
-	            return "register.jsp";
+	            return "ajax.jsp";
 	        }
 	
 	        // Create the user bean
@@ -79,15 +80,17 @@ public class RegisterAction extends Action {
 	        session.setAttribute("user",user);
 	        
 	        status = "success";
+	        msg = "success";
             request.setAttribute("status",status);
+            request.setAttribute("msg",msg);
 	        request.setAttribute("errors",errors);
-			return "register.jsp";
+			return "ajax.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return "register.jsp";
+        	return "error.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
-        	return "register.jsp";
+        	return "error.jsp";
         }
     }
     

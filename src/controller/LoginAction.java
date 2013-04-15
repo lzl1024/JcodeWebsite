@@ -37,55 +37,77 @@ public class LoginAction extends Action {
 	public String getName() { return "login.do"; }
     
     public String perform(HttpServletRequest request) {
+    	System.out.println("Login: recevied ");
+    	
         List<String> errors = new ArrayList<String>();
         String status = null;
-        
-
+        String msg = null;
        
         try {
 	    	LoginForm form = formBeanFactory.create(request);
+	    	System.out.println(form.getEmail());
+	    	System.out.println(form.getPassword());
+
 	        request.setAttribute("loginForm",form);
 	        
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
-	        	status = "Information is incomplete.";
+	        	status = "fail";
+	        	msg = "Information is incomplete.";
 	        	request.setAttribute("errors",errors);
 	            request.setAttribute("status",status);
-	            return "login.jsp";
+	            request.setAttribute("msg",msg);
+	            return "ajax.jsp";
 	        }
 	        
 	        // Any validation errors?
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	        	status = "notValidate";
+	        	status = "fail";
+	        	msg = "notValidate";
 	        	request.setAttribute("errors",errors);
 	            request.setAttribute("status",status);
-	            return "login.jsp";
+	            request.setAttribute("msg",msg);
+	            
+		        System.out.println("login status: " + msg);
+
+	            return "ajax.jsp";
 	        }
 
 	        // Look up the user
 	        User user = userDAO.read(form.getEmail());
 	        
 	        if (user == null) {
-	        	status = "noEmail";
+	        	status = "fail";
+	        	msg = "noEmail";
 	            errors.add("Email not found");
 	            request.setAttribute("errors",errors);
 	            request.setAttribute("status",status);
-	            return "login.jsp";
+	            request.setAttribute("msg",msg);
+	            
+		        System.out.println("login status: " + msg);
+
+	            return "ajax.jsp";
 	        }
 
 	        // Check the password
 	        if (!user.checkPassword(form.getPassword())) {
-	        	status = "incorrectPwd";
+	        	status = "fail";
+	        	msg = "incorrectPwd";
 	            errors.add("Incorrect password");
 	            request.setAttribute("errors",errors);
 	            request.setAttribute("status",status);
-	            return "login.jsp";
+	            request.setAttribute("msg",msg);
+	            
+		        System.out.println("login status: " + msg);
+
+	            return "ajax.jsp";
 	        }
 	
 	        // Attach (this copy of) the user bean to the session
 	        status = "success";
+	        msg = "success";
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user",user);
 	        
@@ -98,7 +120,8 @@ public class LoginAction extends Action {
 	        System.out.println("login status: " + status);
 	        request.setAttribute("errors",errors);
 	        request.setAttribute("status",status);
-	        return "login.jsp";
+            request.setAttribute("msg",msg);
+	        return "ajax.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
