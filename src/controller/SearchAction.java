@@ -56,12 +56,6 @@ public class SearchAction extends Action{
 					request.setAttribute("begin", Integer.parseInt(begin));
 				}
 				
-				String begin;
-				if((begin = request.getParameter("begin")) == null) {
-					request.setAttribute("begin",1);
-				}else {
-					request.setAttribute("begin", Integer.parseInt(begin));
-				}
 				
 				request.setAttribute("bloglist",bloglist);
 		        return "blogList.jsp";
