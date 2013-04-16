@@ -86,24 +86,86 @@
 		</div>
 		<form method="post" class="form-horizontal"
 			action="oj.do?id=${problem.id}" name="frm">
-			<input type="hidden" name="problemId" value="${problem.id}">
-			<input type="hidden" name="switcher" id="switcher" value="${ojForm.switcher}"> 
-			<input type="hidden" id="code" name="code" value="${ojForm.code}">
+			<input type="hidden" name="problemId" value="${problem.id}" id="problemId">
+			<input type="hidden" id="code" name="code" value="${ojForm.code}" id="code">
 			<div style="text-align: center">
-				<button class="btn btn-large btn-primary" type="submit" name="submit" value="run" onmousedown="run(editor,this.form)" style="margin-right: 50px">Run</button>
-				<button class="btn btn-large btn-info" type="submit" name="submit" value="verify" onmousedown="run(editor,this.form)" style="margin-left: 50px">Verify</button>
+				<button class="btn btn-large btn-primary" type="button" name="submit" value="run" onmousedown="run(editor,this.form)" style="margin-right: 50px" id="runBtn">Run</button>
+				<button class="btn btn-large btn-info" type="button" name="submit" value="verify" onmousedown="run(editor,this.form)" style="margin-left: 50px" id="verifyBtn">Verify</button>
 			</div>
-			<textarea class="input-block-level" rows="5" name="result" readonly="yes" style="color: white; background-color: #272822;">${result}</textarea>
+			<textarea class="input-block-level" rows="5" name="result" readonly="yes" style="color: white; background-color: #272822;" id="result"></textarea>
 		</form>
 	</div>
 
 </div>
 
 <script>
-        	if($("#switcher").val() == "1") {
-        		$("#panel").slideToggle(0);
-        	}
-        		
-</script>
+	$(document).ready(function() {
+		$('#runBtn').click(function() {
+			$.ajax({
+				type : 'POST',
+				url :  'oj.do',
+				data : 'id=' + $('#problemId').val()
+						+ '&code='
+						+ $('#code').val()
+						+ '&submit=run',
+				success : function(msg) {
+						$('#result').html(msg);
+				}
+			})
+		})
+	});
+	
+	$(document).ready(function() {
+		$('#verifyBtn').click(function() {
+			$.ajax({
+				type : 'POST',
+				url :  'oj.do',
+				data : 'id=' + $('#problemId').val()
+						+ '&code='
+						+ $('#code').val()
+						+ '&submit=verify',
+				success : function(msg) {
+						$('#result').html(msg);
+				}
+			})
+		})
+	});
+
+    $(document).ready(function(){
+        $("#bar").click(function() {
+            $("#panel").slideToggle("slow");  
+		});
+    });
+    
+    function run(editor,form) {
+    	var code = editor.getValue(); // get content from editor
+    	form.code.value = code;
+    }
+    
+    function post(editor1,editor2,form) {
+    	var startCode = editor1.getValue(); // get start code from editor1
+    	var testCode = editor2.getValue();	// get test code from editor2
+    	form.startCode.value = startCode;
+    	form.testCode.value = testCode;
+
+    }
+    
+    
+    </script>
+    
+	<script src="${pageContext.request.contextPath}/patterns/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-transition.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-alert.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-modal.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-dropdown.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-scrollspy.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-tab.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-tooltip.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-popover.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-button.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-carousel.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/bootstrap-typeahead.js"></script>
+</html>
 
 

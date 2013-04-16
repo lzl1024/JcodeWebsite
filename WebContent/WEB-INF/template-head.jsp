@@ -168,38 +168,7 @@
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="pic/icon.jpeg">
- 	<script>
 
-    $(document).ready(function(){
-        $("#bar").click(function() {
-        	if($("#switcher").val() == "0") {
-        		$("#switcher").val("1");
-        		//$("#code").val("WORI 1");
-        	} else {
-        		$("#switcher").val("0");
-        		//$("#code").val("WORI 0");
-        	}
-            $("#panel").slideToggle("slow");  
-		});
-        
-        
-    });
-    
-    function run(editor,form) {
-    	var code = editor.getValue(); // get content from editor
-    	form.code.value = code;
-    }
-    
-    function post(editor1,editor2,form) {
-    	var startCode = editor1.getValue(); // get start code from editor1
-    	var testCode = editor2.getValue();	// get test code from editor2
-    	form.startCode.value = startCode;
-    	form.testCode.value = testCode;
-
-    }
-    
-    
-    </script>
  
   </head>
 

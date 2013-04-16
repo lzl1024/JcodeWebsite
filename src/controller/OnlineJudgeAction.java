@@ -57,7 +57,6 @@ public class OnlineJudgeAction extends Action {
 	        request.setAttribute("ojForm",ojForm);
 	        request.setAttribute("idForm",idForm);
 
-	        String switcher = ojForm.getSwitcher();
 	        // Any validation errors?
 	        errors.addAll(ojForm.getValidationErrors());
 
@@ -175,8 +174,10 @@ public class OnlineJudgeAction extends Action {
 	        //seems the below attribute is not necessary
 	        request.setAttribute("problem", problem);
 	        request.setAttribute("code", code);
-	        request.setAttribute("result", result);
-	        request.setAttribute("switcher", switcher);
+	        request.setAttribute("msg", result);
+	        request.setAttribute("status", "success");
+	        System.out.println(result);
+
 	        
 	        if (errors.size() != 0) {
 	            return "oj.jsp";
@@ -196,7 +197,7 @@ public class OnlineJudgeAction extends Action {
         request.setAttribute("errors",errors);
         
         System.out.println("Return OJ OK");
-        return "oj.jsp";
+        return "ajax.jsp";
 
     }
 		
