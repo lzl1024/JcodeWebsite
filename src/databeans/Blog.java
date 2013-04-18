@@ -59,6 +59,13 @@ public class Blog implements Comparable<Blog> {
     }
     public String getShortDes()	throws UnsupportedEncodingException { 
     	String ret = getReadableCon();
+    	int i = 0;
+    	int k = -4;
+    	while((k=ret.indexOf("<br>",k+4))>=0 && i < 3){
+    		i++;
+    	}
+    	if (k > 0)
+    		ret = ret.substring(0,k);
     	if (ret.length() > 250) {
     		return ret.substring(0,250);
     	}
