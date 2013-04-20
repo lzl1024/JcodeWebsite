@@ -60,6 +60,11 @@ function deleteblog(blogid) {
 	<a class="btn pull-right" href="blog.do">Wirte a blog &raquo;</a>
 </div>
 
-
+<script>
+	$(document).ready(function() {
+		$("#blog").addClass("active");
+		$("#yourblog").addClass("active");
+	});
+</script>
 
 <jsp:include page="template-bottom.jsp" />

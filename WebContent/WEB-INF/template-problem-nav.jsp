@@ -12,7 +12,7 @@
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			<li class="nav-header">Operations</li>
-			<li class="active"><a href="allproblem.do">All Problems</a></li>
+			<li id="allproblem"><a href="allproblem.do">All Problems</a></li>
 
 			<li class="nav-header">Search Problems</li>
 			<li><form method="post" action="searchproblem.do">
@@ -31,9 +31,9 @@
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			<li class="nav-header">Operations</li>
-			<li class="active"><a href="allproblem.do">All Problems</a></li>
-			<li><a href="manageProblem.do">Manage</a></li>
-			<li><a href="postProblem.do">Post Problem</a></li>
+			<li id="allproblem"><a href="allproblem.do">All Problems</a></li>
+			<li id="manageproblem"><a href="manageProblem.do">Manage</a></li>
+			<li id="postproblem"><a href="postProblem.do">Post Problem</a></li>
 			<li class="nav-header">Search Problems</li>
 			<li><form method="post" action="searchproblem.do">
 					<div class="input-prepend">

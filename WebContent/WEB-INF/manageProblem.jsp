@@ -58,6 +58,11 @@ function deleteproblem(problemid) {
 	<a class="btn pull-right" href="postProblem.do">Post Problem &raquo;</a>
 </div>
 
-
+<script>
+	$(document).ready(function() {
+		$("#oj").addClass("active");
+		$("#manageproblem").addClass("active");
+	});
+</script>
 
 <jsp:include page="template-bottom.jsp" />

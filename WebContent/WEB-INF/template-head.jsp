@@ -17,6 +17,9 @@
     
     <style type="text/css">
     
+    body {background-color:#EBEAEA;}
+    
+    
     .carousel-caption h1,
     .carousel-caption .lead {
       margin: 0;
@@ -187,9 +190,9 @@
           	<a class="brand" href="manage.do">JCode</a>
           	<div class="nav-collapse collapse">
             	<ul class="nav">
-              		<li><a href="manage.do">Home</a></li>
-              		<li><a href="allblog.do">Blog</a></li>
-              		<li><a href="allproblem.do">OnlineJudge</a></li>
+              		<li id="home"><a href="manage.do">Home</a></li>
+              		<li id="blog"><a href="allblog.do">Blog</a></li>
+              		<li id="oj"><a href="allproblem.do">OnlineJudge</a></li>
               	</ul>
               	<ul class = "nav pull-right">
               	

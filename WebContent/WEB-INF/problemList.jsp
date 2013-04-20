@@ -47,5 +47,11 @@
 </div>
 </div>
 
+<script>
+	$(document).ready(function() {
+		$("#oj").addClass("active");
+		$("#allproblem").addClass("active");
+	});
+</script>
 
 <jsp:include page="template-bottom.jsp" />

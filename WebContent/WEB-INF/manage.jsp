@@ -72,6 +72,10 @@
 			function() {
 				$('#myCarousel').carousel();
 			});
+	
+	$(document).ready(function() {
+		$("#home").addClass("active");
+	});
 
 	</script>
 

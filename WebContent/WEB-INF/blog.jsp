@@ -25,4 +25,11 @@
 </div> <!-- span -->
 </div>
 
+<script>
+	$(document).ready(function() {
+		$("#blog").addClass("active");
+		$("#postblog").addClass("active");
+	});
+</script>
+
 <jsp:include page="template-bottom.jsp" />
