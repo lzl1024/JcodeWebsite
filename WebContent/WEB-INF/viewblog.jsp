@@ -6,18 +6,19 @@
 <jsp:include page="template-blog-nav.jsp" />
 
         
-<div class="span9 alert-block alert-info">
-
-        <p><h2 class="text-center">${blog.title}</h2>
+<div class="span9 pull-right alert alert-info">
+		<div style="word-wrap: break-word;  
+          word-break: normal; ">
+        <h2 class="text-center">${blog.title}</h2>
         <hr>
 
-        <div>
         <p>${blog.readableCon} </p>
         </div>
 <hr>  <hr>    
 </div>
 
-<div class="span9 pull-right alert alert-success">   
+<div class="span9 pull-right alert alert-success"
+style="word-wrap: break-word; word-break: normal;">   
 <h3 class="form-signin-heading">Comments</h3> 
 
 <% 	databeans.Comment[] comments = (databeans.Comment[])request.getAttribute("commentlist");

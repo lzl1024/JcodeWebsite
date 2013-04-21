@@ -7,27 +7,30 @@
         
 <div class="span9">
 <p>
-	<table class="table table-striped">
 <% 	databeans.Problem[] problems = (databeans.Problem[])request.getAttribute("problemlist");
 		int begin = (Integer)request.getAttribute("begin");
-        for (int i=(begin-1)*10; i<begin*10 && i < problems.length; i++) { 
-			if (i % 2 == 0) {%>
-		<tr class="success">
-			<%}else {%>
-		<tr class ="info">
-			<%} %>
-			<td>
-			<strong>Title:  <a href="oj.do?id=<%=problems[i].getId()%>"><%=problems[i].getTitle()%></a></strong>
-			<strong class="pull-right">Posted @ <%=problems[i].getDate()%></strong>
-			<p><%=problems[i].getShortDes()%>... 
-			<strong class="pull-right"><a href="oj.do?id=<%=problems[i].getId()%>">See Details &raquo</a></strong>
-			<br><strong >Comments(<%=problems[i].getCommentNum()%>)</strong>
-			&nbsp &nbsp<strong>Accepted(<%=problems[i].getAccept()%>)</strong>
-			&nbsp &nbsp<strong>Denied(<%=problems[i].getDeny()%>)</strong>
-			</td>
-		</tr>
+        for (int i=(begin-1)*10; i<begin*10 && i < problems.length; i++) {   
+%>
+	<div class="span9" style=" width:800px; word-wrap: break-word; word-break: normal;">
+			<br>
+			<a style="display:block;"
+			href="oj.do?id=<%=problems[i].getId()%>">
+			<font size="5"><%=problems[i].getTitle()%></font></a>
+			<p style="margin-left:10px; margin-right:5px; width:700px; word-wrap: break-word; word-break: normal;">
+			<font color="#95aba9"><%=problems[i].getShortDes()%>...</font>
+			<strong class="pull-right" style="display:block; margin-bottom:15px"><a href="oj.do?id=<%=problems[i].getId()%>">See Details &raquo</a></strong>			
+			</p>
+		</div>
+		<div class="span9" style="width:800px;
+			word-wrap: break-word; word-break: normal;
+				background: #eff6fb;
+				line-height: 10px;"	>
+			<br>&nbsp Comments(<%=problems[i].getCommentNum()%>)
+			&nbsp &nbsp Accepted(<%=problems[i].getAccept()%>)
+			&nbsp &nbsp Denied(<%=problems[i].getDeny()%>)
+			&nbsp &nbsp &nbsp @ <%=problems[i].getDate()%></strong>
+		</div>	
 		<%}%>
-	</table>
 	
 	<div class="pagination pagination-centered">
 		<ul>

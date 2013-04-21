@@ -3,7 +3,8 @@
 <div class="row-fluid">
 	<jsp:include page="template-problem-nav.jsp" />
 
-<div class="span9 alert-info alert-block">
+<div class="span9 alert-info alert"
+style="word-wrap: break-word; word-break: normal;">
         <p><h2 class="text-center">${problem.title}</h2>
         <hr>
 
@@ -15,7 +16,8 @@
 &nbsp &nbsp<strong>Denied(${problem.deny})</strong>
 <hr>    
 </div>
-<div class="span9 pull-right alert alert-success">   
+<div class="span9 pull-right alert alert-success"
+style="word-wrap: break-word; word-break: normal;">   
 <h3 class="form-signin-heading">Comments</h3> 
 
 <% 	databeans.PComment[] comments = (databeans.PComment[])request.getAttribute("commentlist");
