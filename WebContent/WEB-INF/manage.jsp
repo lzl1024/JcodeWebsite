@@ -44,7 +44,7 @@
               <h1>Ranking</h1>
               <p class="lead">Code with the world's top coders. Or be one of them!</p>
 			  <br>
-              <a class="btn btn-large btn-primary" href="allstatistics.do">Statistics</a>
+              <a class="btn btn-large btn-primary" href="topcoder.do">Statistics</a>
             </div>
           </div>
         </div>

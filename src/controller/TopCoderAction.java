@@ -32,6 +32,13 @@ public class TopCoderAction extends Action {
 		try {
 	       	
 			User[] users = userDAO.getUsers();
+			if(users.length > 20) {
+				User[] top20 = new User[20];
+				for(int i = 0; i < 20; i++) {
+					top20[i] = users[i];
+				}
+				users = top20;
+			}
 			
 			request.setAttribute("users",users);
 			

@@ -19,7 +19,7 @@ public class UserDAO extends GenericDAO<User> {
 
 	public User[] getUsers() throws RollbackException {
 		User[] users = match();
-		Arrays.sort(users);  // We want them sorted by last and first names (as per User.compareTo());
+		Arrays.sort(users);  // We want them sorted by score
 		return users;
 	}
 	

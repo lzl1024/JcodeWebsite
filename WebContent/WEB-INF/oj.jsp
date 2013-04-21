@@ -108,6 +108,10 @@
 						+ '&code='
 						+ $('#code').val()
 						+ '&submit=run',
+				cache : false,
+				beforeSend : function() {
+						$('#result').html("Running......");
+				},
 				success : function(msg) {
 						$('#result').html(msg);
 				}
@@ -124,6 +128,10 @@
 						+ '&code='
 						+ $('#code').val()
 						+ '&submit=verify',
+				cache : false,
+				beforeSend : function() {
+						$('#result').html("Verifing......");
+				},
 				success : function(msg) {
 						$('#result').html(msg);
 				}

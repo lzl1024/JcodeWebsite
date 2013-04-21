@@ -7,7 +7,7 @@
 	<link href="${pageContext.request.contextPath}/patterns/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 	
 	<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/patterns/js/jquery.js"></script>
 	
 	
 	<title>JCode-- For Every Technical Interviewer</title>
@@ -16,153 +16,240 @@
     <link href="${pageContext.request.contextPath}/patterns/css/bootstrap.css" rel="stylesheet"/>
     
     <style type="text/css">
-    
-    body {background-color:#EBEAEA;}
-    
-    
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    	
-    #upper {
-        position: relative;
-        margin-bottom: 50px;
-    }
+body {
+	background-color: #EBEAEA;
+}
 
-    #lower {
-        position: fixed;
-        bottom: 0;
-        margin: 0;
-        width: 100%;
-        
-    }
+.carousel-caption h1,.carousel-caption .lead {
+	margin: 0;
+	line-height: 1.25;
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+}
 
-    #bar {
-        padding: 5px;
-        font-size:20px;
-        text-align:center;
-        color: #ffffff;
-  		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  		background-color: #272f36;
-    }
-    
-    #bar:hover {
-        padding: 5px;
-        font-size:20px;
-        text-align:center;
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #272f36;
-        opacity:0.7;
-        filter:alpha(opacity=70); /* For IE8 and earlier */
-    }
+#upper {
+	position: relative;
+	margin-bottom: 50px;
+}
 
-    #panel {
-        display: none;
-        /*    height: 100px;*/
-        height: 400px;
-        background-color: #BDBDBD;
-        padding: 10px;
-    }
-    
-    #editor-container {
-        position: relative;
-        height: 250px;
-    }
+#lower {
+	position: fixed;
+	bottom: 0;
+	margin: 0;
+	width: 100%;
+}
 
-    #editor-mask {
-        height: 250px;
-        overflow-y: hidden;
-    }
-    
-    #editor,#editor1, #editor2 { 
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-    
-	   
-      /* Sticky footer styles
+#bar {
+	padding: 5px;
+	font-size: 20px;
+	text-align: center;
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #272f36;
+}
+
+#bar:hover {
+	padding: 5px;
+	font-size: 20px;
+	text-align: center;
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #272f36;
+	opacity: 0.7;
+	filter: alpha(opacity = 70); /* For IE8 and earlier */
+}
+
+#panel {
+	display: none;
+	height: 400px;
+	background-color: #BDBDBD;
+	padding: 10px;
+}
+
+#editor-container {
+	position: relative;
+	height: 250px;
+}
+
+#editor-mask {
+	height: 250px;
+	overflow-y: hidden;
+}
+
+#editor,#editor1,#editor2 {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+/* Sticky footer styles
       -------------------------------------------------- */
+html,body {
+	height: 100%;
+	/* The html and body elements cannot have any padding or margin. */
+}
 
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
+/* Wrapper for page content to push down footer */
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by it's height */
+	margin: 0 auto -60px;
+}
 
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
+/* Set the fixed height of the footer here */
+#push,#footer {
+	height: 60px;
+}
 
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-      }
-      #footer {
-        background-color: #f5f5f5;
-      }
+#footer {
+	background-color: #f5f5f5;
+}
 
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
+/* Lastly, apply responsive CSS fixes as necessary */
+@media ( max-width : 767px) {
+	#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
 
+#wrap>.container {
+	padding-top: 60px;
+}
 
-      #wrap > .container {
-        padding-top: 60px;
-      }
-      .container .credit {
-        margin: 20px 0;
-      }
+.container .credit {
+	margin: 20px 0;
+}
 
-      code {
-        font-size: 80%;
-      }
-      
-      
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
+code {
+	font-size: 80%;
+}
 
-    </style>
+.form-signin {
+	max-width: 300px;
+	padding: 19px 29px 29px;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],.form-signin input[type="password"] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}
+
+.ContentTable {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #ffffff;
+	
+	-moz-border-radius-bottomleft:10px;
+	-webkit-border-bottom-left-radius:10px;
+	border-bottom-left-radius:10px;
+	
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius:10px;
+	border-bottom-right-radius:10px;
+	
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-right-radius:10px;
+	border-top-right-radius:10px;
+	
+	-moz-border-radius-topleft:10px;
+	-webkit-border-top-left-radius:10px;
+	border-top-left-radius:10px;
+}.ContentTable table{
+	width:100%;
+	margin:0px;padding:0px;
+}.ContentTable tr:last-child td:last-child {
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.ContentTable table tr:first-child td:first-child {
+	-moz-border-radius-topleft:10px;
+	-webkit-border-top-left-radius:10px;
+	border-top-left-radius:10px;
+}
+.ContentTable table tr:first-child td:last-child {
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-right-radius:10px;
+	border-top-right-radius:10px;
+}.ContentTable tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:10px;
+	-webkit-border-bottom-left-radius:10px;
+	border-bottom-left-radius:10px;
+}.ContentTable tr:hover td{
+	
+}
+.ContentTable tr:nth-child(odd){ background-color:#cee6ff; }
+.ContentTable tr:nth-child(even)    { background-color:#ffffff; }
+.ContentTable td{
+	vertical-align:middle;
+	
+	
+	border:1px solid #ffffff;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:7px;
+	font-size:14px;
+	font-family:Helvetica;
+	font-weight:normal;
+	color:#000000;
+}.ContentTable tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.ContentTable tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.ContentTable tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.ContentTable tr:first-child td{
+		background:-o-linear-gradient(bottom, #0088cc 5%, #0088cc 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0088cc), color-stop(1, #0088cc) );
+	background:-moz-linear-gradient( center top, #0088cc 5%, #0088cc 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0088cc", endColorstr="#0088cc");	background: -o-linear-gradient(top,#0088cc,0088cc);
+
+	background-color:#0088cc;
+	border:0px solid #ffffff;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:15px;
+	font-family:Helvetica;
+	font-weight:bold;
+	color:#ffffff;
+}
+.ContentTable tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #0088cc 5%, #0088cc 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0088cc), color-stop(1, #0088cc) );
+	background:-moz-linear-gradient( center top, #0088cc 5%, #0088cc 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0088cc", endColorstr="#0088cc");	background: -o-linear-gradient(top,#0088cc,0088cc);
+
+	background-color:#0088cc;
+}
+.ContentTable tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.ContentTable tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}
+
+</style>
     <link href="${pageContext.request.contextPath}/patterns/css/bootstrap-responsive.css" rel="stylesheet"/>
 
     <!--touch icons -->
@@ -171,7 +258,7 @@
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/patterns/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="pic/icon.jpeg">
-
+ 
  
   </head>
 
@@ -205,9 +292,11 @@
 							<a href="#myModal" role="button" class="btn" data-toggle="modal">Sign Up</a>
 						</c:when>
               			<c:otherwise>
-              			<li class="dropdown">
+              			<li class="dropdown" id="profile">
                   		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                   		<ul class="dropdown-menu">
+                    		<li class="nav-header">Hi, ${user.userName}</li>
+                    		<li class="divider"></li>
                    	 		<li><a href="editprofile.do?edit=1">Edit Profile</a></li>
                     		<li><a href="change-pwd.do">Change Password</a></li>
                     		<li class="divider"></li>
@@ -350,5 +439,7 @@
 							})
 				});
 		</script>
+		
+		
 
 		<div class="container">

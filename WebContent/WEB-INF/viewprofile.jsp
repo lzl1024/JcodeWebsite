@@ -3,7 +3,7 @@
 <div class="row-fluid">
 <jsp:include page="template-navprofile.jsp" />
 
-<div class="span10 alert alert-block">
+<div class="span9 alert alert-block">
 
         <div class="span8">
         <div ><img src="image.do?email=${profile.email}" style="width:250px;height:250px;" /></div>  
@@ -27,4 +27,12 @@
         </div>   
 </div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$("#profile").addClass("active");
+		$("#myprofile").addClass("active");
+	});
+</script>
+
 <jsp:include page="template-bottom.jsp" />

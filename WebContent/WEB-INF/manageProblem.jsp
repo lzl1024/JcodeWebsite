@@ -19,19 +19,16 @@ function deleteproblem(problemid) {
         
 <div class="span9">
 <p>
-	<table class="table table-striped">
-	<tr><td><strong>Title</strong></td>
-		<td><strong>Date</strong></td>
-		<td><strong>Operations</strong></td>	
+	<table class="ContentTable">
+	<tr><td>Title</td>
+		<td>Date</td>
+		<td>Operations</td>	
 	</tr>
 <% 	databeans.Problem[] problems = (databeans.Problem[])request.getAttribute("problemlist");
 		int begin = (Integer)request.getAttribute("begin");
         for (int i=(begin-1)*10; i<begin*10 && i < problems.length; i++) { 
-			if (i % 2 == 0) {%>
-		<tr class="success">
-	<%}else {%>
-		<tr class ="info">
-	<%} %>
+		%>
+		<tr>
 			<td><a href="oj.do?id=<%=problems[i].getId()%>"><%=problems[i].getTitle()%></a></td>
 			<td><%=problems[i].getDate()%></td>
 			<td><a onclick="deleteproblem(<%=problems[i].getId()%>)" href="javascript::deleteproblem(<%=problems[i].getId()%>)">Delete</a>

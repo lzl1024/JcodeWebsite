@@ -27,4 +27,11 @@
 </div> <!-- span -->
 </div>
 
+<script>
+	$(document).ready(function() {
+		$("#profile").addClass("active");
+		$("#editprofile").addClass("active");
+	});
+</script>
+
 <jsp:include page="template-bottom.jsp" />

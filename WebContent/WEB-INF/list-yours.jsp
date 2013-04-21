@@ -19,20 +19,17 @@ function deleteblog(blogid) {
         
 <div class="span9">
 <p>
-	<table class="table table-striped">
-	<tr><td><strong>Title</strong></td>
-		<td><strong>Author</strong></td>
-		<td><strong>Date</strong></td>
-		<td><strong>Operations</strong></td>	
+	<div class="ContentTable">
+	<table>
+	<tr><td>Title</td>
+		<td>Author</td>
+		<td>Date</td>
+		<td>Operations</td>	
 	</tr>
 <% 	databeans.Blog[] blogs = (databeans.Blog[])request.getAttribute("bloglist");
 		int begin = (Integer)request.getAttribute("begin");
         for (int i=(begin-1)*10; i<begin*10 && i < blogs.length; i++) { 
-			if (i % 2 == 0) {%>
-		<tr class="success">
-	<%}else {%>
-		<tr class ="info">
-	<%} %>
+	%>	<tr>
 			<td><a href="viewblog.do?id=<%=blogs[i].getId()%>"><%=blogs[i].getTitle()%></a></td>
 			<td><%=blogs[i].getUser()%></td>
 			<td><%=blogs[i].getDate()%></td>
@@ -41,6 +38,8 @@ function deleteblog(blogid) {
 		</tr>
 	<%}%>
 	</table>
+	</div>
+	
 	<div class="pagination pagination-centered">
 		<ul>
 		<li><a href="yourblog.do?begin=<%= begin >1 ? begin-1:1%>">Prev</a></li>

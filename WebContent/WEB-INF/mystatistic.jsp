@@ -4,19 +4,16 @@
 
 <div class="row-fluid">
 <p>
-	<table class="table table-striped">
+	<table class="ContentTable">
 	<tr><td><strong>Problem</strong></td>
 		<td><strong>Accepted</strong></td>
 		<td><strong>Denied</strong></td>
 		<td><strong>Scores</strong></td>	
 	</tr>
 <% 	databeans.Statistic[] stats = (databeans.Statistic[])request.getAttribute("stats");
-        for (int i=0; i< stats.length; i++) { 
-			if (i % 2 == 0) {%>
-		<tr class="success">
-	<%}else {%>
-		<tr class ="info">
-	<%} %>
+        for (int i=0; i < stats.length; i++) { 
+		%>
+		<tr>
 			<td><%=stats[i].getProblemTitle()%></td>
 			<td><%=stats[i].getAccept()%></td>
 			<td><%=stats[i].getDeny()%></td>

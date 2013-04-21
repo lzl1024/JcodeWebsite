@@ -29,7 +29,7 @@ public class User implements Comparable<User> {
 	}
 	
 	public int compareTo(User other) {
-		// Order first by lastName and then by firstName
+		// Order by score
 		if (score > other.score ) 
 			return -1;
 		else if (score < other.score)

@@ -43,6 +43,7 @@ public class MyStatisticAction extends Action {
 			Statistic[] stats = statisticDAO.getStats(user.getEmail());
 			
 			
+			
 			request.setAttribute("stats",stats);
 			
 	        return "mystatistic.jsp";
