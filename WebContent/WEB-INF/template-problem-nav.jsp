@@ -36,11 +36,12 @@
 			<li id="postproblem"><a href="postProblem.do">Post Problem</a></li>
 			<li class="nav-header">Search Problems</li>
 			<li><form method="post" action="searchproblem.do">
-					<div class="input-prepend">
+					<div class="input-prepend input-block-level">
 						<span class="add-on"><i class="icon-search"></i>
 						</span> <input id="inputIcon" type="text" class="span10" placeholder="Search" name="keyword">
 					</div>
-				</form></li>
+				</form>
+			</li>
 
 		</ul>
 	</div>

@@ -1,6 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="template-head.jsp" />
 
+<script>
+	function post(editor1,editor2,form) {
+	      var startCode = editor1.getValue(); // get start code from editor1
+	      var testCode = editor2.getValue();  // get test code from editor2
+	      form.startCode.value = startCode;
+	      form.testCode.value = testCode;
+	}
+</script>
 <div class="row-fluid">
 	<jsp:include page="template-problem-nav.jsp" />
 

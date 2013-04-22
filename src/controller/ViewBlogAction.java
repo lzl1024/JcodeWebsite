@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.BlogDAO;
 import model.CommentDAO;
 import model.Model;
+import model.UserDAO;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -15,6 +16,7 @@ import org.mybeans.form.FormBeanFactory;
 
 import databeans.Blog;
 import databeans.Comment;
+import databeans.User;
 
 import formbeans.IdForm;
 
@@ -22,10 +24,12 @@ public class ViewBlogAction extends Action {
 	private FormBeanFactory<IdForm> formBeanFactory = FormBeanFactory.getInstance(IdForm.class);
 
 	private BlogDAO  blogDAO;
+	private UserDAO	 userDAO;
 	private CommentDAO commentDAO;
 	
     public ViewBlogAction(Model model) {
     	blogDAO  = model.getBlogDAO();
+    	userDAO  = model.getUserDAO();
     	commentDAO = model.getCommentDAO();
 	}
 
@@ -51,7 +55,15 @@ public class ViewBlogAction extends Action {
     			return "error.jsp";
     		}
     		
+    		User u = userDAO.read(p.getEmail());
+			Blog[] archives = blogDAO.getBlogs(u.getEmail());
+
+    		
     		request.setAttribute("blog",p);  
+    		request.setAttribute("blogOwner",u); 
+    		request.setAttribute("archives",archives);  
+
+
 			Comment[] comments = commentDAO.getComments(p.getId());
 			request.setAttribute("commentlist",comments);
 			String begin;

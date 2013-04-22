@@ -3,7 +3,7 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-<jsp:include page="template-blog-nav.jsp" />
+<jsp:include page="template-viewblog-nav.jsp" />
 
         
 <div class="span9 pull-right alert alert-info">
