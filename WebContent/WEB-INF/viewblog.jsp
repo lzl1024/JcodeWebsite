@@ -14,7 +14,7 @@
 
         <p>${blog.readableCon} </p>
         </div>
-<hr>  <hr>    
+<hr>
 </div>
 
 <div class="span9 pull-right alert alert-success"
