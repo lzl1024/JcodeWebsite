@@ -35,7 +35,6 @@
 			&nbsp &nbsp &nbsp<a href="viewprofile.do?email=<%=blogs[i].getEmail()%>"><%=blogs[i].getUser()%></a>  @ <%=blogs[i].getDate()%></strong>
 		</div>
 		<%}%>
-
 	<div class="pagination pagination-centered">
 		<ul>
 		<li><a href="allblog.do?begin=<%= begin >1 ? begin-1:1%>">Prev</a></li>

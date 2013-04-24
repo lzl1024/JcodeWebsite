@@ -14,11 +14,11 @@
 	<div class="span9" style=" width:800px; word-wrap: break-word; word-break: normal;">
 			<br>
 			<a style="display:block;"
-			href="oj.do?id=<%=problems[i].getId()%>">
+			href="problem.do?id=<%=problems[i].getId()%>">
 			<font size="5"><%=problems[i].getTitle()%></font></a>
 			<p style="margin-left:10px; margin-right:5px; width:700px; word-wrap: break-word; word-break: normal;">
 			<font color="#95aba9"><%=problems[i].getShortDes()%>...</font>
-			<strong class="pull-right" style="display:block; margin-bottom:15px"><a href="oj.do?id=<%=problems[i].getId()%>">See Details &raquo</a></strong>			
+			<strong class="pull-right" style="display:block; margin-bottom:15px"><a href="problem.do?id=<%=problems[i].getId()%>">See Details &raquo</a></strong>			
 			</p>
 		</div>
 		<div class="span9" style="width:800px;

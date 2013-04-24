@@ -1,11 +1,12 @@
 <jsp:include page="template-head.jsp" />
 
 <div class="row-fluid">
-	<jsp:include page="template-problem-nav.jsp" />
+	<jsp:include page="template-viewproblem-nav.jsp" />
 
 <div class="span9 alert-info alert"
 style="word-wrap: break-word; word-break: normal;">
         <p><h2 class="text-center">${problem.title}</h2>
+        <h5 class="text-center">Date:&nbsp${problem.date}</h5>
         <hr>
 
         <div>
@@ -30,22 +31,23 @@ style="word-wrap: break-word; word-break: normal;">
         for (int i=(begin-1)*10; i<begin*10 && i < comments.length; i++) {%>
 
 		<h3 class="badge"><%=i+1%></h3>
-		<h3 class="label">Posted By: <%=comments[i].getUser()%></h3>
-    	<h3 class="label pull-right"> <%=comments[i].getDate()%></h3>
+		&nbsp
+		<h3 class="label"><%=comments[i].getUser()%>:</h3>
+    	<h3 class="label label-info pull-right"> <%=comments[i].getDate()%></h3>
    		<p><%=comments[i].getReadableCon()%></p>
    		<hr>
 	<%}}%>
 	<div class="pagination pagination-centered">
 		<ul>
-		<li><a href="oj.do?begin=<%= begin >1 ? begin-1:1%>&id=${problem.id}">Prev</a></li>
+		<li><a href="problem.do?begin=<%= begin >1 ? begin-1:1%>&id=${problem.id}">Prev</a></li>
 		<%  int k = (comments.length-1)/10+1;
         	for (Integer i= 1; i<=k; i++)
         	if (i!=begin){%>
-        		<li><a href="oj.do?begin=<%=i%>&id=${problem.id}"><%=i%></a></li>
+        		<li><a href="problem.do?begin=<%=i%>&id=${problem.id}"><%=i%></a></li>
         	<%} else{%>
-        		<li class="disabled"><a href="oj.do?begin=<%=i%>&id=${problem.id}"><%=i%></a></li>
+        		<li class="disabled"><a href="problem.do?begin=<%=i%>&id=${problem.id}"><%=i%></a></li>
         	<%}%>
-        <li><a href="oj.do?begin=<%= begin<k ? begin+1:k%>&id=${problem.id}">Next</a></li>
+        <li><a href="problem.do?begin=<%= begin<k ? begin+1:k%>&id=${problem.id}">Next</a></li>
         </ul>
 	</div>
 	       
@@ -59,7 +61,6 @@ style="word-wrap: break-word; word-break: normal;">
 </form>
 
 </div>
-		<jsp:include page="error-list.jsp" />
 
 </div>
 
@@ -75,7 +76,7 @@ style="word-wrap: break-word; word-break: normal;">
 	<div id="panel">
 		<div id="editor-mask">
 			<div id="editor-container">
-				<div id="editor" style="position: absolute">${ojForm.code}</div>
+				<div id="editor" style="position: absolute">${problem.readableStartCode}</div>
 				<script>
                     		var editor = ace.edit("editor");
                     		editor.setTheme("ace/theme/monokai");
@@ -86,10 +87,9 @@ style="word-wrap: break-word; word-break: normal;">
                 		</script>
 			</div>
 		</div>
-		<form method="post" class="form-horizontal"
-			action="oj.do?id=${problem.id}" name="frm">
+		<form method="post" class="form-horizontal">
 			<input type="hidden" name="problemId" value="${problem.id}" id="problemId">
-			<input type="hidden" id="code" name="code" value="${ojForm.code}" id="code">
+			<input type="hidden" name="code" value="" id="code">
 			<div style="text-align: center">
 				<button class="btn btn-large btn-primary" type="button" name="submit" value="run" onmousedown="run(editor,this.form)" style="margin-right: 50px" id="runBtn">Run</button>
 				<button class="btn btn-large btn-info" type="button" name="submit" value="verify" onmousedown="run(editor,this.form)" style="margin-left: 50px" id="verifyBtn">Verify</button>

@@ -10,6 +10,7 @@
 		<div style="word-wrap: break-word;  
           word-break: normal; ">
         <h2 class="text-center">${blog.title}</h2>
+        <h5 class="text-center">Author:&nbsp${blog.user}&nbsp&nbsp&nbsp&nbspDate:&nbsp${blog.date}</h5>
         <hr>
 
         <p>${blog.readableCon} </p>
@@ -32,7 +33,7 @@ style="word-wrap: break-word; word-break: normal;">
 
 		<h3 class="badge"><%=i+1%></h3>
 		<h3 class="label">Posted By: <%=comments[i].getUser()%></h3>
-    	<h3 class="label pull-right"> <%=comments[i].getDate()%></h3>
+    	<h3 class="label label-info pull-right"> <%=comments[i].getDate()%></h3>
    		<p><%=comments[i].getReadableCon()%></p>
    		<hr>
 	<%}}%>

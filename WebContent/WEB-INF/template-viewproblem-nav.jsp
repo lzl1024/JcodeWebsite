@@ -1,5 +1,6 @@
 <div class="span3">
-	<%@ page import="databeans.User"%>
+	<%@ page import="databeans.User"
+			 import="databeans.Statistic" %>
 	<% 
 		User user = (User) session.getAttribute("user");
 		String group = null;
@@ -47,5 +48,27 @@
 		</ul>
 	</div>
 	<% } %>
+
+	<div class="well" align="center">
+		<div align="center" style="padding: 8px 14px; margin: 0; font-size: 15px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
+				High Score for This Problem
+		</div>
+		<div align="center" style="font-size: 110%; display: block; width: 70%">
+
+		<% Statistic[] stat = (Statistic[])request.getAttribute("stat");
+		   for(int i = 0; i < stat.length; i++) {
+		%>
+				<div class="pull-left"><%= i+1%>.&nbsp &nbsp
+				<a href="viewprofile.do?email=<%=stat[i].getUserEmail()%>"><%=stat[i].getUserName()%></a>
+				</div> 
+				<div class="pull-right"><%=stat[i].getScore() %></div>
+				<br>
+		<%} %>
+		</div>
+		<hr>
+	</div>
+	<!--/.well -->
+
+
 </div>
 <!--/span-->

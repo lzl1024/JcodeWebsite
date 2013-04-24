@@ -51,12 +51,12 @@ public class CommentProblemAction extends Action {
 	        request.setAttribute("form",form);
 	        
 	        if (!form.isPresent()) {
-	            return "oj.jsp";
+	            return "viewproblem.jsp";
 	        }
 	       
 	        
 	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() > 0) return "oj.jsp";
+	        if (errors.size() > 0) return "viewproblem.jsp";
 
 			PComment comment = new PComment();  // id & position will be set when created
 			
@@ -73,16 +73,14 @@ public class CommentProblemAction extends Action {
 			problemDAO.update(problem);
 			request.setAttribute("errors",errors);
 			
-			HttpSession session = request.getSession();
-	        session.setAttribute("problem",problem);
+	        request.setAttribute("problem",problem);
 			
-			/*PComment[] comments = pcommentDAO.getComments(problem.getId());
+			PComment[] comments = pcommentDAO.getComments(problem.getId());
 			request.setAttribute("commentlist",comments);
 			request.setAttribute("problem", problem);
-			request.setAttribute("begin",1);*/
+			request.setAttribute("begin",1);
 			
-			
-	        return "oj.do";
+	        return "viewproblem.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

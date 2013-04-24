@@ -12,7 +12,7 @@ $(function () {
                 margin: [50, 50, 100, 80]
             },
             title: {
-                text: 'Top Coder Ranking'
+                text: 'Top Coder Ranking (top 20)'
             },
             xAxis: {
                 categories: [
@@ -93,7 +93,7 @@ $(function () {
         %>
 		<tr>
 			<td><%=i+1 %></td>
-			<td><%=users[i].getUserName()%></td>
+			<td><a href="viewprofile.do?email=<%=users[i].getEmail()%>"><%=users[i].getUserName()%></a></td>
 			<td><%=users[i].getAccept()%></td>
 			<td><%=users[i].getDeny()%></td>
 			<td><%=users[i].getScore()%></td>

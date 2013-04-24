@@ -28,11 +28,33 @@
 </div>
 </div>
 
-<script>
-	$(document).ready(function() {
-		$("#profile").addClass("active");
-		$("#myprofile").addClass("active");
-	});
-</script>
+<%@ page import="databeans.User" 
+		 import="databeans.Profile"%>
+<% 
+	User user = (User)session.getAttribute("user");
+	Profile profile = (Profile)request.getAttribute("profile");
+	if(user.getEmail().equals(profile.getEmail())) {
+		%>
+		<script>
+			$(document).ready(function() {
+			$("#profile").addClass("active");
+			$("#myprofile").addClass("active");
+		});
+		</script>
+		<%
+	} else {
+		%>
+		<script>
+			$(document).ready(function() {
+			$("#profile").addClass("active");
+		});
+		</script>
+		<%
+	}
+	
+ 
+%>
+
+
 
 <jsp:include page="template-bottom.jsp" />

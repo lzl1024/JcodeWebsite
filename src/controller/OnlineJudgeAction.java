@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.Model;
-import model.PCommentDAO;
 import model.ProblemDAO;
 import model.StatisticDAO;
 import model.UserDAO;
@@ -16,30 +15,24 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.PComment;
 import databeans.Problem;
 import databeans.Statistic;
 import databeans.User;
 
-import formbeans.IdForm;
 import formbeans.OnlineJudgeForm;
 
 
 public class OnlineJudgeAction extends Action {
 	private FormBeanFactory<OnlineJudgeForm> ojFactory = FormBeanFactory.getInstance(OnlineJudgeForm.class);
-	private FormBeanFactory<IdForm> idFactory = FormBeanFactory.getInstance(IdForm.class);
-
 
 	private String   OJPath;
 	private ProblemDAO problemDAO;
-	private PCommentDAO pcommentDAO;
 	private StatisticDAO statisticDAO;
 	private UserDAO		userDAO;
 
 	public OnlineJudgeAction(Model model) {
     	OJPath = model.getOJPath();
     	problemDAO = model.getProblemDAO();
-    	pcommentDAO = model.getPCommentDAO();
     	statisticDAO = model.getStatisticDAO();
     	userDAO	= model.getUserDAO();
 	}
@@ -49,36 +42,34 @@ public class OnlineJudgeAction extends Action {
 	public String perform(HttpServletRequest request) {
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
+        request.setAttribute("errors",errors);
+        
+        System.out.println("OJ begins");
        
 		try {
 			OnlineJudgeForm ojForm = ojFactory.create(request);
-			IdForm idForm = idFactory.create(request);
 
 	        request.setAttribute("ojForm",ojForm);
-	        request.setAttribute("idForm",idForm);
 
 	        // Any validation errors?
-	        errors.addAll(ojForm.getValidationErrors());
+	        //errors.addAll(ojForm.getValidationErrors());
 
-	        int idID = idForm.getIdAsInt();
-	        int idOJ = ojForm.getProblemId();
-	        System.out.printf("%d, %d", idID, idOJ);
+	        int id = ojForm.getId();
+	        String code = ojForm.getCode();
+	        
+	        System.out.println("id = "+id);
+	        System.out.println("code: "+code);
+
 	        Problem problem = null;
-	        if(idID >= 0) {
-	        	problem = problemDAO.read(idID);
+	        if(id >= 0) {
+	        	problem = problemDAO.read(id);
 	        	if (problem == null) {
-	        		errors.add("No problem with id="+idID);
-	        		return "error.jsp";
-	        	}
-	        } else if(idOJ >= 0) {
-	        	problem = problemDAO.read(idOJ);
-	        	if (problem == null) {
-	        		errors.add("No problem with id="+idOJ);
+	        		errors.add("No problem with id="+id);
 	        		return "error.jsp";
 	        	}
 	        }else {
-	        	problem =(Problem) request.getSession(false).getAttribute("problem");
-	        	request.getSession(false).removeAttribute("problem");
+	        	errors.add("Error in reading problem");
+	        	return "error.jsp";
 	        }
     		
 	        if(ojForm.getCode() == null || ojForm.getCode().length() == 0)
@@ -91,29 +82,14 @@ public class OnlineJudgeAction extends Action {
 	        System.out.println("---------------");
 
 
-	        request.setAttribute("ojForm", ojForm);
-	        request.setAttribute("problem",problem);
-
-
-	        PComment[] comments = pcommentDAO.getComments(problem.getId());
-			
-			request.setAttribute("commentlist",comments);
-			String begin;
-			if((begin = request.getParameter("begin")) == null) {
-				request.setAttribute("begin",1);
-			}else {
-				request.setAttribute("begin", Integer.parseInt(begin));
-			}
-	 
-
 	        //compile and run
-	        String code = ojForm.getCode();
+	        //String code = ojForm.getCode();
 	        Console con = Console.getInstance();
 
 
 	        String result = null;
 
-	        String act = request.getParameter("submit");
+	        String act = ojForm.getSubmit();
 	        if(act != null) {
 	        	if(act.equals("run")) {
 	        		result = con.compileRun(code, OJPath);
@@ -141,7 +117,7 @@ public class OnlineJudgeAction extends Action {
 	    	        User user = (User) request.getSession(false).getAttribute("user");
 	    	        Statistic stat = statisticDAO.read(user.getEmail(), problem.getId());
 	    	        if (stat == null){
-	    	        	stat = new Statistic(user.getEmail(), problem.getId(),problem.getTitle());
+	    	        	stat = new Statistic(user.getEmail(), user.getUserName(), problem.getId(),problem.getTitle());
 	    	        	if(result.equals("Accepted")) {
 	    	        		stat.setAccept(1);
 	    	        		stat.setScore(100);
@@ -176,12 +152,13 @@ public class OnlineJudgeAction extends Action {
 	        request.setAttribute("code", code);
 	        request.setAttribute("msg", result);
 	        request.setAttribute("status", "success");
-	        System.out.println(result);
+	        System.out.println("result" + result);
 
 	        
-	        if (errors.size() != 0) {
-	            return "oj.jsp";
-	        }
+	        System.out.println("Return OJ OK");
+	        return "ajax.jsp";
+	        
+
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
@@ -194,10 +171,6 @@ public class OnlineJudgeAction extends Action {
         	return "error.jsp";
 		}
 
-        request.setAttribute("errors",errors);
-        
-        System.out.println("Return OJ OK");
-        return "ajax.jsp";
 
     }
 		

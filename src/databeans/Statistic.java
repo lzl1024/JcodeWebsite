@@ -5,6 +5,7 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("userEmail,problemId")
 public class Statistic implements Comparable<Statistic>{
 	private String  userEmail = null;
+	private String userName = null;
 	private int  problemId = -1;
 	private String problemTitle = "";
 	private int accept = 0;
@@ -13,8 +14,9 @@ public class Statistic implements Comparable<Statistic>{
 	
 	public Statistic(){}
 	
-	public Statistic(String email, int pid, String pname) {
+	public Statistic(String email, String userName, int pid, String pname) {
 		this.userEmail = email;
+		this.userName = userName;
 		this.problemId = pid;
 		this.problemTitle = pname;
 		this.accept = 0;
@@ -23,6 +25,7 @@ public class Statistic implements Comparable<Statistic>{
 	}
 	
 	public String  getUserEmail() 		{ return userEmail; 	}
+	public String  getUserName()		{ return userName;		}
 	public int	   getProblemId()       { return problemId;     }
 	public String  getProblemTitle()    { return problemTitle;  }
 	public int     getAccept()  	    { return accept;  		}	
@@ -30,6 +33,7 @@ public class Statistic implements Comparable<Statistic>{
 	public int	   getScore()			{ return score;			}	
 
 	public void setUserEmail(String x)  	{ userEmail = x; 	}
+	public void setUserName(String x)		{ userName = x;		}
 	public void setProblemId(int id)    	{ problemId = id;	}
 	public void setProblemTitle(String x)   { problemTitle = x; }
 	public void setAccept(int ac)		 	{ accept = ac;		}
@@ -43,7 +47,13 @@ public class Statistic implements Comparable<Statistic>{
 		}else if(this.problemId > st.problemId){
 			return 1;
 		}else {
-			return 0;
+			if(this.score < st.score)
+				return 1;
+			else if(this.score > st.score)
+				return -1;
+			else
+				return 0;
+			
 		}
 	}
 

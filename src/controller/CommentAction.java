@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.BlogDAO;
 import model.CommentDAO;
 import model.Model;
+import model.UserDAO;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -28,10 +29,12 @@ public class CommentAction extends Action {
 	
 	private CommentDAO commentDAO;
 	private BlogDAO blogDAO;
+	private UserDAO userDAO;
 
 	public CommentAction(Model model) {
 		commentDAO = model.getCommentDAO();
 		blogDAO = model.getBlogDAO();
+		userDAO = model.getUserDAO();
 	}
 
 	public String getName() { return "comment.do"; }
@@ -67,15 +70,22 @@ public class CommentAction extends Action {
 			comment.setUser(user.getUserName());
 			commentDAO.create(comment);
 			
-			blog.setCommentNum(blog.getCommentNum()+1);
+			blog.setCommentNum(blog.getCommentNum()+1); 
 			
 			blogDAO.update(blog);
 			request.setAttribute("errors",errors);
 			
 			//request.setAttribute("comment", comment);
 			Comment[] comments = commentDAO.getComments(blog.getId());
+			
+			
+			User u = userDAO.read(blog.getEmail());
+			Blog[] archives = blogDAO.getBlogs(u.getEmail());
+
 			request.setAttribute("commentlist",comments);
 			request.setAttribute("blog", blog);
+			request.setAttribute("blogOwner",u); 
+    		request.setAttribute("archives",archives); 
 			request.setAttribute("begin",1);
 			
 	        return "viewblog.jsp";

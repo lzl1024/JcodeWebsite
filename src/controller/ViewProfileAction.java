@@ -29,6 +29,10 @@ public class ViewProfileAction extends Action {
         
         try {
 			Profile profile = profileDAO.read(email);
+			if(profile == null) {
+				errors.add("No profile with email=" + email);
+				return "error.jsp";
+			}
 			request.setAttribute("profile",profile);
 			return "viewprofile.jsp";
 		} catch (RollbackException e) {

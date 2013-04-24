@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.BlogDAO;
 import model.Model;
+import model.UserDAO;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
@@ -25,9 +27,11 @@ public class PostBlogAction extends Action {
 	private FormBeanFactory<PostBlogForm> formBeanFactory = FormBeanFactory.getInstance(PostBlogForm.class);
 	
 	private BlogDAO	blogDAO;
+	private UserDAO userDAO;
 
 	public PostBlogAction(Model model) {
 		blogDAO = model.getBlogDAO();
+		userDAO = model.getUserDAO();
 	}
 
 	public String getName() { return "blog.do"; }
@@ -62,6 +66,12 @@ public class PostBlogAction extends Action {
 			blog.setEmail(user.getEmail());
 			blog.setCommentNum(0);
 			blogDAO.create(blog);
+			
+			User u = userDAO.read(blog.getEmail());
+			Blog[] archives = blogDAO.getBlogs(u.getEmail());
+  
+    		request.setAttribute("blogOwner",u); 
+    		request.setAttribute("archives",archives); 
 
 			request.setAttribute("errors", errors);
 			request.setAttribute("commentlist", new Comment[0]);
