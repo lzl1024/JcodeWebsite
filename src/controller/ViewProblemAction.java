@@ -10,7 +10,6 @@ import model.Model;
 import model.PCommentDAO;
 import model.ProblemDAO;
 import model.StatisticDAO;
-import model.UserDAO;
 
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
@@ -60,10 +59,12 @@ public class ViewProblemAction extends Action {
     		}
     		
     		Statistic[] stat = statisticDAO.match(MatchArg.equals("problemId", p.getId()));
-    		Arrays.sort(stat);
+			Statistic[] newstat = stat;
+			if (stat.length > 10)
+				newstat = Arrays.copyOf(stat, 10);
     		
     		request.setAttribute("problem",p); 
-    		request.setAttribute("stat",stat);
+    		request.setAttribute("stat",newstat);
 
 
 			PComment[] pcomments = pcommentDAO.getComments(p.getId());

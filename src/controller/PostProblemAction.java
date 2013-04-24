@@ -18,7 +18,6 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Comment;
 import databeans.Problem;
 import databeans.User;
 import formbeans.PostProblemForm;

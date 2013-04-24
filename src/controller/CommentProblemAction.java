@@ -3,6 +3,7 @@ package controller;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -81,10 +82,15 @@ public class CommentProblemAction extends Action {
 			
 			PComment[] comments = pcommentDAO.getComments(problem.getId());
 			Statistic[] stat = statisticDAO.match(MatchArg.equals("problemId", problem.getId()));
+			Arrays.sort(stat);
+			Statistic[] newstat = stat;
+			if (stat.length > 10)
+				newstat = Arrays.copyOf(stat, 10);
+			
 			request.setAttribute("commentlist",comments);
 			request.setAttribute("problem", problem);
 			request.setAttribute("begin",1);
-			request.setAttribute("stat", stat);
+			request.setAttribute("stat", newstat);
 			
 	        return "viewproblem.jsp";
 	 	} catch (RollbackException e) {

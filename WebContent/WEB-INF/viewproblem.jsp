@@ -108,7 +108,7 @@ style="word-wrap: break-word; word-break: normal;">
 				url :  'oj.do',
 				data : 'id=' + $('#problemId').val()
 						+ '&code='
-						+ $('#code').val()
+						+ encodeURIComponent($('#code').val())
 						+ '&submit=run',
 				cache : false,
 				beforeSend : function() {
@@ -128,7 +128,7 @@ style="word-wrap: break-word; word-break: normal;">
 				url :  'oj.do',
 				data : 'id=' + $('#problemId').val()
 						+ '&code='
-						+ $('#code').val()
+						+ encodeURIComponent($('#code').val())
 						+ '&submit=verify',
 				cache : false,
 				beforeSend : function() {
