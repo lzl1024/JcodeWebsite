@@ -38,6 +38,8 @@ public class EditProfileAction extends Action {
 			User user = (User) request.getSession(false).getAttribute("user");
         	Profile profile = profileDAO.read(user.getEmail());
         	
+        	
+        	
 			EditProfileForm form;
 			
 			if (request.getParameter("edit") == null)

@@ -19,6 +19,7 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.Problem;
+import databeans.User;
 
 import formbeans.PostProblemForm;
 
@@ -42,12 +43,19 @@ public class EditProblemAction extends Action {
         
 		try {
 			PostProblemForm form = formBeanFactory.create(request);
-		    
+			User user = (User) request.getSession(false).getAttribute("user");
+			if (!user.getEmail().equals("admin@admin")) {
+				errors.add("You are not administrator!");
+				return "error.jsp";
+			}
+			
+			
+			
     		int id = Integer.parseInt((String)request.getParameter("id"));
     		Problem p = problemDAO.read(id);
     		if (p == null) {
     			errors.add("No problem with id="+id);
-    			return "postProblem.jsp";
+    			return "error.jsp";
     		}
     		
     		PostProblemForm form2 = new PostProblemForm();

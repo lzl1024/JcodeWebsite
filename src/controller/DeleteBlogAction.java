@@ -13,7 +13,9 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databeans.Blog;
 import databeans.Comment;
+import databeans.User;
 
 public class DeleteBlogAction extends Action {
 	
@@ -35,10 +37,21 @@ public class DeleteBlogAction extends Action {
 		try {
 			Transaction.begin();
 			String strid = request.getParameter("blogid");
-			//User user = (User) request.getSession(false).getAttribute("user");
-
+			User user = (User) request.getSession(false).getAttribute("user");
 			int blogid = Integer.parseInt(strid);
+			Blog blog = blogDAO.read(blogid);
+			if(blog == null ) {
+				errors.add("No blog with id="+blogid);
+				return "error.jsp";
+			}
+
+    		if (!blog.getEmail().equals(user.getEmail())) {
+    			errors.add("Blog with id="+blogid + " is not yours!");
+    			return "error.jsp";
+    		}
+    		
 	        blogDAO.delete(blogid);
+	        
 	        
 	        Comment[] comments = commentDAO.match(MatchArg.equals("blogid", blogid));
 

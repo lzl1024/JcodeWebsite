@@ -21,6 +21,7 @@ import org.mybeans.form.FormBeanFactory;
 
 import databeans.Blog;
 import databeans.Comment;
+import databeans.User;
 
 import formbeans.PostBlogForm;
 
@@ -44,12 +45,17 @@ public class EditBlogAction extends Action {
         
 		try {
 			PostBlogForm form = formBeanFactory.create(request);
+			User user = (User) request.getSession(false).getAttribute("user");
 		    
     		int id = Integer.parseInt((String)request.getParameter("id"));
     		Blog p = blogDAO.read(id);
     		if (p == null) {
     			errors.add("No blog with id="+id);
-    			return "blog.jsp";
+    			return "error.jsp";
+    		}
+    		if (!p.getEmail().equals(user.getEmail())) {
+    			errors.add("Blog with id="+id + " is not yours!");
+    			return "error.jsp";
     		}
     		
     		PostBlogForm form2 = new PostBlogForm();

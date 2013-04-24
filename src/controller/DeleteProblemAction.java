@@ -11,6 +11,8 @@ import model.ProblemDAO;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databeans.User;
+
 public class DeleteProblemAction extends Action {
 	
 	private ProblemDAO	problemDAO;
@@ -29,11 +31,23 @@ public class DeleteProblemAction extends Action {
         request.setAttribute("errors",errors);
         
 		try {
+			User user = (User) request.getSession(false).getAttribute("user");
+			if (!user.getEmail().equals("admin@admin")) {
+				errors.add("You are not administrator!");
+				return "error.jsp";
+			}
+			
+			
 			String strid = request.getParameter("problemid");
 			int problemid = Integer.parseInt(strid);
-			System.out.println("problemid: "+ problemid);
+		//	System.out.println("problemid: "+ problemid);
 			//Transaction.begin();
 			//System.out.println("Reach after begin!");
+			if (problemDAO.read(problemid) == null) {
+				errors.add("No problem with id="+problemid);
+    			return "error.jsp";
+			}
+			
 	        problemDAO.delete(problemid);
 	        /*
 	        //Comment[] comments = commentDAO.match(MatchArg.equals("blogid", blogid));
