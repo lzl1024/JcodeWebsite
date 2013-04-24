@@ -409,12 +409,14 @@ code {
 										if (msg == "success") {
 											window.location.href = 'manage.do';
 										} else {
+											$('#signinPassword').val("");
 											$('#signinMsg').html(msg);
 										}
 									}
 								})
 							}), 
 					$('#registerSubmit').click(
+							
 							function() {
 								$.ajax({
 									type : 'POST',
@@ -428,10 +430,13 @@ code {
 											+ '&confirm='
 											+ $('#registerConPassword').val(),
 									success : function(msg) {
+										
 										msg = $.trim(msg);
 										if (msg == "success") {
 											window.location.href = 'manage.do';
 										} else {
+											$('#registerPassword').val("");
+											$('#registerConPassword').val("");
 											$('#registerMsg').html(msg);
 										}
 									}

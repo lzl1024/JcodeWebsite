@@ -9,18 +9,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import model.Model;
 import model.PCommentDAO;
 import model.ProblemDAO;
+import model.StatisticDAO;
 
+import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.PComment;
 import databeans.Problem;
+import databeans.Statistic;
 import databeans.User;
 import formbeans.CommentForm;
 
@@ -29,10 +31,12 @@ public class CommentProblemAction extends Action {
 	
 	private PCommentDAO pcommentDAO;
 	private ProblemDAO problemDAO;
+	private StatisticDAO statisticDAO;
 
 	public CommentProblemAction(Model model) {
 		pcommentDAO = model.getPCommentDAO();
 		problemDAO = model.getProblemDAO();
+		statisticDAO = model.getStatisticDAO();
 	}
 
 	public String getName() { return "commentproblem.do"; }
@@ -76,9 +80,11 @@ public class CommentProblemAction extends Action {
 	        request.setAttribute("problem",problem);
 			
 			PComment[] comments = pcommentDAO.getComments(problem.getId());
+			Statistic[] stat = statisticDAO.match(MatchArg.equals("problemId", problem.getId()));
 			request.setAttribute("commentlist",comments);
 			request.setAttribute("problem", problem);
 			request.setAttribute("begin",1);
+			request.setAttribute("stat", stat);
 			
 	        return "viewproblem.jsp";
 	 	} catch (RollbackException e) {
