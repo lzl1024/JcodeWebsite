@@ -3,6 +3,7 @@ package controller;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -72,15 +73,18 @@ public class PostProblemAction extends Action {
 			problemDAO.create(problem);
 
 			request.setAttribute("errors", errors);
-			request.setAttribute("commentlist", new Comment[0]);
-			request.setAttribute("problem", problem);			
-	        return "postProblem.jsp";
+			Problem[] problems = problemDAO.match();
+			Arrays.sort(problems);
+			request.setAttribute("problemlist",problems);
+			request.setAttribute("begin",1);
+			
+	        return "problemList.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "postProblem.jsp";
+			return "error.jsp";
 	 	} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "postProblem.jsp";
+			return "error.jsp";
 		} catch (UnsupportedEncodingException e) {
 			errors.add(e.getMessage());
 			return "postProblem.jsp";
