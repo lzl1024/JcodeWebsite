@@ -15,7 +15,7 @@ public class OnlineJudgeForm extends FormBean {
 	public String getSubmit() { return submit;}
 	
 	public void setId(String d) { id = Integer.parseInt(d); }
-	public void setCode(String s)   { code = s;  }
+	public void setCode(String s)   { code = s; }
 	public void setSubmit(String s) { submit = s; }
 
 	public List<String> getValidationErrors() {
