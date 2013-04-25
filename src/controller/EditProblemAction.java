@@ -112,11 +112,10 @@ public class EditProblemAction extends Action {
 			
 			
     		Statistic[] stat = statisticDAO.match(MatchArg.equals("problemId", p.getId()));
-			Statistic[] newstat = stat;
-			Arrays.sort(newstat);
+			Arrays.sort(stat);
 			if (stat.length > 10)
-				newstat = Arrays.copyOf(stat, 10);
-    		request.setAttribute("stat",newstat);
+				stat = Arrays.copyOf(stat, 10);
+    		request.setAttribute("stat",stat);
     		
     		request.setAttribute("problem",p); 
 			PComment[] pcomments = pcommentDAO.getComments(p.getId());
