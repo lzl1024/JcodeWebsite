@@ -48,7 +48,7 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Population',
+                name: 'Score',
                 data: [
                     <%
                     for(int i = 0; i < users.length; i++) {

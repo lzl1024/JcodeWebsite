@@ -1,6 +1,11 @@
 <div class="span3">
 	<%@ page import="databeans.User"
 			 import="databeans.Statistic" %>
+			 
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
 	<% 
 		User user = (User) session.getAttribute("user");
 		String group = null;
@@ -10,6 +15,7 @@
 		
 		if(group != null && group.equals("user")) {
 		%>
+		
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			<li class="nav-header">Operations</li>
@@ -48,24 +54,67 @@
 		</ul>
 	</div>
 	<% } %>
+	
+	<%
+		Statistic[] stat = (Statistic[])request.getAttribute("stat");
+	%>
+	
+	
+	<script>
+	$(function () {
+        $('#highScore').highcharts({
+            chart: {
+            	backgroundColor: '#f5f5f5',
+                type: 'bar'
+            },
+            title: {
+                text: 'High Score'
+            },
+            xAxis: {
+                categories: [
+                             <% for(int i = 0; i < stat.length; i++) {
+                             %> '<%=stat[i].getUserName()%>',
+                             <% }%>
+                             ]
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'Top 10 score'
+                }
 
+            },
+            legend: {
+                backgroundColor: '#f5f5f5',
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+                series: [{
+                name: 'Score',
+                pointPadding: 0,
+                data: [
+						<% for(int i = 0; i < stat.length; i++) {
+    					%> <%=stat[i].getScore()%>,
+    					<% }%>
+                       ]
+            }]
+        });
+    });
+    
+	</script>
+	
+	
 	<div class="well" align="center">
-		<div align="center" style="padding: 8px 14px; margin: 0; font-size: 15px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
-				High Score for This Problem
-		</div>
-		<div align="center" style="font-size: 110%; display: block; width: 70%">
-
-		<% Statistic[] stat = (Statistic[])request.getAttribute("stat");
-		   for(int i = 0; i < stat.length; i++) {
-		%>
-				<div class="pull-left"><%= i+1%>.&nbsp &nbsp
-				<a href="viewprofile.do?email=<%=stat[i].getUserEmail()%>"><%=stat[i].getUserName()%></a>
-				</div> 
-				<div class="pull-right"><%=stat[i].getScore() %></div>
-				<br>
-		<%} %>
-		</div>
-		<hr>
+			<%if(stat == null || stat.length == 0)  {%>
+				<h5>No submission record</h5>
+			<%}else {%>
+			<div id="highScore" style="min-width: 200px; height: <%=40*stat.length + 100 %>px; margin: 0 auto"></div>
+			<%} %>
 	</div>
 	<!--/.well -->
 

@@ -32,7 +32,7 @@ public class DeleteProblemAction extends Action {
         
 		try {
 			User user = (User) request.getSession(false).getAttribute("user");
-			if (!user.getEmail().equals("admin@admin")) {
+			if (!user.getUserGroup().equals("admin")) {
 				errors.add("You are not administrator!");
 				return "error.jsp";
 			}
