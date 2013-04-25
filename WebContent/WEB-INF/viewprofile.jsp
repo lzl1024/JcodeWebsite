@@ -3,7 +3,8 @@
 <div class="row-fluid">
 <jsp:include page="template-navprofile.jsp" />
 
-<div class="span9 alert alert-block">
+<div class="span9 alert alert-block" style="word-wrap: break-word;  
+          word-break: normal; ">
 
         <div class="span8">
         <div ><img src="image.do?email=${profile.email}" style="width:250px;height:250px;" /></div>  

@@ -51,8 +51,9 @@
 	<% } %>
 
 	<!-- hot problem -->
-	<div class="well">
-	<div align="center"
+	<div class="well" style="word-wrap: break-word;  
+          word-break: normal; ">
+	<div align="center" 
 		style="padding: 8px 14px; margin: 0; font-size: 18px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
 			Hot Problems
 	</div>
@@ -67,12 +68,8 @@
 				for (int i = 0; i < hotProblem.length; i++) {
 					int accept = hotProblem[i].getAccept();
 					int deny = hotProblem[i].getDeny();
-					String subTitle = hotProblem[i].getTitle();
-					if (subTitle.length() > 20) {
-						subTitle = subTitle.substring(1,20);
-						subTitle = subTitle+"...";
-					}
-			%><li><a href="problem.do?id=<%=hotProblem[i].getId()%>"><%=subTitle%></a>&nbsp(<%=accept%>/<%=accept+deny%>)</li>
+	
+			%><li><a href="problem.do?id=<%=hotProblem[i].getId()%>"><%=hotProblem[i].getTitle()%></a>&nbsp(<%=accept%>/<%=accept+deny%>)</li>
 			<%
 				}
 				}

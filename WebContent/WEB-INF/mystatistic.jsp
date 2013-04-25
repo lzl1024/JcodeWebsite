@@ -2,7 +2,8 @@
 <jsp:include page="template-head.jsp" />
 
 
-<div class="row-fluid">
+<div class="row-fluid" style="word-wrap: break-word;  
+          word-break: normal; ">
 <p>
 	<table class="ContentTable">
 	<tr><td><strong>Problem</strong></td>

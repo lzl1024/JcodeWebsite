@@ -22,7 +22,8 @@
 	<!--/.well -->
 
 	<!-- hot problem -->
-	<div class="well">
+	<div class="well" style="word-wrap: break-word;  
+          word-break: normal; ">
 		<div align="center"
 			style="padding: 8px 14px; margin: 0; font-size: 18px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
 			Hot Blog</div>
@@ -37,12 +38,7 @@
 		<ul>
 			<%
 				for (int i = 0; i < hotBlog.length; i++) {
-					String subTitle = hotBlog[i].getTitle();
-					if (subTitle.length() > 20) {
-						subTitle = subTitle.substring(1,20);
-						subTitle = subTitle+"...";
-					}
-			%><li><a href="viewblog.do?id=<%=hotBlog[i].getId()%>"><%=subTitle%></a></li>
+			%><li><a href="viewblog.do?id=<%=hotBlog[i].getId()%>"><%=hotBlog[i].getTitle()%></a></li>
 			<%
 				}
 				}

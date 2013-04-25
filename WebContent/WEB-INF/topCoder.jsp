@@ -79,7 +79,8 @@ $(function () {
 	<div id="picture" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 	<br>
 	<br>
-	<div class="ContentTable">
+	<div class="ContentTable" style="word-wrap: break-word;  
+          word-break: normal; ">
 	<table>
 	<tr>
 		<td><strong>Rank</strong>

@@ -46,7 +46,8 @@
           </div><!--/.well -->
           
           <!-- Blogs posted by the author-->
-          <div class="well">
+          <div class="well" style="word-wrap: break-word;  
+          word-break: normal; ">
 			<div align="center" style="padding: 8px 14px; margin: 0; font-size: 18px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
 				Archives
 			</div>

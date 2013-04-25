@@ -17,7 +17,8 @@ function deleteproblem(problemid) {
 <jsp:include page="template-problem-nav.jsp" />
 
         
-<div class="span9">
+<div class="span9"  style="word-wrap: break-word;  
+          word-break: normal; ">
 <p>
 	<table class="ContentTable">
 	<tr><td>Title</td>

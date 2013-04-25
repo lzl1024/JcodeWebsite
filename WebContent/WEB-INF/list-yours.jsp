@@ -19,7 +19,8 @@ function deleteblog(blogid) {
         
 <div class="span9">
 <p>
-	<div class="ContentTable">
+	<div class="ContentTable" style="word-wrap: break-word;  
+          word-break: normal; ">
 	<table>
 	<tr><td>Title</td>
 		<td>Author</td>
