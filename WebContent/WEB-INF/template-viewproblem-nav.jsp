@@ -1,9 +1,9 @@
 <div class="span3">
 	<%@ page import="databeans.User"
 			 import="databeans.Statistic" %>
-			 
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+
 
 
 	<% 
@@ -59,8 +59,17 @@
 		Statistic[] stat = (Statistic[])request.getAttribute("stat");
 	%>
 	
-	
+	<div class="well" align="center">
+			<%if(stat == null || stat.length == 0)  {%>
+				<h5>No submission record</h5>
+			<%}else {%>
+			
+
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
 	<script>
+	
 	$(function () {
         $('#highScore').highcharts({
             chart: {
@@ -81,7 +90,7 @@
                 min: 0,
                 max: 100,
                 title: {
-                    text: 'Top 10 score'
+                    text: 'Top 10 scores'
                 }
 
             },
@@ -109,10 +118,6 @@
 	</script>
 	
 	
-	<div class="well" align="center">
-			<%if(stat == null || stat.length == 0)  {%>
-				<h5>No submission record</h5>
-			<%}else {%>
 			<div id="highScore" style="min-width: 200px; height: <%=40*stat.length + 100 %>px; margin: 0 auto"></div>
 			<%} %>
 	</div>
