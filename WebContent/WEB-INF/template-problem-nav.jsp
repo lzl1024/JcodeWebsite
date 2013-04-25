@@ -67,7 +67,12 @@
 				for (int i = 0; i < hotProblem.length; i++) {
 					int accept = hotProblem[i].getAccept();
 					int deny = hotProblem[i].getDeny();
-			%><li><a href="problem.do?id=<%=hotProblem[i].getId()%>"><%=hotProblem[i].getTitle()%></a>&nbsp(<%=accept%>/<%=accept+deny%>)</li>
+					String subTitle = hotProblem[i].getTitle();
+					if (subTitle.length() > 20) {
+						subTitle = subTitle.substring(1,20);
+						subTitle = subTitle+"...";
+					}
+			%><li><a href="problem.do?id=<%=hotProblem[i].getId()%>"><%=subTitle%></a>&nbsp(<%=accept%>/<%=accept+deny%>)</li>
 			<%
 				}
 				}

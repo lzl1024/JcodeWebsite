@@ -37,7 +37,12 @@
 		<ul>
 			<%
 				for (int i = 0; i < hotBlog.length; i++) {
-			%><li><a href="viewblog.do?id=<%=hotBlog[i].getId()%>"><%=hotBlog[i].getTitle()%></a></li>
+					String subTitle = hotBlog[i].getTitle();
+					if (subTitle.length() > 20) {
+						subTitle = subTitle.substring(1,20);
+						subTitle = subTitle+"...";
+					}
+			%><li><a href="viewblog.do?id=<%=hotBlog[i].getId()%>"><%=subTitle%></a></li>
 			<%
 				}
 				}

@@ -51,14 +51,10 @@ public class CommentAction extends Action {
 	                
 	        CommentForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
-	        
-	        if (!form.isPresent()) {
-	            return "viewblog.jsp";
-	        }
 	       
 	        
 	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() > 0) return "viewblog.jsp";
+	        if (errors.size() > 0) return "error.jsp";
 
 			Comment comment = new Comment();  // id & position will be set when created
 			
