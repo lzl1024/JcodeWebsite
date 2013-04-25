@@ -19,11 +19,13 @@ import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
+import model.BlogDAO;
 import model.Model;
 import model.ProblemDAO;
 import model.ProfileDAO;
 import model.UserDAO;
 
+import databeans.Blog;
 import databeans.Problem;
 import databeans.Profile;
 import databeans.User;
@@ -38,6 +40,7 @@ public class Controller extends HttpServlet {
         UserDAO userDAO = model.getUserDAO();
         ProblemDAO problemDAO = model.getProblemDAO();
         ProfileDAO profileDAO = model.getProfileDAO();
+        BlogDAO blogDAO = model.getBlogDAO();
         
         Action.add(new LoginAction(model));
         Action.add(new RegisterAction(model));
@@ -70,11 +73,16 @@ public class Controller extends HttpServlet {
         // add an admin
         try {
 			if(userDAO.read("admin@admin") == null) {
-				adduser(userDAO, "admin", "1", "admin@admin", "admin");			
+				adduser(userDAO, "admin", "1", "admin@admin", "admin");
+				adduser(userDAO, "lzl", "1", "lzl@com", "user");
+				adduser(userDAO, "qm", "1", "qm@com", "user");
 			
 				//Create the profile bean
-				Profile profile = setProfileDefault("admin@admin", "admin");
-				profileDAO.create(profile);
+				setProfileDefault(profileDAO, "admin@admin", "admin","jpg","/images/1.jpg");
+				setProfileDefault(profileDAO, "lzl@com", "lzl","jpg","/images/lzl.jpg");
+				setProfileDefault(profileDAO, "qm@com", "qm","jpg","/images/mao.jpg");	
+				
+				
 			}
 		} catch (RollbackException e) {
 			e.printStackTrace();
@@ -98,12 +106,66 @@ public class Controller extends HttpServlet {
 				problemDAO.create(problem);
 
 			}
+			
+			if(blogDAO.match() == null || blogDAO.match().length == 0){
+				//Create default blog
+				User user = userDAO.read("admin@admin");
+				addBlog(blogDAO, user, "Welcome to Jcode!", "Welcome to Jcode!\r\n\r\n This is programmer's home.");
+			
+				user = userDAO.read("lzl@com");
+				addBlog(blogDAO, user, "Apple releases revised plans for its 'spaceship' headquarters",
+						"As Apple waits for the city of Cupertino to give the final thumbs up for the design of its new spaceship-like headquarters, the company has been tinkering with the details.\r\n\r\n"+
+"Cupertino published the software giant's project update of the headquarters on the city Web site on Wednesday. Included in the documents are the project description, site and landscaping plans, floor plans, renderings, and a bicycle plan.\r\n\r\n"+
+"While a ton of information was submitted, it appears that the basic essentials haven't changed too much. The building still looks like a circular spaceship; in fact, many of the renderings in the new packet are the same as past iterations. It also has the same specifications: it will be 2.8 million square feet, sit up to 14,200 employees, and have a copious amount of trees.");
+			
+				addBlog(blogDAO, user, "iPhone should come to the big screen in the fall",
+"Tim Cook likes to talk in religous tones about Apple's higher calling. Speaking at the Goldman Sachs Technology conference last month, Apple's CEO laid out his credo, noting that the only thing the company will never do is produce \"a crappy product.\"\r\n\r\n"+
+"\"That's the only religion that we have,\" Cook said. \"We must do something bold, something ambitious, something great for the customers, and we sweat all of the details.\"\r\n\r\n" +
+"In the meantime, customers and investors are waiting for Apple to do something bold and ambitious again, and Cook is calling out the competitors' products as wanting.\r\n\r\n" +
+"When questioned Tuesday during the second-quarter earnings call about Apple's stance on offering an iPhone with a 5-inch screen, he offered this revealing glimpse into his thinking:");
+				
+				
+				
+				user = userDAO.read("qm@com");
+				addBlog(blogDAO, user, "MacBook Pro declared 'best performing' Windows laptop",
+"An Apple 13-inch MacBook Pro is the \"best performing\" Windows laptop? Yes, says a PC services company that has done \"frustration analytics\" on some of the best-selling PCs.\r\n\r\n"+
+"The MacBook Pro won out over established PC makers like Dell, Acer, and Lenovo, according to Soluto, which was quick to explain its finding.");
+				
+				addBlog(blogDAO, user, "Auctioning Tim Cook: Winner gets coffee with Apple's CEO",
+"Apple CEO Tim Cook is selling his time, and it's worth $50,000.\r\n\r\n"+
+"Cook is auctioning off a coffee meeting with himself at Apple's headquarters in Cupertino, Calif., to raise money for the Robert F. Kennedy Center for Justice and Human Rights. Nine bids have already been submitted on charity auction site Charitybuzz, with the current highest at $10,500.\r\n\r\n"+
+"Charitybuzz is calling the item a \"power meeting\" that lets a lucky winner \"nab one-on-one access to one of the most powerful figures in tech and business.\" The meeting can run between 30 minutes and one hour.");
+			}
 		} catch (RollbackException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
       
+    }
+    
+    void addBlog(BlogDAO blogDAO, User user, String title, String content) {
+		Blog blog = new Blog();  // id & position will be set when created
+		
+		SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
+		Date curDate = new Date(System.currentTimeMillis()); 
+		blog.setDate(formatter.format(curDate));
+		try {
+			blog.setContent(content.getBytes("Unicode"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		blog.setTitle(title);
+		blog.setUser(user.getUserName());
+		blog.setEmail(user.getEmail());
+		blog.setCommentNum(0);
+		try {
+			blogDAO.create(blog);
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     void adduser(UserDAO userDAO, String uname, String ps, String email, String group) {
@@ -212,20 +274,20 @@ public class Controller extends HttpServlet {
         return path.substring(slash+1);
     }
     
-    private Profile setProfileDefault(String email, String userName) {
+    private void setProfileDefault(ProfileDAO profileDAO, String email, String userName, String type, String pic) {
     	Profile p = new Profile();
     	BufferedImage image;
     	ByteArrayOutputStream out = new ByteArrayOutputStream();
     	
 		try { 
-			image = ImageIO.read(getClass().getResourceAsStream("/images/1.jpg"));    	
-	    	ImageIO.write(image, "jpg", out);
+			image = ImageIO.read(getClass().getResourceAsStream(pic));    	
+	    	ImageIO.write(image, type, out);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
 		p.setBytes(out.toByteArray());
-		p.setPictype("jpg");
+		p.setPictype(type);
 		p.setEmail(email);
 		p.setInterest("I just like code");
 		p.setOccupation("No code no job");
@@ -233,8 +295,11 @@ public class Controller extends HttpServlet {
 		p.setStatus("Watching best demo!");
 		p.setIntroduction("I am too lazy to intro myself");
 		
-    	
-    	return p;
+		try {
+   			profileDAO.create(p);
+   		} catch (RollbackException e) {
+   			e.printStackTrace();
+   		}
     }
     
     private String fixBadChars(String s) {

@@ -297,6 +297,7 @@ code {
                   		<ul class="dropdown-menu">
                     		<li class="nav-header">Hi, ${user.userName}</li>
                     		<li class="divider"></li>
+                    		<li><a href="viewprofile.do?email=${user.email}">My Profile</a></li>
                    	 		<li><a href="editprofile.do?edit=1">Edit Profile</a></li>
                     		<li><a href="change-pwd.do">Change Password</a></li>
                     		<li class="divider"></li>

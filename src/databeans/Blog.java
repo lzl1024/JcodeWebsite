@@ -20,7 +20,6 @@ public class Blog implements Comparable<Blog> {
 	private int    commentNum = 0;
 	
 	public class HotBlog implements Comparator<Blog> {
-
 		@Override
 		public int compare(Blog o1, Blog o2) {
 			if (o1.commentNum > o2.commentNum) return -1;
