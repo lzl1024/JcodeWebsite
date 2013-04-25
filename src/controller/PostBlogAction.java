@@ -3,6 +3,7 @@ package controller;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,6 +48,14 @@ public class PostBlogAction extends Action {
 	                
 	        PostBlogForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
+	        
+	        Blog[] hotBlog = blogDAO.match();
+			Blog b = new Blog();
+			Arrays.sort(hotBlog, b.hb);
+			if (hotBlog.length > 10)
+				hotBlog = Arrays.copyOf(hotBlog, 10);
+			
+			request.setAttribute("hotblog", hotBlog);
 	        
 	        if (!form.isPresent()) {
 	            return "blog.jsp";

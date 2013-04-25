@@ -1,5 +1,7 @@
 <div class="span3">
-	<%@ page import="databeans.User"%>
+	<%@ page import="databeans.User"
+			 import="databeans.Problem"
+	%>
 	<% 
 		User user = (User) session.getAttribute("user");
 		String group = null;
@@ -47,5 +49,32 @@
 		</ul>
 	</div>
 	<% } %>
+
+	<!-- hot problem -->
+	<div class="well">
+	<div align="center"
+		style="padding: 8px 14px; margin: 0; font-size: 18px; font-weight: normal; line-height: 18px; background-color: #f7f7f7; border-bottom: 1px solid #ebebeb;">
+			Hot Problems
+	</div>
+	<%
+		Problem[] hotProblem = (Problem[])request.getAttribute("hotproblem");
+		if(hotProblem == null || hotProblem.length == 0) {
+		%>	No Hot Problem <%
+		} else { %>
+		
+		<ul>
+			<%
+				for (int i = 0; i < hotProblem.length; i++) {
+					int accept = hotProblem[i].getAccept();
+					int deny = hotProblem[i].getDeny();
+			%><li><a href="problem.do?id=<%=hotProblem[i].getId()%>"><%=hotProblem[i].getTitle()%></a>&nbsp(<%=accept%>/<%=accept+deny%>)</li>
+			<%
+				}
+				}
+			%>
+		</ul>
+
+	</div>
+	<!--/.well -->
 </div>
 <!--/span-->

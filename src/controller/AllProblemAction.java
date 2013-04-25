@@ -42,6 +42,16 @@ public class AllProblemAction extends Action {
 			}
 			request.setAttribute("problemlist",problems);
 			
+			Problem[] hotProblem = problemDAO.match();
+			Problem p = new Problem();
+			Arrays.sort(hotProblem, p.hp);
+			if (hotProblem.length > 10)
+				hotProblem = Arrays.copyOf(hotProblem, 10);
+			
+			//System.out.println(hotProblem.length);
+			request.setAttribute("hotproblem", hotProblem);
+			
+			
 	        return "problemList.jsp";
 		}catch (NumberFormatException e) {
     		errors.add(e.getMessage());

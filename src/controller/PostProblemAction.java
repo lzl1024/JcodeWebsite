@@ -48,6 +48,16 @@ public class PostProblemAction extends Action {
 	        }
 	        
 	        PostProblemForm form = formBeanFactory.create(request);
+	        
+	        Problem[] hotProblem = problemDAO.match();
+			Problem pt = new Problem();
+			Arrays.sort(hotProblem, pt.hp);
+			if (hotProblem.length > 10)
+				hotProblem = Arrays.copyOf(hotProblem, 10);
+			
+			//System.out.println(hotProblem.length);
+			request.setAttribute("hotproblem", hotProblem);
+			
 	        request.setAttribute("postForm",form);
 	        
 	        if (!form.isPresent()) {
@@ -77,6 +87,7 @@ public class PostProblemAction extends Action {
 			request.setAttribute("problemlist",problems);
 			request.setAttribute("begin",1);
 			
+
 	        return "problemList.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());

@@ -26,6 +26,7 @@ public class ManageAction extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
+        
 		try {
             // Set up user list for nav bar
 			request.setAttribute("userList",userDAO.getUsers());

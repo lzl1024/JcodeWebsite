@@ -51,6 +51,16 @@ public class ManageProblemAction extends Action {
 				request.setAttribute("begin", b);
 			}
 			
+			Problem[] hotProblem = problemDAO.match();
+			Problem p = new Problem();
+			Arrays.sort(hotProblem, p.hp);
+			if (hotProblem.length > 10)
+				hotProblem = Arrays.copyOf(hotProblem, 10);
+			
+			//System.out.println(hotProblem.length);
+			request.setAttribute("hotproblem", hotProblem);
+			
+			
 			request.setAttribute("problemlist",problems);
 			
 	        return "manageProblem.jsp";

@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +61,15 @@ public class SearchProblemAction extends Action{
 				}
 				
 				request.setAttribute("problemlist",problemlist);
+				
+				Problem[] hotProblem = problemDAO.match();
+				Problem p = new Problem();
+				Arrays.sort(hotProblem, p.hp);
+				if (hotProblem.length > 10)
+					hotProblem = Arrays.copyOf(hotProblem, 10);
+				
+				request.setAttribute("hotproblem", hotProblem);
+				
 		        return "problemList.jsp";
 			}catch (NumberFormatException e) {
 	    		errors.add(e.getMessage());

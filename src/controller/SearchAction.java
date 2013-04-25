@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +59,13 @@ public class SearchAction extends Action{
 					request.setAttribute("begin", b);	
 				}
 				
+		        Blog[] hotBlog = blogDAO.match();
+				Blog b = new Blog();
+				Arrays.sort(hotBlog, b.hb);
+				if (hotBlog.length > 10)
+					hotBlog = Arrays.copyOf(hotBlog, 10);
+				
+				request.setAttribute("hotblog", hotBlog);
 				
 				request.setAttribute("bloglist",bloglist);
 		        return "blogList.jsp";

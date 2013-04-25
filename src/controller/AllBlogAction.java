@@ -44,6 +44,14 @@ public class AllBlogAction extends Action {
 			}
 			request.setAttribute("bloglist",blogs);
 			
+			Blog[] hotBlog = blogDAO.match();
+			Blog b = new Blog();
+			Arrays.sort(hotBlog, b.hb);
+			if (hotBlog.length > 10)
+				hotBlog = Arrays.copyOf(hotBlog, 10);
+			
+			request.setAttribute("hotblog", hotBlog);
+			
 	        return "blogList.jsp";
 		}catch (NumberFormatException e) {
     		errors.add(e.getMessage());

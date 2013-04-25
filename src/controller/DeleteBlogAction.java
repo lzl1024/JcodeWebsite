@@ -59,6 +59,8 @@ public class DeleteBlogAction extends Action {
 	        	commentDAO.delete(comment.getId());
 	        }
 	        Transaction.commit();		
+	        
+			
 			return "yourblog.do";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());

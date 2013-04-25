@@ -29,7 +29,7 @@ function deleteproblem(problemid) {
         for (int i=(begin-1)*10; i<begin*10 && i < problems.length; i++) { 
 		%>
 		<tr>
-			<td><a href="oj.do?id=<%=problems[i].getId()%>"><%=problems[i].getTitle()%></a></td>
+			<td><a href="problem.do?id=<%=problems[i].getId()%>"><%=problems[i].getTitle()%></a></td>
 			<td><%=problems[i].getDate()%></td>
 			<td><a onclick="deleteproblem(<%=problems[i].getId()%>)" href="javascript::deleteproblem(<%=problems[i].getId()%>)">Delete</a>
 			&nbsp &nbsp <a href="editproblem.do?id=<%=problems[i].getId()%>">Edit</a></td>

@@ -18,6 +18,11 @@ public class Blog implements Comparable<Blog> {
 	private String email 	= null;
 	private String date		= null;
 	private int    commentNum = 0;
+	public HotBlog hb;
+	
+	public Blog() {
+		hb = new HotBlog();
+	}
 	
 	public class HotBlog implements Comparator<Blog> {
 		@Override

@@ -67,6 +67,16 @@ public class EditProblemAction extends Action {
     		}
     		
     		PostProblemForm form2 = new PostProblemForm();
+    		
+			Problem[] hotProblem = problemDAO.match();
+			Problem pt = new Problem();
+			Arrays.sort(hotProblem, pt.hp);
+			if (hotProblem.length > 10)
+				hotProblem = Arrays.copyOf(hotProblem, 10);
+			
+			//System.out.println(hotProblem.length);
+			request.setAttribute("hotproblem", hotProblem);
+			
 
     		form2.setContent(p.getReadableCon().replaceAll("<br>", "\n"));
     		form2.setTitle(p.getTitle());

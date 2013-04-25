@@ -58,7 +58,8 @@ public class DeleteProblemAction extends Action {
 	         * 
 	         */
 	        //Transaction.commit();	
-			System.out.println("Reach after commit!");
+			
+	        
 			return "manageProblem.do";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());

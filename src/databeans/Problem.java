@@ -22,10 +22,12 @@ public class Problem implements Comparable<Problem> {
 	private byte[] referRes		= null;
 	private int	   accept		= 0;
 	private int    deny			= 0;
+	public HotProblem hp;
 	
 	public Problem(){
 		accept = 0;
 		deny = 0;
+		hp = new HotProblem();
 	}
 	
 	public class HotProblem implements Comparator<Problem> {
