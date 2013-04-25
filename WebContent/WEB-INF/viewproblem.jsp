@@ -113,6 +113,7 @@ style="word-wrap: break-word; word-break: normal;">
 				cache : false,
 				beforeSend : function() {
 						$('#result').html("Running......");
+
 				},
 				success : function(msg) {
 						$('#result').html(msg);
@@ -123,6 +124,8 @@ style="word-wrap: break-word; word-break: normal;">
 	
 	$(document).ready(function() {
 		$('#verifyBtn').click(function() {
+			
+
 			$.ajax({
 				type : 'POST',
 				url :  'oj.do',
