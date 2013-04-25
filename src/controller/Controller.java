@@ -91,19 +91,17 @@ public class Controller extends HttpServlet {
         // add a demo problem
         try {
 			if(problemDAO.match() == null || problemDAO.match().length == 0) {
+				addProblem(problemDAO, "Demo problem", "This is a demo problem, please write a program printing \"Hello World\"", "public class Source {\r\n  public void hello() {\r\n    //TO DO\r\n  }\r\n}", 
+						"public class Test {\r\n  public static void main(String[] args) {\r\n   Source s = new Source();\r\n    s.hello();\r\n  }\r\n}", "Hello World");
 				
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
-				Date curDate = new Date(System.currentTimeMillis()); 
+				addProblem(problemDAO, "Sum of all numbers from 1 to 1000", "This is a warm-up problem. Please write a problem calculating the sum of all numbers from 1 to 1000 (inclusive).", "public class Source {\r\n  public int sum() {\r\n    //TO DO\r\n  }\r\n}", 
+						"public class Test {\r\n  public static void main(String[] args) {\r\n   Source s = new Source();\r\n    if(s.sum() == 500500) System.out.println(1);\r\n    \r\n  }\r\n}", "1");
 				
-				Problem problem = new Problem();
-				problem.setDate(formatter.format(curDate));
-				problem.setContent((fixBadChars("This is a demo problem, please write a problem printing \"Hello World\"")).getBytes("Unicode"));
-				problem.setTitle(fixBadChars("Demo problem"));
-				problem.setCommentNum(0);
-				problem.setStartCode(("public class Source {\r\n  public void hello() {\r\n    //TO DO\r\n  }\r\n}").getBytes("Unicode"));
-				problem.setTestCode(("public class Test {\r\n  public static void main(String[] args) {\r\n   Source s = new Source();\r\n    s.hello();\r\n  }\r\n}").getBytes("Unicode"));
-				problem.setReferRes(("Hello World").getBytes("Unicode"));
-				problemDAO.create(problem);
+				addProblem(problemDAO, "Balanced Binary Tree", "Given a binary tree, determine if it is height-balanced. \r\n\r\nFor this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.\r\n", 
+						"public class Source {\r\n  public boolean isBalanced(TreeNode root) {\r\n    //TO DO\r\n  }\r\n\r\nclass TreeNode {\r\n  int val;\r\n  TreeNode left;\r\n  TreeNode right;\r\n  TreeNode(int x) { val = x; }\r\n}", 
+						"public class Test {\r\n  public static void main(String[] args) {\r\n   TreeNode n1 = new TreeNode(1);\r\n    TreeNode n2 = new TreeNode(2);\r\n    TreeNode n3 = new TreeNode(3);\r\n    TreeNode n4 = new TreeNode(4);\r\n    TreeNode n5 = new TreeNode(5);\r\n    TreeNode root = n1;\r\n    " +
+						"n1.left = n2;\r\n    n1.right = n3;\r\n    n3.right = n4;\r\n    n4.left = n5;\r\n    Source s = new Source();\r\n    if(s.isBalanced(root) == false) System.out.println(1);\r\n    \r\n  }\r\n}", "1");
+				
 
 			}
 			
@@ -142,6 +140,26 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
       
+    }
+    
+    void addProblem(ProblemDAO problemDAO, String title, String content, String startCode, String testCode, String referRes) throws UnsupportedEncodingException {
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
+		Date curDate = new Date(System.currentTimeMillis()); 
+		
+		Problem problem = new Problem();
+		problem.setDate(formatter.format(curDate));
+		problem.setContent((fixBadChars(content)).getBytes("Unicode"));
+		problem.setTitle(fixBadChars(title));
+		problem.setCommentNum(0);
+		problem.setStartCode((startCode).getBytes("Unicode"));
+		problem.setTestCode((testCode).getBytes("Unicode"));
+		problem.setReferRes((referRes).getBytes("Unicode"));
+		try {
+			problemDAO.create(problem);
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     void addBlog(BlogDAO blogDAO, User user, String title, String content) {

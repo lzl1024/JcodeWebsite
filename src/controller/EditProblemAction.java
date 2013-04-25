@@ -105,8 +105,10 @@ public class EditProblemAction extends Action {
 			Transaction.begin();
 			p.setDate(formatter.format(curDate));
 			p.setContent((fixBadChars(form.getContent())).getBytes("Unicode"));
-			
+			p.setStartCode((form.getStartCode()).getBytes("Unicode"));
 			p.setTitle(fixBadChars(form.getTitle()));
+			p.setTestCode((form.getTestCode()).getBytes("Unicode"));
+			p.setReferRes((form.getReferRes()).getBytes("Unicode"));
 			problemDAO.update(p);
 			Transaction.commit();
 			
