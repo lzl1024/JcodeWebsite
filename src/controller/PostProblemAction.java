@@ -48,15 +48,6 @@ public class PostProblemAction extends Action {
 	        }
 	        
 	        PostProblemForm form = formBeanFactory.create(request);
-	        
-	        Problem[] hotProblem = problemDAO.match();
-			Problem pt = new Problem();
-			Arrays.sort(hotProblem, pt.hp);
-			if (hotProblem.length > 10)
-				hotProblem = Arrays.copyOf(hotProblem, 10);
-			
-			//System.out.println(hotProblem.length);
-			request.setAttribute("hotproblem", hotProblem);
 			
 	        request.setAttribute("postForm",form);
 	        
@@ -80,6 +71,15 @@ public class PostProblemAction extends Action {
 			problem.setTestCode(form.getTestCode().getBytes("Unicode"));
 			problem.setReferRes(form.getReferRes().getBytes("Unicode"));
 			problemDAO.create(problem);
+			
+	        Problem[] hotProblem = problemDAO.match();
+			Problem pt = new Problem();
+			Arrays.sort(hotProblem, pt.hp);
+			if (hotProblem.length > 10)
+				hotProblem = Arrays.copyOf(hotProblem, 10);
+			
+			//System.out.println(hotProblem.length);
+			request.setAttribute("hotproblem", hotProblem);
 
 			request.setAttribute("errors", errors);
 			Problem[] problems = problemDAO.match();
