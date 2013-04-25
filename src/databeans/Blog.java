@@ -5,12 +5,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.Comparator;
 import org.genericdao.PrimaryKey;
 
-@PrimaryKey("id")
-public class Blog implements Comparable<Blog> {
 
+@PrimaryKey("id")
+public class Blog implements Comparable<Blog> { 
 	private int    id		= -1;
 	private String title 	= null;
 	private byte[] content 	= null;
@@ -18,6 +18,17 @@ public class Blog implements Comparable<Blog> {
 	private String email 	= null;
 	private String date		= null;
 	private int    commentNum = 0;
+	
+	public class HotBlog implements Comparator<Blog> {
+
+		@Override
+		public int compare(Blog o1, Blog o2) {
+			if (o1.commentNum > o2.commentNum) return -1;
+			if (o1.commentNum < o2.commentNum) return 1;
+			return 0;
+		}
+		
+	}
 	
 	public int compareTo(Blog other) {
 		// Order first by owner, then by position
@@ -37,6 +48,7 @@ public class Blog implements Comparable<Blog> {
 
 		return -1;
 	}
+	
 	
 	public boolean equals(Object obj) {
 		if (obj instanceof Blog) {

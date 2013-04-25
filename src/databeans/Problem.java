@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 import org.genericdao.PrimaryKey;
@@ -25,6 +26,16 @@ public class Problem implements Comparable<Problem> {
 	public Problem(){
 		accept = 0;
 		deny = 0;
+	}
+	
+	public class HotProblem implements Comparator<Problem> {
+		@Override
+		public int compare(Problem o1, Problem o2) {
+			if (o1.accept + o1.deny > o2.accept + o1.deny) return -1;
+			if (o1.accept + o1.deny < o2.accept + o1.deny) return 1;
+			return 0;
+		}
+		
 	}
 	
 	public int compareTo(Problem other) {
