@@ -3,6 +3,7 @@ package controller;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,14 +12,19 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 import model.Model;
+import model.PCommentDAO;
 import model.ProblemDAO;
+import model.StatisticDAO;
 
+import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.PComment;
 import databeans.Problem;
+import databeans.Statistic;
 import databeans.User;
 
 import formbeans.PostProblemForm;
@@ -28,11 +34,13 @@ public class EditProblemAction extends Action {
 	
 
 	private ProblemDAO  problemDAO;
-	//private CommentDAO commentDAO;
+	private PCommentDAO pcommentDAO;
+	private StatisticDAO statisticDAO;
 	
     public EditProblemAction(Model model) {
     	problemDAO  = model.getProblemDAO();
-    	//commentDAO = model.getCommentDAO();
+    	pcommentDAO = model.getPCommentDAO();
+    	statisticDAO = model.getStatisticDAO();
 	}
 
     public String getName() { return "editproblem.do"; }
@@ -91,20 +99,29 @@ public class EditProblemAction extends Action {
 			p.setTitle(fixBadChars(form.getTitle()));
 			problemDAO.update(p);
 			Transaction.commit();
-    		request.setAttribute("problem",p);  
-			//Comment[] comments = commentDAO.getComments(p.getId());
-			//request.setAttribute("commentlist",comments);
+			
+			
+    		Statistic[] stat = statisticDAO.match(MatchArg.equals("problemId", p.getId()));
+			Statistic[] newstat = stat;
+			if (stat.length > 10)
+				newstat = Arrays.copyOf(stat, 10);
     		
-            return "oj.jsp";
+    		request.setAttribute("problem",p); 
+    		request.setAttribute("stat",newstat); 
+			PComment[] pcomments = pcommentDAO.getComments(p.getId());
+			request.setAttribute("commentlist",pcomments);
+			request.setAttribute("begin",1);
+    		
+            return "viewproblem.jsp";
+		}catch (NumberFormatException e) {
+    		errors.add(e.getMessage());
+    		return "error.jsp";
     	} catch (RollbackException e) {
     		errors.add(e.getMessage());
     		return "error.jsp";
     	} catch (FormBeanException e) {
     		errors.add(e.getMessage());
-    		return "error.jsp";
-    	}catch (NumberFormatException e) {
-    		errors.add(e.getMessage());
-    		return "error.jsp";
+    		return "error.jsp";  	
     	}catch (UnsupportedEncodingException e) {
     		errors.add(e.getMessage());
 			return "error.jsp";

@@ -45,7 +45,7 @@ public class DeleteBlogAction extends Action {
 				return "error.jsp";
 			}
 
-    		if (!blog.getEmail().equals(user.getEmail())) {
+    		if (!user.getEmail().equals("admin@admin") && !blog.getEmail().equals(user.getEmail())) {
     			errors.add("Blog with id="+blogid + " is not yours!");
     			return "error.jsp";
     		}

@@ -70,10 +70,15 @@ public class ViewBlogAction extends Action {
 			if((begin = request.getParameter("begin")) == null) {
 				request.setAttribute("begin",1);
 			}else {
-				request.setAttribute("begin", Integer.parseInt(begin));
+				int b = Integer.parseInt(begin);
+				if (b <= 0) b = 1;
+				request.setAttribute("begin", b);
 			}
     		
             return "viewblog.jsp";
+		}catch (NumberFormatException e) {
+    		errors.add(e.getMessage());
+    		return "error.jsp";
     	} catch (RollbackException e) {
     		errors.add(e.getMessage());
     		return "error.jsp";

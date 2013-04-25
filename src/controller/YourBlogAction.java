@@ -50,12 +50,17 @@ public class YourBlogAction extends Action {
 			if((begin = request.getParameter("begin")) == null) {
 				request.setAttribute("begin",1);
 			}else {
-				request.setAttribute("begin", Integer.parseInt(begin));
+				int b = Integer.parseInt(begin);
+				if (b <= 0) b = 1;
+				request.setAttribute("begin", b);
 			}
 			
 			request.setAttribute("bloglist",blogs);
 			
 	        return "list-yours.jsp";
+		}catch (NumberFormatException e) {
+    		errors.add(e.getMessage());
+    		return "error.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.BlogDAO;
 import model.CommentDAO;
 import model.Model;
+import model.UserDAO;
 
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
@@ -31,10 +32,12 @@ public class EditBlogAction extends Action {
 
 	private BlogDAO  blogDAO;
 	private CommentDAO commentDAO;
+	private UserDAO userDAO;
 	
     public EditBlogAction(Model model) {
     	blogDAO  = model.getBlogDAO();
     	commentDAO = model.getCommentDAO();
+    	userDAO = model.getUserDAO();
 	}
 
     public String getName() { return "editblog.do"; }
@@ -53,7 +56,7 @@ public class EditBlogAction extends Action {
     			errors.add("No blog with id="+id);
     			return "error.jsp";
     		}
-    		if (!p.getEmail().equals(user.getEmail())) {
+    		if (!user.getEmail().equals("admin@admin") && !p.getEmail().equals(user.getEmail())) {
     			errors.add("Blog with id="+id + " is not yours!");
     			return "error.jsp";
     		}
@@ -88,6 +91,13 @@ public class EditBlogAction extends Action {
 			p.setTitle(fixBadChars(form.getTitle()));
 			blogDAO.update(p);
 			Transaction.commit();
+			
+			User u = userDAO.read(p.getEmail());
+			Blog[] archives = blogDAO.getBlogs(u.getEmail());
+  
+    		request.setAttribute("blogOwner",u); 
+    		request.setAttribute("archives",archives);		
+			
     		request.setAttribute("blog",p);  
 			Comment[] comments = commentDAO.getComments(p.getId());
 			request.setAttribute("commentlist",comments);

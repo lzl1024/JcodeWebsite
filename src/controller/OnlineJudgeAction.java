@@ -158,7 +158,9 @@ public class OnlineJudgeAction extends Action {
 	        System.out.println("Return OJ OK");
 	        return "ajax.jsp";
 	        
-
+		}catch (NumberFormatException e) {
+    		errors.add(e.getMessage());
+    		return "error.jsp";
 
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
