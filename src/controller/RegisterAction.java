@@ -22,12 +22,6 @@ import databeans.Profile;
 import databeans.User;
 import formbeans.RegisterForm;
 
-/*
- * Processes the parameters from the form in register.jsp.
- * If successful:
- *   (1) creates a new User bean
- *   (2) sets the "user" session attribute to the new User bean
- */
 public class RegisterAction extends Action {
 	private FormBeanFactory<RegisterForm> formBeanFactory = FormBeanFactory.getInstance(RegisterForm.class);
 

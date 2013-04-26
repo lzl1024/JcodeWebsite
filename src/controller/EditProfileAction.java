@@ -74,7 +74,6 @@ public class EditProfileAction extends Action {
 			
 			profileDAO.update(profile);
 
-			// Update photoList (there's now one more on the list)
 			request.setAttribute("profile", profile);
 	        return "viewprofile.jsp";
 	 	} catch (RollbackException e) {

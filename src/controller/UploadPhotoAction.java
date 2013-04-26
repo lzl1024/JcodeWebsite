@@ -68,7 +68,6 @@ public class UploadPhotoAction extends Action {
 	        System.out.println("Upload photo: success");
 			profileDAO.update(profile);
 
-			// Update photoList (there's now one more on the list)
 	        return "changePhoto.jsp";
 	 	} catch (RollbackException e) {
 

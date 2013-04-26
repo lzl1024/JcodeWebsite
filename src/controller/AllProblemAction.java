@@ -24,8 +24,6 @@ public class AllProblemAction extends Action {
     public String getName() { return "allproblem.do"; }
 
     public String perform(HttpServletRequest request) {
-        // Set up the request attributes (the errors list and the form bean so
-        // we can just return to the jsp with the form if the request isn't correct)
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         

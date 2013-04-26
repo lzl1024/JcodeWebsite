@@ -74,16 +74,9 @@ public class OnlineJudgeAction extends Action {
     		
 	        if(ojForm.getCode() == null || ojForm.getCode().length() == 0)
 	        	ojForm.setCode(problem.getReadableStartCode());
-	        //else
-	        	//ojForm.setCode("public class Source {\r\n    public static void main(String[] args) {\r\n        //Please don't modify the class name\r\n    }\r\n}");
-
-	        System.out.println("---------------");
-	        System.out.println(ojForm.getCode());
-	        System.out.println("---------------");
 
 
 	        //compile and run
-	        //String code = ojForm.getCode();
 	        Console con = Console.getInstance();
 
 
@@ -95,15 +88,12 @@ public class OnlineJudgeAction extends Action {
 	        		result = con.compileRun(code, OJPath);
 	        	}
 	        	else if(act.equals("verify")) {	
-	        		//String testCode = "public class Test { public static void main(String[] args) {Source a = new Source(); System.out.println(a.len(\"test\"));}}";
 	        		String testCode = problem.getReadableTestCode();
 	        		String referRes = problem.getReadableReferRes();
 
 	        		result = con.compileVerify(code, testCode, OJPath);
 	        		//compare the result with the reference
-        			System.out.println("result: " + result);
-        			System.out.println("referRes: " + referRes);
-        			//
+        			
 	        		if(referRes.trim().equals(result.trim())) {
 	        			result = "Accepted";
 	        			problem.setAccept(problem.getAccept()+1);

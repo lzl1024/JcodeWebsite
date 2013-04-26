@@ -60,8 +60,7 @@ public class CommentProblemAction extends Action {
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "error.jsp";
 
-			PComment comment = new PComment();  // id & position will be set when created
-			
+			PComment comment = new PComment();  			
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 
 			comment.setDate(formatter.format(curDate));

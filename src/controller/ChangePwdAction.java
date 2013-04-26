@@ -39,8 +39,6 @@ public class ChangePwdAction extends Action {
 	        // Load the form parameters into a form bean
 	        ChangePwdForm form = formBeanFactory.create(request);
 	        
-	        // If no params were passed, return with no errors so that the form will be
-	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
 	            return "change-pwd.jsp";
 	        }

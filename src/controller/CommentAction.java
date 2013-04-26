@@ -56,7 +56,7 @@ public class CommentAction extends Action {
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "error.jsp";
 
-			Comment comment = new Comment();  // id & position will be set when created
+			Comment comment = new Comment();  
 			
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 
@@ -71,7 +71,6 @@ public class CommentAction extends Action {
 			blogDAO.update(blog);
 			request.setAttribute("errors",errors);
 			
-			//request.setAttribute("comment", comment);
 			Comment[] comments = commentDAO.getComments(blog.getId());
 			
 			

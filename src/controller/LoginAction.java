@@ -17,14 +17,6 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.User;
 import formbeans.LoginForm;
 
-/*
- * Processes the parameters from the form in login.jsp.
- * If successful, set the "user" session attribute to the
- * user's User bean and then redirects to view the originally
- * requested photo.  If there was no photo originally requested
- * to be viewed (as specified by the "redirect" hidden form
- * value), just redirect to manage.do
- */
 public class LoginAction extends Action {
 	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
 	
@@ -49,9 +41,7 @@ public class LoginAction extends Action {
 	    	System.out.println(form.getPassword());
 
 	        request.setAttribute("loginForm",form);
-	        
-	        // If no params were passed, return with no errors so that the form will be
-	        // presented (we assume for the first time).
+	
 	        if (!form.isPresent()) {
 	        	status = "fail";
 	        	msg = "Information is incomplete.";

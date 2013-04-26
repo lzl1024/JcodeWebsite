@@ -240,13 +240,6 @@ public class Controller extends HttpServlet {
 			return "login.jsp";
         }
         
-        
-        /*
-        if (user != null && action.equals("oj.do")) {
-        	// If user logged in and click online judge system
-        	return Action.perform("oj.do",request);
-        }*/
-        
 
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);

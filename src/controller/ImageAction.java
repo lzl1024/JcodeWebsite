@@ -12,14 +12,7 @@ import org.genericdao.RollbackException;
 
 import databeans.Profile;
 
-/**
- * This action looks up the photo bean by "email" and then passes it
- * (via request attribute) to the ImageServlet.  See also the mapping
- * of /image in the web.xml file.
- * 
- * We need to use a servlet instead of a JSP for the "view" of the image
- * because we need to send back the image bytes and not HTML.
- */
+
 public class ImageAction extends Action {
 	private ProfileDAO profileDAO;
 

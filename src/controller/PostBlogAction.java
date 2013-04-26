@@ -64,7 +64,7 @@ public class PostBlogAction extends Action {
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "blog.jsp";
 
-			Blog blog = new Blog();  // id & position will be set when created
+			Blog blog = new Blog();  
 			
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 

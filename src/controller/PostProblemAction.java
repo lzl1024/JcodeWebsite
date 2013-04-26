@@ -57,7 +57,6 @@ public class PostProblemAction extends Action {
 			if (hotProblem.length > 10)
 				hotProblem = Arrays.copyOf(hotProblem, 10);
 			
-			//System.out.println(hotProblem.length);
 			request.setAttribute("hotproblem", hotProblem);
 			
 	        if (!form.isPresent()) {
@@ -67,7 +66,7 @@ public class PostProblemAction extends Action {
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "postProblem.jsp";
 
-			Problem problem = new Problem();  // id & position will be set when created
+			Problem problem = new Problem();  
 			
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");      
 			Date curDate = new Date(System.currentTimeMillis()); 

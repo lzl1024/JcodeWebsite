@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -57,8 +56,7 @@ public class ChangePhotoAction extends Action {
 					errors.add("Error select area");
 					return "error.jsp";
 				}
-				System.out.println(x1 + " " + y1 + " " + x2 + " " + y2 + " "
-						+ w + " " + " " + h);
+				//System.out.println(x1 + " " + y1 + " " + x2 + " " + y2 + " "+ w + " " + " " + h);
 
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				BufferedImage image;
@@ -67,7 +65,7 @@ public class ChangePhotoAction extends Action {
 					// Get the sub image
 					BufferedImage newImage = image.getSubimage(x1, y1, w, h);
 					//ImageIO.write(newImage, "jpg", new File("/Users/maoqian/Desktop/haha1111111.jpg"));
-					System.out.println("profile type: " + profile.getPictype());
+					//System.out.println("profile type: " + profile.getPictype());
 					
 					String type = profile.getPictype();
 		        	String newType = null;
@@ -84,8 +82,8 @@ public class ChangePhotoAction extends Action {
 				}
 
 				profile.setBytes(out.toByteArray());
-				System.out.println("changePhotot: out: "+ out.toString());
-				System.out.println("changePhotot: outarray: "+ Arrays.toString(out.toByteArray()));
+				//System.out.println("changePhotot: out: "+ out.toString());
+				//System.out.println("changePhotot: outarray: "+ Arrays.toString(out.toByteArray()));
 
 				try {
 		   			profileDAO.update(profile);

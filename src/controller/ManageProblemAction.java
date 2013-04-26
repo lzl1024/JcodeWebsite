@@ -57,7 +57,6 @@ public class ManageProblemAction extends Action {
 			if (hotProblem.length > 10)
 				hotProblem = Arrays.copyOf(hotProblem, 10);
 			
-			//System.out.println(hotProblem.length);
 			request.setAttribute("hotproblem", hotProblem);
 			
 			
