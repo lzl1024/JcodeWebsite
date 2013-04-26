@@ -8,24 +8,38 @@
 
         <div class="span8">
         <div ><img src="image.do?email=${profile.email}" style="width:250px;height:250px;" /></div>  
-         <p></p>
-        <h4>User Name:      &nbsp &nbsp ${profile.realName}</h4>
-        <p></p>      
-        <h4>Email Addr:    &nbsp &nbsp  ${profile.email}</h4>
-        <p></p>      
-        <h4>Status: 	&nbsp &nbsp${profile.status}</h4>
-        <p></p>      
-        <h4>Occupation:     &nbsp &nbsp ${profile.occupation}</h4>
-        <p></p>      
-        <h4>Interest of Area: &nbsp &nbsp${profile.interest}</h4>
-        <p></p>      
-        <h4>Introduction:  &nbsp &nbsp  ${profile.introduction}</h4>
+        <br>
+        <table class="table">   
+        <tbody>  
+          <tr>  
+            <td>User Name</td>  
+            <td>${profile.realName}</td>  
+          </tr>  
+          <tr>  
+            <td>Email Addr</td>  
+            <td>${profile.email}</td>   
+          </tr>  
+          <tr>  
+            <td>Status</td>  
+            <td>${profile.status}</td>  
+          </tr>
+          <tr>  
+            <td>Occupation</td>  
+            <td>${profile.occupation}</td>  
+          </tr> 
+          <tr>  
+            <td>Interest of Area</td>  
+            <td>${profile.interest}</td>  
+          </tr>
+          <tr>  
+            <td>Introduction</td>  
+            <td>${profile.introduction}</td>  
+          </tr>
+        </tbody>  
+      </table>  
+        
         </div>
-
-        <div class="span5">
-        
-        
-        </div>   
+  
 </div>
 </div>
 
