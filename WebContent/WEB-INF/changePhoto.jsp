@@ -13,11 +13,15 @@
 /* Apply these styles only when #preview-pane has
    been placed within the Jcrop widget */
 .jcrop-holder #preview-pane {
+
   display: block;
   position: absolute;
-  z-index: 2000;
-  top: 200px;
-  right: -200px;
+  
+  top: 80;
+  left: -240;
+	
+  z-index: 0;
+  
   padding: 6px;
   border: 1px rgba(0,0,0,.4) solid;
   background-color: white;
@@ -57,6 +61,7 @@ jQuery(function($){
 
         xsize = $pcnt.width(),
         ysize = $pcnt.height();
+    	
     
     console.log('init',[xsize,ysize]);
     $('#target').Jcrop({
@@ -103,15 +108,17 @@ jQuery(function($){
 </script>
 
 <div class="span9 alert alert-block">
-    <h2 class="form-signin-heading">Change Photo</h2>
-	
+    <h2 class="form-signin-heading">Select your Thumbnail</h2>
 	<img src="image.do?email=${profile.email}" id="target" />
 	<hr>
+	
+	<div style="height: 120; display: block; position: absolute"> 
 	<div id="preview-pane">
     <div class="preview-container">
       <img src="image.do?email=${profile.email}" class="jcrop-preview" alt="Preview" />
     </div>
-  </div>
+  	</div>
+  	</div>
  
     <br>
     

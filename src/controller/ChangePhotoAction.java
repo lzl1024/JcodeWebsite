@@ -45,12 +45,18 @@ public class ChangePhotoAction extends Action {
 			System.out.println("changephoto: y1: " + request.getParameter("y1"));
 
 			if (request.getParameter("change") != null) {
-				int x1 = Integer.parseInt(request.getParameter("x1"));
-				int y1 = Integer.parseInt(request.getParameter("y1"));
-				int x2 = Integer.parseInt(request.getParameter("x2"));
-				int y2 = Integer.parseInt(request.getParameter("y2"));
-				int w = Integer.parseInt(request.getParameter("w"));
-				int h = Integer.parseInt(request.getParameter("h"));
+				int x1,y1,x2,y2,w,h;
+				try{
+					x1 = Integer.parseInt(request.getParameter("x1"));
+					y1 = Integer.parseInt(request.getParameter("y1"));
+					x2 = Integer.parseInt(request.getParameter("x2"));
+					y2 = Integer.parseInt(request.getParameter("y2"));
+					w = Integer.parseInt(request.getParameter("w"));
+					h = Integer.parseInt(request.getParameter("h"));
+				} catch(NumberFormatException e) {
+					errors.add("Error select area");
+					return "error.jsp";
+				}
 				System.out.println(x1 + " " + y1 + " " + x2 + " " + y2 + " "
 						+ w + " " + " " + h);
 
