@@ -69,6 +69,8 @@ public class Controller extends HttpServlet {
         Action.add(new TopCoderAction(model));
         Action.add(new SearchProblemAction(model));
         Action.add(new ViewProblemAction(model));
+        Action.add(new UploadPhotoAction(model));
+        Action.add(new ChangePhotoAction(model));
         
         // add an admin
         try {

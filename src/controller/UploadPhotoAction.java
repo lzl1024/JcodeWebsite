@@ -15,18 +15,18 @@ import org.mybeans.form.FormBeanFactory;
 
 import databeans.Profile;
 import databeans.User;
-import formbeans.EditProfileForm;
+import formbeans.UploadPhotoForm;
 
-public class EditProfileAction extends Action {
-	private FormBeanFactory<EditProfileForm> formBeanFactory = FormBeanFactory.getInstance(EditProfileForm.class);
+public class UploadPhotoAction extends Action {
+	private FormBeanFactory<UploadPhotoForm> formBeanFactory = FormBeanFactory.getInstance(UploadPhotoForm.class);
 
 	private ProfileDAO profileDAO;
 	
-	public EditProfileAction(Model model) {
+	public UploadPhotoAction(Model model) {
 		profileDAO = model.getProfileDAO();
 	}
 
-	public String getName() { return "editprofile.do"; }
+	public String getName() { return "uploadPhoto.do"; }
 
     public String perform(HttpServletRequest request) {
         // Set up the errors list
@@ -37,52 +37,50 @@ public class EditProfileAction extends Action {
 
 			User user = (User) request.getSession(false).getAttribute("user");
         	Profile profile = profileDAO.read(user.getEmail());
-        	request.setAttribute("profile", profile);
-        	
-        	
-			EditProfileForm form;
-			
-			if (request.getParameter("edit") == null)
-				form= formBeanFactory.create(request);
-			else {
-				form = new EditProfileForm();
-				form.setInterest(profile.getInterest());
-				form.setIntroduction(profile.getIntroduction());
-				form.setOccupation(profile.getOccupation());
-				form.setStatus(profile.getStatus());
-				
-				request.setAttribute("form", form);
-				return "editprofile.jsp";
-			}
+			request.setAttribute("profile", profile);
+
+			UploadPhotoForm form= formBeanFactory.create(request);
+
 			
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) {
 	        	request.setAttribute("form", form);
-	        	return "editprofile.jsp";
+
+	        	System.out.println("Upload photot: fail");
+
+	        	return "changePhoto.jsp";
 	        }
 	        
 	        
 	        FileProperty fileProp = form.getFile();
 	        if (fileProp!= null && fileProp.getFileName().length()!= 0 && fileProp.getBytes().length!= 0) {
+	        	String type = fileProp.getContentType();
+	        	
+	        	if(!type.startsWith("image/")) {
+	        		//error type
+	        		errors.add("Error Type. Please select image file.");
+	        		return "error.jsp";
+	        	}
 	        	profile.setBytes(fileProp.getBytes());
 	        	profile.setPictype(fileProp.getContentType());
 	        }
-			profile.setInterest(form.getInterest());			
-			profile.setIntroduction(form.getIntroduction());
-			profile.setOccupation(form.getOccupation());
-			profile.setStatus(form.getStatus());
 			
+	        System.out.println("Upload photo: success");
 			profileDAO.update(profile);
 
 			// Update photoList (there's now one more on the list)
-			request.setAttribute("profile", profile);
-	        return "viewprofile.jsp";
+	        return "changePhoto.jsp";
 	 	} catch (RollbackException e) {
+
+	 		System.out.println("Upload photo: fail: rollback excpetion");
+
 			errors.add(e.getMessage());
-			return "editprofile.jsp";
+			return "changePhoto.jsp";
 	 	} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "editprofile.jsp";
+        	System.out.println("Upload photo: fail: formbeanexception" + e.getMessage());
+
+			return "changePhoto.jsp";
 		}
     }
     

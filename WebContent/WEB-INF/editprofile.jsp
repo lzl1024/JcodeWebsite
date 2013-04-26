@@ -5,9 +5,14 @@
 <jsp:include page="template-navprofile.jsp" />
 
 <div class="span9 alert alert-block">
+    <h2 class="form-signin-heading">Edit your profile</h2>
+	
+	<div ><img src="image.do?email=${profile.email}" style="width:250px;height:250px;" /></div>  
+    <!--  <input type="file" name="file" value=""/> -->
+    <br>
+	<a class="btn btn-info" href="uploadPhoto.do">Change Photo</a>
+
 	<form method="post" class="form-horizontal" action="editprofile.do" enctype="multipart/form-data">
-        <h2 class="form-signin-heading">Edit your profile</h2>
-        <input type="file" name="file" value=""/>
         <p> </p>
         <h4>Status: </h4>
         <input type="text" class="input-block-level" placeholder="Status" name="status" value="${form.status}">
@@ -21,9 +26,9 @@
         <h4>Introduction: </h4>
         <input type="text" class="input-block-level" placeholder="Introduction" name="introduction" value="${form.introduction}">
         <p> </p>
-        <button class="btn btn-large btn-primary" type="submit">Upload</button>
+        <button class="btn btn-large btn-primary" type="submit">Submit</button>
 		<jsp:include page="error-list.jsp" />
-</form>
+	</form>
 </div> <!-- span -->
 </div>
 
