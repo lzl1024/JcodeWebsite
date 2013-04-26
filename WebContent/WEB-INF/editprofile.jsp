@@ -13,19 +13,19 @@
 	<a class="btn btn-info" href="uploadPhoto.do">Change Photo</a>
 
 	<form method="post" class="form-horizontal" action="editprofile.do" enctype="multipart/form-data">
-        <p> </p>
+        <br>
         <h4>Status: </h4>
         <input type="text" class="input-block-level" placeholder="Status" name="status" value="${form.status}">
-        <p> </p>
+        <br><br>
         <h4>Occupation: </h4>
         <input type="text" class="input-block-level" placeholder="Occupation" name="occupation" value="${form.occupation}">
-        <p> </p>
+        <br><br>
         <h4>Interest of Area: </h4>
         <input type="text" class="input-block-level" placeholder="Interest of Area" name="interest" value="${form.interest}">
-        <p> </p>
+        <br><br>
         <h4>Introduction: </h4>
         <input type="text" class="input-block-level" placeholder="Introduction" name="introduction" value="${form.introduction}">
-        <p> </p>
+        <br><br>
         <button class="btn btn-large btn-primary" type="submit">Submit</button>
 		<jsp:include page="error-list.jsp" />
 	</form>
