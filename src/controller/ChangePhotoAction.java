@@ -3,7 +3,6 @@ package controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,19 +10,14 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.ImageIcon;
 
 import model.Model;
 import model.ProfileDAO;
 
 import org.genericdao.RollbackException;
-import org.mybeans.form.FileProperty;
-import org.mybeans.form.FormBeanException;
-import org.mybeans.form.FormBeanFactory;
 
 import databeans.Profile;
 import databeans.User;
-import formbeans.UploadPhotoForm;
 
 public class ChangePhotoAction extends Action {
 

@@ -18,7 +18,7 @@
 			<font size="5"><%=blogs[i].getTitle()%></font></a>
 			<table>
 			<tr><td>
-			<img  style="display:block; margin-top:5px; margin-bottom:5px; width:100px;height:80px;" src="image.do?email=<%=blogs[i].getEmail()%>">
+			<img  style="display:block; margin-top:5px; margin-bottom:5px; width:80px;height:80px;" src="image.do?email=<%=blogs[i].getEmail()%>">
 			</td><td>
 			<p style="margin-left:10px; margin-right:5px; width:700px; word-wrap: break-word; word-break: normal;">
 			<font color="#95aba9"><%=blogs[i].getShortDes()%>...</font>
